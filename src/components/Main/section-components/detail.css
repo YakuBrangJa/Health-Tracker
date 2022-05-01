@@ -1,0 +1,67 @@
+.container-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+}
+.container-head h3 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: transform 300ms ease;
+  transform: scale(0.3);
+}
+.container-head.loaded h3 {
+  transform: scale(1);
+}
+.container-head .form-button {
+  position: relative;
+}
+.container-head button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: rgb(69, 125, 223);
+}
+.container-head button > .icon {
+  font-size: 1.2rem;
+}
+.container-head button:hover {
+  color: rgba(69, 125, 223, 0.785);
+}
+
+.section-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-shrink: 0;
+  height: 20rem;
+  background-color: var(--color-grey8);
+}
+.value-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.value-header .value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-grey2);
+}
+
+.value-header .unit {
+  border: none;
+  padding: 0.5rem;
+  padding-right: 0.8rem;
+  border-radius: 0.3rem;
+  font-weight: 700;
+  color: var(--color-grey2);
+}
+
+.value-header .unit option {
+  border: none;
+}

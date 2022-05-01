@@ -1,0 +1,52 @@
+{
+  "heart": {
+    "heartRate": {
+      "title": "heart rate",
+      "type": "heart",
+      "data": [
+        {
+          "value": 71,
+          "time": "Mar 3"
+        },
+        {
+          "value": 83,
+          "time": "Mar 3"
+        }
+      ],
+      "unit": {
+        "beatPerMinute": "bpm"
+      }
+    },
+    "bloodPressure": {
+      "title": "blood pressure",
+      "type": "heart",
+      "data": [
+        {
+          "value": {
+            "systolic": 110,
+            "diastolic": 70
+          },
+          "date": "Mar 3"
+        },
+        {
+          "value": {
+            "systolic": 110,
+            "diastolic": 70
+          },
+          "date": "Mar 3"
+        }
+      ],
+      "unit": {
+        "millimeterMercury": "mmHg"
+      },
+      "subType": {
+        "vitals": true,
+        "summary": {
+          "favourites": true,
+          "highlights": true
+        }
+      }
+    }
+  },
+  "respiratory": {}
+}

@@ -1,0 +1,6 @@
+.summary-container {
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

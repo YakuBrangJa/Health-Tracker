@@ -1,13 +1,59 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Montserrat", sans-serif;
+  font-family: "Nunito", sans-serif;
+  /* outline: 1px solid violet; */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  all: unset;
+}
+
+ul li {
+  list-style: none;
+}
+
+html::-webkit-scrollbar {
+  width: 0.8vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+}
+html::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+:root {
+  /*BASIC COLORS */
+  --color-black1: #000;
+  --color-black2: #222;
+
+  --color-grey1: #555;
+  --color-grey2: #666;
+  --color-grey3: #777;
+  --color-grey3b: #787878;
+  --color-grey4: #888;
+  --color-grey5: #999;
+  --color-grey5b: #989898;
+  --color-grey6: #aaa;
+  --color-grey6b: #a8a8a8;
+  --color-grey7: #bbb;
+  --color-grey7b: #b8b8b8;
+  --color-grey8: #ccc;
+  --color-grey8b: #c8c8c8;
+  --color-grey9: #ddd;
+  --color-grey9b: #d8d8d8;
+  --color-grey10: #d8d8d8;
+  --color-grey11: #ddd;
+
+  --color-white1: #fff;
+  --color-white3: #eeeeee;
+  --color-white2: #eaeaea;
+
+  /* LAYOUTS */
+
+  --navbar-height: 3.3rem;
 }

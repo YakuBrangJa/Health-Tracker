@@ -1,0 +1,27 @@
+.main-section {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: calc(100vh - var(--navbar-height));
+  background-color: var(--color-white);
+}
+
+.main-section > h1 {
+  font-size: 1.4rem;
+  margin-top: 0.8rem;
+  padding-left: 1.3rem;
+  color: var(--color-grey2);
+}
+
+.main-section::-webkit-scrollbar {
+  width: 0.7vw;
+}
+.main-section::-webkit-scrollbar-thumb {
+  background-color: #bbba;
+}
+.main-section::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+.main-section::-webkit-scrollbar-track {
+  background-color: transparent;
+}

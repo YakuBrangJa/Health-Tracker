@@ -1,0 +1,11 @@
+.favourite {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.favourite-card {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}

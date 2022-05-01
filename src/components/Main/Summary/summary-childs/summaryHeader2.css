@@ -1,0 +1,28 @@
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-grey2);
+}
+
+.summary-header .summary-edit__button {
+  all: unset;
+  display: flex;
+  border: 1px solid var(--color-grey4);
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.3rem;
+  gap: 0.3rem;
+}
+
+.summary-edit__button span {
+  font-size: 1rem;
+}
+
+.summary-edit__button .icon {
+  font-size: 1.1rem;
+}

@@ -1,0 +1,121 @@
+.cardItem,
+.emptyCardItem {
+  display: flex;
+  align-items: stretch;
+  background: var(--color-grey8b);
+  border-radius: 0.5rem;
+  /* transition: all linear; */
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.cardItem {
+  height: 5.8rem;
+  justify-content: space-between;
+  padding: 0.7rem;
+  padding-left: 1rem;
+}
+
+.cardItem:hover,
+.emptyCardItem:hover {
+  background-color: var(--color-grey7);
+}
+.cardItem:hover .cardItem-date__container,
+.emptyCardItem:hover .emptyCardItem-add__container {
+  transform: translate(0.2rem, 0);
+}
+.cardItem.active,
+.emptyCardItem.active {
+  background-color: rgba(43, 135, 255, 0.56);
+}
+.emptyCardItem.active p {
+  color: rgba(43, 135, 255, 0.897);
+}
+
+.cardItem-date__container.active,
+.emptyCardItem-add__container.active {
+  transform: translate(0.2rem, 0);
+}
+
+.cardItem-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* gap: 0.8rem; */
+}
+
+.cardItem-name {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.cardItem-value__container {
+  display: flex;
+  gap: 0.3rem;
+  align-items: flex-end;
+}
+
+.cardItem-value {
+  font-size: 2.3rem;
+  font-weight: 650;
+  margin-right: 0.3rem;
+  color: var(--color-grey1);
+  display: inline-block;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.cardItem-unit {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-grey3);
+}
+
+.cardItem-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cardItem-right .cardItem-date__container {
+  display: flex;
+  align-items: center;
+  transition: all 150ms ease;
+}
+
+.cardItem-right .cardItem-date {
+  font-size: 0.8rem;
+}
+.cardItem-forward__icon {
+  font-size: 1.3rem;
+  color: var(--color-grey3);
+}
+
+.cardItem-right .cardItem-type__icon {
+  font-size: 1.8rem;
+}
+
+/* EMPTY CARD ITEM */
+.emptyCardItem {
+  flex-direction: column;
+  padding: 0.7rem;
+  padding-left: 1rem;
+}
+
+.emptyCardItem-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-basis: content;
+}
+
+.emptyCardItem-add__container {
+  display: flex;
+  align-items: center;
+  transition: all 150ms ease;
+}
+
+.emptyCardItem-add {
+  font-size: 0.8rem;
+}
