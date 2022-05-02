@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Section from "../section-components/Section";
 
 function Heart() {
-  const data = useSelector((state) => state.heart);
+  const { heart: data, componentState } = useSelector((state) => state.heart);
 
   useEffect(() => {
     fetch(

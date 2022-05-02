@@ -15,23 +15,18 @@ import { heartActions } from "../../../store/heart";
 function Detail({ id, title, data, unit }) {
   const [formOpen, setFormOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { dataState, sidebarState, unitState } = useSelector(
+    (state) => state.formState
+  );
+  const dispatch = useDispatch();
+
+  const unitArray = Object.values(unit);
+  const initialUnit = unitArray.find((item) => item.selected === true);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  const formToggleHandler = () => {
-    setFormOpen(!formOpen);
-  };
-
-  const { dataState, sidebarState, unitState } = useSelector(
-    (state) => state.formState
-  );
-
-  const unitArray = Object.values(unit);
-  const initialUnit = unitArray.find((item) => item.selected === true);
-
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       formStateActions.setUnitState({
@@ -40,6 +35,9 @@ function Detail({ id, title, data, unit }) {
       })
     );
   }, [initialUnit]);
+
+  const formToggleHandler = () => setFormOpen(!formOpen);
+  const formCloseHandler = () => setFormOpen(false);
 
   const unitSelectHandler = (e) => {
     e.preventDefault();
@@ -61,7 +59,6 @@ function Detail({ id, title, data, unit }) {
     }
   };
 
-  const formCloseHandler = () => setFormOpen(false);
   return (
     <>
       <div className={`container-head ${isLoaded && "loaded"}`}>

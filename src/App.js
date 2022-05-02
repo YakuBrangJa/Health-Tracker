@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 
@@ -21,12 +21,26 @@ import CycleTracker from "./components/Main/CycleTracker/CycleTracker";
 import OtherData from "./components/Main/OtherData/OtherData";
 
 import { formStateActions } from "./store/form-state";
+import { bodyMeasurementsActions } from "./store/body-measurements";
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const data = useSelector((state) => state);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   console.log("fetching");
+  //   fetch(
+  //     "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/body-measurements.json"
+  //   )
+  //     .then((response) => response.json())
+  //     .then((responseData) => {
+  //       dispatch(bodyMeasurementsActions.populateData(responseData));
+  //       setIsLoading(false);
+  //     });
+  // }, []);
 
   // useEffect(() => {
   //   fetch(
@@ -53,7 +67,10 @@ function App() {
             <Route path="vitals" element={<Vitals />} />
             <Route path="symptoms" element={<Symptoms />} />
             <Route path="medications" element={<Medications />} />
-            <Route path="body-measurements" element={<BodyMeasurements />} />
+            <Route
+              path="body-measurements"
+              element={<BodyMeasurements isLoading={isLoading} />}
+            />
             <Route path="heart" element={<Heart />} />
             <Route path="respiratory" element={<Respiratory />} />
             <Route path="sleep" element={<Sleep />} />
