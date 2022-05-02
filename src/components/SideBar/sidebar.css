@@ -5,7 +5,7 @@
   position: sticky;
   top: 0;
   overflow-y: overlay;
-  background-color: var(--color-grey11);
+  background-color: var(--color-grey10);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -70,10 +70,10 @@ ul .title {
   padding-left: 1.5rem;
   height: 2.3rem;
   cursor: pointer;
-  background-color: var(--color-grey11);
+  background-color: var(--color-grey10);
 }
 .sidebar ul li a:hover {
-  background: var(--color-grey9);
+  background: var(--color-grey8b);
 }
 
 .sidebar ul li a .icon {

@@ -55,13 +55,11 @@
 
 .value-header .unit {
   border: none;
-  padding: 0.5rem;
-  padding-right: 0.8rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 0.3rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 650;
   color: var(--color-grey2);
-}
-
-.value-header .unit option {
-  border: none;
+  outline: none;
+  /* cursor: pointer; */
 }

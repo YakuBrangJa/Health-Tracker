@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   dataState: "",
   sidebarState: "",
-  unitState: "",
+  unitState: {},
 };
 
 const formStateSlice = createSlice({

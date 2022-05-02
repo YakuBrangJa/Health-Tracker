@@ -7,6 +7,7 @@
   /* transition: all linear; */
   flex-shrink: 0;
   cursor: default;
+  border: 2px solid var(--color-grey8b);
 }
 
 .cardItem {
@@ -19,6 +20,7 @@
 .cardItem:hover,
 .emptyCardItem:hover {
   background-color: var(--color-grey7);
+  border-color: var(--color-grey7);
 }
 .cardItem:hover .cardItem-date__container,
 .emptyCardItem:hover .emptyCardItem-add__container {
@@ -26,10 +28,11 @@
 }
 .cardItem.active,
 .emptyCardItem.active {
-  background-color: rgba(43, 135, 255, 0.56);
-}
-.emptyCardItem.active p {
-  color: rgba(43, 135, 255, 0.897);
+  background-color: rgb(126, 167, 255);
+  background-color: rgb(101, 168, 255);
+  background-color: rgb(150, 183, 255);
+  /* border: 2px solid rgb(104, 152, 255); */
+  border-color: rgb(116, 160, 255);
 }
 
 .cardItem-date__container.active,
@@ -99,8 +102,8 @@
 /* EMPTY CARD ITEM */
 .emptyCardItem {
   flex-direction: column;
-  padding: 0.7rem;
-  padding-left: 1rem;
+  padding: 0.6rem;
+  padding-left: 0.95rem;
 }
 
 .emptyCardItem-top {

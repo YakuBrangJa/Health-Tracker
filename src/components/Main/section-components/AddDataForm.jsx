@@ -12,23 +12,29 @@ function AddDataForm(props) {
   const { dataState, sidebarState, unitState } = useSelector(
     (state) => state.formState
   );
-  console.log(typeof formData.value);
+
+  const [inchState, setInchState] = useState(0);
+
   const onChangeHandler = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),
     });
+    if (e.target.name === "inch") {
+      setInchState(e.target.value);
+    }
   };
 
   const addDataHandler = (event) => {
     event.preventDefault();
+    console.log(formData);
 
     if (sidebarState === "/body-measurements") {
       dispatch(
         bodyMeasurementsActions.addData({
           dataState,
           unitState,
-          ...formData,
+          formData,
         })
       );
     } else if (sidebarState === "/heart") {
@@ -36,12 +42,60 @@ function AddDataForm(props) {
         heartActions.addData({
           dataState,
           unitState,
-          ...formData,
+          formData,
         })
       );
     }
     props.formClose();
   };
+
+  let valueInput = (
+    <li>
+      <label>{unitState.symbol}</label>
+      <input type={"number"} name="value" onChange={onChangeHandler} />
+    </li>
+  );
+
+  if (unitState.state === "milimeter mercury") {
+    valueInput = (
+      <>
+        <li>
+          <label>Systolic</label>
+          <input type={"number"} name="systolic" onChange={onChangeHandler} />
+        </li>
+        <li>
+          <label>Diastolic</label>
+          <input type={"number"} name="diastolic" onChange={onChangeHandler} />
+        </li>
+      </>
+    );
+  } else if (unitState.state === "foot") {
+    valueInput = (
+      <>
+        <li>
+          <label>ft</label>
+          <input name="foot" type={"number"} onChange={onChangeHandler} />
+        </li>
+        <li>
+          <label>in</label>
+          <select name="inch" onChange={onChangeHandler} value={inchState}>
+            <option value={0}>0</option>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+            <option value={6}>6</option>
+            <option value={7}>7</option>
+            <option value={8}>8</option>
+            <option value={9}>9</option>
+            <option value={10}>10</option>
+            <option value={11}>11</option>
+          </select>
+        </li>
+      </>
+    );
+  }
 
   return (
     <form
@@ -65,14 +119,7 @@ function AddDataForm(props) {
           <label>Time</label>
           <input type={"time"} name="time" onChange={onChangeHandler} />
         </li>
-        <li>
-          <label>Value</label>
-          <input type={"number"} name="value" onChange={onChangeHandler} />
-        </li>
-        {/* <li>
-          <label>Diastolic</label>
-          <input type={"number"} />
-        </li> */}
+        {valueInput}
       </ul>
     </form>
   );

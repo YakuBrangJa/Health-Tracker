@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import NavBar from "./components/NavBar/NavBar";
 import Sidebar from "./components/SideBar/Sidebar";
@@ -25,6 +25,18 @@ import { formStateActions } from "./store/form-state";
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const data = useSelector((state) => state);
+
+  // useEffect(() => {
+  //   fetch(
+  //     "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker.json",
+  //     {
+  //       method: "PUT",
+  //       body: JSON.stringify(data),
+  //     }
+  //   );
+  // }, [data]);
 
   useEffect(() => {
     dispatch(formStateActions.setSidebarState(location.pathname));

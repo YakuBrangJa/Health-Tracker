@@ -20,21 +20,43 @@ import { unitTransformer } from "../../../store/function-components";
 
 function CardItem({ id, title, data, unit, type, selected }) {
   const dispatch = useDispatch();
-
   const onClickHandler = (id) => {
     dispatch(formStateActions.setDataState(id));
   };
 
-  // console.log(unit);
   const unitArray = Object.values(unit);
   const selectedUnit = unitArray.find((item) => item.selected === true);
 
   const latestData = data[data.length - 1];
-  let transformedValue;
+
+  let valueContainer;
   if (latestData) {
-    transformedValue = parseFloat(
-      unitTransformer(latestData.value, selectedUnit.name).toFixed(1)
-    );
+    if (selectedUnit.name === "milimeter mercury") {
+      valueContainer = (
+        <span className="cardItem-value">
+          {latestData.value.systolic}/{latestData.value.diastolic}
+        </span>
+      );
+    } else {
+      const transformedValue = unitTransformer(
+        latestData.value,
+        selectedUnit.name
+      );
+
+      if (selectedUnit.name === "foot") {
+        valueContainer = (
+          <span className="cardItem-value">
+            {transformedValue.foot}'{transformedValue.inch}"
+          </span>
+        );
+      } else {
+        valueContainer = (
+          <span className="cardItem-value">
+            {parseFloat(transformedValue.toFixed(2))}
+          </span>
+        );
+      }
+    }
   }
 
   let dataType;
@@ -79,10 +101,8 @@ function CardItem({ id, title, data, unit, type, selected }) {
       break;
   }
 
-  let cardItem;
-
   if (data.length === 0) {
-    cardItem = (
+    return (
       <div
         className={`emptyCardItem ${selected && "active"}`}
         onClick={() => onClickHandler(id)}
@@ -101,7 +121,7 @@ function CardItem({ id, title, data, unit, type, selected }) {
       </div>
     );
   } else {
-    cardItem = (
+    return (
       <div
         className={`cardItem ${selected && "active"}`}
         onClick={() => onClickHandler(id)}
@@ -109,8 +129,10 @@ function CardItem({ id, title, data, unit, type, selected }) {
         <div className="cardItem-left">
           <span className="cardItem-name">{title}</span>
           <div className="cardItem-value__container">
-            <span className="cardItem-value">{transformedValue}</span>
-            <span className="cardItem-unit">{selectedUnit.symbol}</span>
+            {valueContainer}
+            {selectedUnit.name != "foot" && (
+              <span className="cardItem-unit">{selectedUnit.symbol}</span>
+            )}
           </div>
         </div>
         <div className="cardItem-right">
@@ -125,8 +147,6 @@ function CardItem({ id, title, data, unit, type, selected }) {
       </div>
     );
   }
-
-  return <>{cardItem}</>;
 }
 
 export default CardItem;

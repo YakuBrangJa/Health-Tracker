@@ -1,13 +1,16 @@
 export function unitTransformer(value, unit) {
   switch (unit) {
     case "kilogram":
-      return value * 0.453592;
+      return value / 2.205;
       break;
     case "meter":
-      return value * 0.01;
+      return value / 100;
       break;
     case "foot":
-      return value * 0.0328084;
+      return {
+        foot: (value / 30.48).toFixed(0),
+        inch: Math.round((value % 30.48) / 2.54),
+      };
       break;
     case "inch":
       return value * 0.393701;
