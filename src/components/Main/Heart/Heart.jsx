@@ -15,16 +15,10 @@ function Heart() {
   // FETCHING
   const { isLoading, error, fetchData } = useDataRequest("heart", heartActions);
 
-  // const [preLoad, setPreload] = useState(true);
-  // useEffect(() => {
-  //   if (componentState.firstRun) return;
-  //   setPreload(isLoading);
-  // }, [isLoading]);
-
   useEffect(() => {
     if (!componentState.firstRun) return;
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   // POSTING
   const { sendRequest } = useHttps({
@@ -35,19 +29,12 @@ function Heart() {
   useEffect(() => {
     if (componentState.firstRun) return;
     sendRequest();
-  }, [data]);
+  }, [data, sendRequest]);
 
   useEffect(() => {
     if (componentState.firstClick) return;
     dispatch(heartActions.updateDataState(dataArray[0].id));
-    dispatch(formStateActions.setDataState(dataArray[0].id));
   }, [dataArray]);
-
-  const dispatchDataStateOnClick = (id) => {
-    dispatch(heartActions.updateDataState(id));
-    dispatch(heartActions.updateFirstClick(true));
-    dispatch(formStateActions.setDataState(id));
-  };
 
   if (isLoading) {
     return <SectionLoading title={"Heart"}></SectionLoading>;
@@ -57,10 +44,9 @@ function Heart() {
     <Section
       title={"Heart"}
       data={dataArray}
-      // isLoading={isLoading}
       error={error}
       componentState={componentState}
-      dispatchOnClick={dispatchDataStateOnClick}
+      actions={heartActions}
     />
   );
 }

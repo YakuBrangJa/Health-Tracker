@@ -7,12 +7,10 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import "./detail.css";
 
-import AddDataForm from "./AddDataForm";
+import AddDataForm from "./Form/AddDataForm";
 import { formStateActions } from "../../../store/form-state";
-import { bodyMeasurementsActions } from "../../../store/body-measurements";
-import { heartActions } from "../../../store/heart";
 
-function Detail({ id, title, data, unit }) {
+function Detail({ id, title, data, unit, actions }) {
   const [formOpen, setFormOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const { dataState, sidebarState, unitState } = useSelector(
@@ -41,22 +39,12 @@ function Detail({ id, title, data, unit }) {
 
   const unitSelectHandler = (e) => {
     e.preventDefault();
-    // dispatch(formStateActions.setUnitState(e.target.value));
-    if (sidebarState === "/body-measurements") {
-      dispatch(
-        bodyMeasurementsActions.changeUnit({
-          dataState,
-          unit: e.target.value,
-        })
-      );
-    } else if (sidebarState === "/heart") {
-      dispatch(
-        heartActions.changeUnit({
-          dataState,
-          unit: e.target.value,
-        })
-      );
-    }
+
+    dispatch(
+      actions.changeUnit({
+        unit: e.target.value,
+      })
+    );
   };
 
   return (
@@ -69,7 +57,11 @@ function Detail({ id, title, data, unit }) {
           <button onClick={formToggleHandler}>
             Add data <AddRoundedIcon className="icon" />
           </button>
-          <AddDataForm formOpenState={formOpen} formClose={formCloseHandler} />
+          <AddDataForm
+            formOpenState={formOpen}
+            formClose={formCloseHandler}
+            actions={actions}
+          />
         </div>
       </div>
       <div className="container-child">

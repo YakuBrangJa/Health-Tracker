@@ -18,14 +18,19 @@ import "./cardItem.css";
 import ValueContainer from "./ValueContainer";
 
 import useUnitTransformer from "../../../hooks/useUnitTransformer";
+import useActionSelector from "../../../hooks/useActionSelector";
 
-function CardItem({ id, title, data, unit, type, selected, dispatchOnClick }) {
+function CardItem({ id, title, data, unit, type, selected, actions }) {
   const unitArray = Object.values(unit);
   const selectedUnit = unitArray.find((item) => item.selected === true);
-
   const latestData = data[data.length - 1];
+  const { transform, singleValues, doubleValues } = useUnitTransformer();
+  const dispatch = useDispatch();
 
-  const { transform, transformedValue, doubleValues } = useUnitTransformer();
+  // const { action, select } = useActionSelector();
+  // useEffect(() => {
+  //   select();
+  // }, [select]);
 
   useEffect(() => {
     if (!latestData) return;
@@ -33,7 +38,8 @@ function CardItem({ id, title, data, unit, type, selected, dispatchOnClick }) {
   }, [latestData, selectedUnit]);
 
   const onClickHandler = () => {
-    dispatchOnClick(id);
+    dispatch(actions.updateDataState(id));
+    dispatch(actions.updateFirstClick(true));
   };
 
   let dataType;
@@ -82,7 +88,7 @@ function CardItem({ id, title, data, unit, type, selected, dispatchOnClick }) {
     return (
       <div
         className={`emptyCardItem ${selected && "active"}`}
-        onClick={() => onClickHandler()}
+        onClick={onClickHandler}
       >
         <div className="emptyCardItem-top">
           <span className="cardItem-name">{title}</span>
@@ -109,7 +115,7 @@ function CardItem({ id, title, data, unit, type, selected, dispatchOnClick }) {
             <ValueContainer
               latestData={latestData}
               selectedUnit={selectedUnit.name}
-              transformedValue={transformedValue}
+              transformedValue={singleValues}
               doubleValues={doubleValues}
             />
             {selectedUnit.name != "foot" && (

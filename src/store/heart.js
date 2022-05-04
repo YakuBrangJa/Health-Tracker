@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const initialState = {
   heart: {
@@ -98,6 +99,7 @@ const initialState = {
   componentState: {
     firstRun: true,
     dataState: "",
+    firstClick: false,
   },
 };
 
@@ -106,9 +108,9 @@ const heartSlice = createSlice({
   initialState,
   reducers: {
     addData(state, action) {
-      const { formData, dataState, unitState } = action.payload;
+      const { formData, unitState } = action.payload;
       const key = Object.keys(state.heart).find(
-        (key) => state.heart[key].id === dataState
+        (key) => state.heart[key].id === state.componentState.dataState
       );
 
       let transformedValue;
@@ -132,7 +134,7 @@ const heartSlice = createSlice({
     changeUnit(state, action) {
       const unitData = action.payload;
       const dataKey = Object.keys(state.heart).find(
-        (key) => state.heart[key].id === unitData.dataState
+        (key) => state.heart[key].id === state.componentState.dataState
       );
 
       const unit = state.heart[dataKey].unit;
@@ -158,7 +160,7 @@ const heartSlice = createSlice({
       state.heart = data;
     },
 
-    updateComponentState(state, action) {
+    updateFirstRunState(state, action) {
       state.componentState.firstRun = action.payload;
     },
     updateDataState(state, action) {

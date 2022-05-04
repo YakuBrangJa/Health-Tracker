@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
 import "./section.css";
-
-import { useSelector, useDispatch } from "react-redux";
 
 import SectionContainer from "./SectionContainer";
 import CardItem from "./CardItem";
 import Detail from "./Detail";
-import SectionLoading from "./SectionLoading";
-import { formStateActions } from "../../../store/form-state";
 
-function Section(props) {
-  const itemWithData = props.data.filter((item) => item.data.length > 0);
-  const itemWithoutData = props.data.filter((item) => item.data.length === 0);
+function Section({ data, title, componentState, error, actions }) {
+  const itemWithData = data.filter((item) => item.data.length > 0);
+  const itemWithoutData = data.filter((item) => item.data.length === 0);
 
-  const dispatch = useDispatch();
-  const dataState = props.componentState.dataState;
-  console.log(props.componentState.dataState);
+  const dataState = componentState.dataState;
 
   return (
-    <SectionContainer title={props.title}>
+    <SectionContainer title={title}>
       <div className="section-container">
         <div className="container-left">
           <div className="container-child">
@@ -35,7 +28,7 @@ function Section(props) {
                     type={value.type}
                     index={i}
                     selected={dataState === value.id}
-                    dispatchOnClick={props.dispatchOnClick}
+                    actions={actions}
                   />
                 );
               })}
@@ -52,7 +45,7 @@ function Section(props) {
                     unit={value.unit}
                     type={value.type}
                     selected={dataState === value.id}
-                    dispatchOnClick={props.dispatchOnClick}
+                    actions={actions}
                   />
                 );
               })}
@@ -60,7 +53,7 @@ function Section(props) {
           </div>
         </div>
         <div className="container-right">
-          {props.data
+          {data
             .filter((value) => value.id === dataState)
             .map((value) => (
               <Detail
@@ -69,6 +62,7 @@ function Section(props) {
                 title={value.title}
                 data={0}
                 unit={value.unit}
+                actions={actions}
               />
             ))}
         </div>

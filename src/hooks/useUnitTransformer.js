@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 
 function useUnitTransformer() {
-  const [transformedValue, setTransformedValue] = useState();
+  const [singleValues, setSingleValues] = useState();
   const [doubleValues, setDoubleValues] = useState({});
   const transform = (value, unit) => {
     switch (unit) {
       case "kilogram":
-        setTransformedValue(parseFloat((value / 2.205).toFixed(1)));
+        setSingleValues(parseFloat((value / 2.205).toFixed(1)));
         break;
       case "meter":
-        setTransformedValue(parseFloat((value / 100).toFixed(1)));
+        setSingleValues(parseFloat((value / 100).toFixed(1)));
         break;
       case "inch":
-        setTransformedValue(parseFloat((value * 0.393701).toFixed(1)));
+        setSingleValues(parseFloat((value * 0.393701).toFixed(1)));
         break;
       case "celcius":
-        setTransformedValue(parseFloat(((value - 32) * (5 / 9)).toFixed(1)));
+        setSingleValues(parseFloat(((value - 32) * (5 / 9)).toFixed(1)));
         break;
       case "foot":
         setDoubleValues({
@@ -30,12 +30,12 @@ function useUnitTransformer() {
         });
         break;
       default:
-        setTransformedValue(parseFloat(value.toFixed(1)));
+        setSingleValues(parseFloat(value.toFixed(1)));
     }
   };
 
   return {
-    transformedValue,
+    singleValues,
     doubleValues,
     transform,
   };

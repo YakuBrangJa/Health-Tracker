@@ -6,15 +6,15 @@ function useDataRequest(branch, actions) {
   const applyData = (data) => {
     dispatch(actions.populateData(data));
   };
-
   const { isLoading, error, sendRequest } = useHttps({
     url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}.json`,
   });
 
   const fetchData = () => {
     sendRequest(applyData);
-    dispatch(actions.updateComponentState(false));
+    dispatch(actions.updateFirstRunState(false));
   };
+
   return {
     isLoading,
     error,

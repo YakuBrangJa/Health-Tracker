@@ -137,9 +137,10 @@ const bodyMeasurementsSlice = createSlice({
   initialState,
   reducers: {
     addData(state, action) {
-      const { formData, dataState, unitState } = action.payload;
+      const { formData, unitState } = action.payload;
       const key = Object.keys(state.bodyMeasurements).find(
-        (key) => state.bodyMeasurements[key].id === dataState
+        (key) =>
+          state.bodyMeasurements[key].id === state.componentState.dataState
       );
 
       let transformedValue;
@@ -167,7 +168,8 @@ const bodyMeasurementsSlice = createSlice({
     changeUnit(state, action) {
       const unitData = action.payload;
       const dataKey = Object.keys(state.bodyMeasurements).find(
-        (key) => state.bodyMeasurements[key].id === unitData.dataState
+        (key) =>
+          state.bodyMeasurements[key].id === state.componentState.dataState
       );
 
       const unit = state.bodyMeasurements[dataKey].unit;
@@ -193,7 +195,7 @@ const bodyMeasurementsSlice = createSlice({
       state.bodyMeasurements = data;
     },
 
-    updateComponentState(state, action) {
+    updateFirstRunState(state, action) {
       state.componentState.firstRun = action.payload;
     },
     updateDataState(state, action) {
