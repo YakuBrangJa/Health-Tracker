@@ -11,53 +11,30 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import MedicationIcon from "@mui/icons-material/Medication";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import "./cardItem.css";
 
-import { useDispatch } from "react-redux";
-import { formStateActions } from "../../../store/form-state";
-import { unitTransformer } from "../../../store/function-components";
+import ValueContainer from "./ValueContainer";
 
-function CardItem({ id, title, data, unit, type, selected }) {
-  const dispatch = useDispatch();
-  const onClickHandler = (id) => {
-    dispatch(formStateActions.setDataState(id));
-  };
+import useUnitTransformer from "../../../hooks/useUnitTransformer";
 
+function CardItem({ id, title, data, unit, type, selected, dispatchOnClick }) {
   const unitArray = Object.values(unit);
   const selectedUnit = unitArray.find((item) => item.selected === true);
 
   const latestData = data[data.length - 1];
 
-  let valueContainer;
-  if (latestData) {
-    if (selectedUnit.name === "milimeter mercury") {
-      valueContainer = (
-        <span className="cardItem-value">
-          {latestData.value.systolic}/{latestData.value.diastolic}
-        </span>
-      );
-    } else {
-      const transformedValue = unitTransformer(
-        latestData.value,
-        selectedUnit.name
-      );
+  const { transform, transformedValue, doubleValues } = useUnitTransformer();
 
-      if (selectedUnit.name === "foot") {
-        valueContainer = (
-          <span className="cardItem-value">
-            {transformedValue.foot}'{transformedValue.inch}"
-          </span>
-        );
-      } else {
-        valueContainer = (
-          <span className="cardItem-value">
-            {parseFloat(transformedValue.toFixed(2))}
-          </span>
-        );
-      }
-    }
-  }
+  useEffect(() => {
+    if (!latestData) return;
+    transform(latestData.value, selectedUnit.name);
+  }, [latestData, selectedUnit]);
+
+  const onClickHandler = () => {
+    dispatchOnClick(id);
+  };
 
   let dataType;
 
@@ -105,7 +82,7 @@ function CardItem({ id, title, data, unit, type, selected }) {
     return (
       <div
         className={`emptyCardItem ${selected && "active"}`}
-        onClick={() => onClickHandler(id)}
+        onClick={() => onClickHandler()}
       >
         <div className="emptyCardItem-top">
           <span className="cardItem-name">{title}</span>
@@ -124,12 +101,17 @@ function CardItem({ id, title, data, unit, type, selected }) {
     return (
       <div
         className={`cardItem ${selected && "active"}`}
-        onClick={() => onClickHandler(id)}
+        onClick={() => onClickHandler()}
       >
         <div className="cardItem-left">
           <span className="cardItem-name">{title}</span>
           <div className="cardItem-value__container">
-            {valueContainer}
+            <ValueContainer
+              latestData={latestData}
+              selectedUnit={selectedUnit.name}
+              transformedValue={transformedValue}
+              doubleValues={doubleValues}
+            />
             {selectedUnit.name != "foot" && (
               <span className="cardItem-unit">{selectedUnit.symbol}</span>
             )}

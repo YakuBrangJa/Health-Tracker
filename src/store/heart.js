@@ -97,6 +97,7 @@ const initialState = {
 
   componentState: {
     firstRun: true,
+    dataState: "",
   },
 };
 
@@ -146,11 +147,25 @@ const heartSlice = createSlice({
     },
 
     populateData(state, action) {
-      state.heart = action.payload;
+      const data = action.payload;
+
+      for (let key in data) {
+        if (!data[key].data) {
+          data[key].data = [];
+        }
+      }
+
+      state.heart = data;
     },
 
     updateComponentState(state, action) {
       state.componentState.firstRun = action.payload;
+    },
+    updateDataState(state, action) {
+      state.componentState.dataState = action.payload;
+    },
+    updateFirstClick(state, action) {
+      state.componentState.firstClick = action.payload;
     },
   },
 });

@@ -1,18 +1,15 @@
 import useHttps from "./useHttps";
 import { useDispatch } from "react-redux";
 
-function useDataRequest(branch, firstRun, actions) {
+function useDataRequest(branch, actions) {
   const dispatch = useDispatch();
   const applyData = (data) => {
     dispatch(actions.populateData(data));
   };
 
-  const { isLoading, error, sendRequest } = useHttps(
-    {
-      url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}.json`,
-    },
-    firstRun
-  );
+  const { isLoading, error, sendRequest } = useHttps({
+    url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}.json`,
+  });
 
   const fetchData = () => {
     sendRequest(applyData);

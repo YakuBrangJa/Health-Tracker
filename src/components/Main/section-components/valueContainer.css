@@ -1,0 +1,12 @@
+.cardItem-value {
+  font-size: 2.3rem;
+  font-weight: 650;
+  margin-right: 0.3rem;
+  color: var(--color-grey1);
+  display: inline-block;
+  height: 2rem;
+  line-height: 2rem;
+}
+.foot-unit {
+  color: var(--color-grey4);
+}

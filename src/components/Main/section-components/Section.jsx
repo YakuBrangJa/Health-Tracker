@@ -6,21 +6,16 @@ import { useSelector, useDispatch } from "react-redux";
 import SectionContainer from "./SectionContainer";
 import CardItem from "./CardItem";
 import Detail from "./Detail";
+import SectionLoading from "./SectionLoading";
 import { formStateActions } from "../../../store/form-state";
 
 function Section(props) {
-  // console.log(props.data);
-
-  const dataArray = Object.values(props.data);
-  const itemWithData = dataArray.filter((item) => item.data.length > 0);
-  const itemWithoutData = dataArray.filter((item) => item.data.length === 0);
+  const itemWithData = props.data.filter((item) => item.data.length > 0);
+  const itemWithoutData = props.data.filter((item) => item.data.length === 0);
 
   const dispatch = useDispatch();
-  const dataState = useSelector((state) => state.formState.dataState);
-
-  useEffect(() => {
-    dispatch(formStateActions.setDataState(dataArray[0].id));
-  }, []);
+  const dataState = props.componentState.dataState;
+  console.log(props.componentState.dataState);
 
   return (
     <SectionContainer title={props.title}>
@@ -40,6 +35,7 @@ function Section(props) {
                     type={value.type}
                     index={i}
                     selected={dataState === value.id}
+                    dispatchOnClick={props.dispatchOnClick}
                   />
                 );
               })}
@@ -56,6 +52,7 @@ function Section(props) {
                     unit={value.unit}
                     type={value.type}
                     selected={dataState === value.id}
+                    dispatchOnClick={props.dispatchOnClick}
                   />
                 );
               })}
@@ -63,7 +60,7 @@ function Section(props) {
           </div>
         </div>
         <div className="container-right">
-          {dataArray
+          {props.data
             .filter((value) => value.id === dataState)
             .map((value) => (
               <Detail

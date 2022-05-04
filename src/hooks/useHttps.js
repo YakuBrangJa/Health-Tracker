@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-function useHttps(requestConfig, firstRun) {
+function useHttps(requestConfig) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const sendRequest = async (applyData) => {
-    if (!firstRun) return;
     setIsLoading(true);
 
     try {

@@ -81,9 +81,9 @@ const initialState = {
       data: [],
       unit: {
         bmi: {
-          name: "bmi",
+          name: "body mass index",
           selected: true,
-          symbol: "BMI",
+          symbol: "bmi",
         },
       },
     },
@@ -127,6 +127,8 @@ const initialState = {
   },
   componentState: {
     firstRun: true,
+    dataState: "",
+    firstClick: false,
   },
 };
 
@@ -193,6 +195,12 @@ const bodyMeasurementsSlice = createSlice({
 
     updateComponentState(state, action) {
       state.componentState.firstRun = action.payload;
+    },
+    updateDataState(state, action) {
+      state.componentState.dataState = action.payload;
+    },
+    updateFirstClick(state, action) {
+      state.componentState.firstClick = action.payload;
     },
   },
 });
