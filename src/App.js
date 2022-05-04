@@ -29,29 +29,6 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   console.log("fetching");
-  //   fetch(
-  //     "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/body-measurements.json"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((responseData) => {
-  //       dispatch(bodyMeasurementsActions.populateData(responseData));
-  //       setIsLoading(false);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch(
-  //     "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker.json",
-  //     {
-  //       method: "PUT",
-  //       body: JSON.stringify(data),
-  //     }
-  //   );
-  // }, [data]);
-
   useEffect(() => {
     dispatch(formStateActions.setSidebarState(location.pathname));
   }, [location]);
