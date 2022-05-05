@@ -4,8 +4,6 @@ import "./favourites.css";
 import SummaryHeader2 from "./summary-childs/SummaryHeader2";
 import Card from "./summary-childs/Card";
 
-import dummyData from "../../../json/data.json";
-
 function Favourites() {
   const [fetchedData, setFetchedData] = useState([]);
 
@@ -27,16 +25,6 @@ function Favourites() {
     <div className="favourite">
       <SummaryHeader2 title={"Favourites"} />
       <div className="favourite-card">
-        {/* {fetchedData.map((item) => (
-          <Card
-            key={item.title}
-            name={item.title}
-            value={72}
-            unit={item.unit.millimeterMercury}
-            date={"Mar 9"}
-            type={item.type}
-          />
-        ))} */}
         <Card
           key="0"
           name={"Heart Rate"}

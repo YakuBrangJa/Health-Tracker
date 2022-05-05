@@ -9,7 +9,7 @@ function useActionSelector() {
 
   const sidebarState = useSelector((state) => state.formState.sidebarState);
 
-  const select = () => {
+  const select = React.useCallback(() => {
     switch (sidebarState) {
       case "/body-measurements":
         setAction(bodyMeasurementsActions);
@@ -20,7 +20,7 @@ function useActionSelector() {
       default:
         break;
     }
-  };
+  }, [sidebarState]);
 
   return {
     action,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import useDateTime from "../../../../hooks/useDateTime";
+import useFormDateFormat from "../../../../hooks/useFormDateFormat";
 
 import ValueInput from "./ValueInput";
 
@@ -21,7 +21,7 @@ function AddDataForm({ formClose, formOpenState, actions }) {
     });
   };
 
-  const { date, time } = useDateTime();
+  const { date, time } = useFormDateFormat();
 
   useEffect(() => {
     setFormDate(date);

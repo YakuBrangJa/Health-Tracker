@@ -21,14 +21,14 @@ function Heart() {
   }, [fetchData]);
 
   // POSTING
-  const { sendRequest } = useHttps({
-    url: "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/heart.json",
-    method: "PUT",
-    body: data,
-  });
+  const { sendRequest } = useHttps();
   useEffect(() => {
     if (componentState.firstRun) return;
-    sendRequest();
+    sendRequest({
+      url: "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/heart.json",
+      method: "PUT",
+      body: data,
+    });
   }, [data, sendRequest]);
 
   useEffect(() => {

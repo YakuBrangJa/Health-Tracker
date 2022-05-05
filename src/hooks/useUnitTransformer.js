@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 function useUnitTransformer() {
   const [singleValues, setSingleValues] = useState();
   const [doubleValues, setDoubleValues] = useState({});
-  const transform = (value, unit) => {
+
+  const transform = useCallback((value, unit) => {
     switch (unit) {
       case "kilogram":
         setSingleValues(parseFloat((value / 2.205).toFixed(1)));
@@ -32,7 +33,7 @@ function useUnitTransformer() {
       default:
         setSingleValues(parseFloat(value.toFixed(1)));
     }
-  };
+  }, []);
 
   return {
     singleValues,

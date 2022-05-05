@@ -3,6 +3,7 @@ import "./section.css";
 import SectionContainer from "./SectionContainer";
 import CardItem from "./CardItem";
 import Detail from "./Detail";
+import { useEffect } from "react";
 
 function Section({ data, title, componentState, error, actions }) {
   const itemWithData = data.filter((item) => item.data.length > 0);

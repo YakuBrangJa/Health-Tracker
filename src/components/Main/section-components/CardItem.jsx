@@ -18,7 +18,7 @@ import "./cardItem.css";
 import ValueContainer from "./ValueContainer";
 
 import useUnitTransformer from "../../../hooks/useUnitTransformer";
-import useActionSelector from "../../../hooks/useActionSelector";
+import useDateTimeFormatter from "../../../hooks/useDateTimeFormatter";
 
 function CardItem({ id, title, data, unit, type, selected, actions }) {
   const unitArray = Object.values(unit);
@@ -27,15 +27,17 @@ function CardItem({ id, title, data, unit, type, selected, actions }) {
   const { transform, singleValues, doubleValues } = useUnitTransformer();
   const dispatch = useDispatch();
 
-  // const { action, select } = useActionSelector();
-  // useEffect(() => {
-  //   select();
-  // }, [select]);
+  const { formattedDate, format } = useDateTimeFormatter();
+
+  useEffect(() => {
+    if (!latestData) return;
+    format(latestData.date, latestData.time);
+  }, [latestData, format]);
 
   useEffect(() => {
     if (!latestData) return;
     transform(latestData.value, selectedUnit.name);
-  }, [latestData, selectedUnit]);
+  }, [latestData, selectedUnit, transform]);
 
   const onClickHandler = () => {
     dispatch(actions.updateDataState(id));
@@ -126,7 +128,7 @@ function CardItem({ id, title, data, unit, type, selected, actions }) {
         <div className="cardItem-right">
           {/* {dataType.icon} */}
           <div className={`cardItem-date__container ${selected && "active"}`}>
-            <span className="cardItem-date">{latestData.date}</span>
+            <span className="cardItem-date">{formattedDate}</span>
             <KeyboardArrowRightSharpIcon
               className={`cardItem-forward__icon `}
             />
