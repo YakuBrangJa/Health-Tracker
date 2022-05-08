@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import "./detail.css";
 
 import AddDataForm from "./Form/AddDataForm";
+import BarChart from "../../Charts/BarChart";
+import { DemoChart } from "../../Charts/DemoChart";
 import { formStateActions } from "../../../store/form-state";
 
 function Detail({ id, title, data, unit, actions }) {
@@ -75,7 +77,7 @@ function Detail({ id, title, data, unit, actions }) {
           </ul>
         </div>
         <div className="value-header">
-          <div className="value">{data}</div>
+          <div className="value">{0}</div>
           <select
             name="unit"
             className="unit"
@@ -89,8 +91,9 @@ function Detail({ id, title, data, unit, actions }) {
             ))}
           </select>
         </div>
-        <div className="section-graph">
-          <div className="graph"></div>
+        <div className="section-chart">
+          <BarChart data={data} className="chart" />
+          <DemoChart />
         </div>
       </div>
     </>

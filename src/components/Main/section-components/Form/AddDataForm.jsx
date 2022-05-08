@@ -11,6 +11,7 @@ function AddDataForm({ formClose, formOpenState, actions }) {
   const [formData, setFormData] = useState({});
   const [formDate, setFormDate] = useState();
   const [formTime, setFormTime] = useState();
+  const [inputIsValid, setInputIsValid] = useState(false);
   const dispatch = useDispatch();
   const unitState = useSelector((state) => state.formState.unitState);
 
@@ -19,6 +20,12 @@ function AddDataForm({ formClose, formOpenState, actions }) {
       ...formData,
       [e.target.name]: e.target.value.trim(),
     });
+    if (formData.value.length > 0) {
+      setInputIsValid(true);
+    }
+    if (formData.value.length === 0) {
+      setInputIsValid(false);
+    }
   };
 
   const { date, time } = useFormDateFormat();
@@ -55,7 +62,11 @@ function AddDataForm({ formClose, formOpenState, actions }) {
         <button onClick={formClose} type="button" className="form-cancel">
           Cancle
         </button>
-        <button type="submit" className="form-add">
+        <button
+          type="submit"
+          className={`form-add`}
+          disabled={!inputIsValid ? true : false}
+        >
           Add
         </button>
       </div>

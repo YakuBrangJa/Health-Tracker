@@ -27,7 +27,6 @@ function Section({ data, title, componentState, error, actions }) {
                     data={value.data}
                     unit={value.unit}
                     type={value.type}
-                    index={i}
                     selected={dataState === value.id}
                     actions={actions}
                   />
@@ -36,7 +35,7 @@ function Section({ data, title, componentState, error, actions }) {
             </div>
             <div className="noData">
               {itemWithoutData.length > 0 && <h3>No Data</h3>}
-              {itemWithoutData.map((value, i) => {
+              {itemWithoutData.map((value) => {
                 return (
                   <CardItem
                     key={value.id}
@@ -61,7 +60,7 @@ function Section({ data, title, componentState, error, actions }) {
                 key={value.id}
                 id={value.id}
                 title={value.title}
-                data={0}
+                data={value.data}
                 unit={value.unit}
                 actions={actions}
               />
