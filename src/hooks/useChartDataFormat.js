@@ -11,19 +11,24 @@ function useChartDataFormat() {
       });
       const day = new Date(item.date).getDate();
       const weekDay = new Date(item.date).toLocaleString("en-US", {
-        week: "short",
+        weekday: "short",
       });
       const hour = new Date(`${item.date}T${item.time}`).getHours();
+      const hourObj = "hour";
+      const weekObj = "week";
 
       if (!group[year]) group[year] = {};
       if (!group[year][month]) group[year][month] = {};
       if (!group[year][month][day]) group[year][month][day] = {};
-      // if (!group[year][month][day].weekDay)
-      // group[year][month][day].weekDay = "";
-      if (!group[year][month][day][hour]) group[year][month][day][hour] = [];
+      if (!group[year][month][day][weekObj])
+        group[year][month][day][weekObj] = "";
+      if (!group[year][month][day][hourObj])
+        group[year][month][day][hourObj] = {};
+      if (!group[year][month][day][hourObj][hour])
+        group[year][month][day][hourObj][hour] = [];
 
-      // group[year][month][day].weekDay = weekDay;
-      group[year][month][day][hour].push(item.value);
+      group[year][month][day][weekObj] = weekDay;
+      group[year][month][day][hourObj][hour].push(item.value);
       return group;
     }, {});
 
@@ -44,7 +49,7 @@ function useChartDataFormat() {
             Object.values(matchedMonth)
               .map(
                 (d) =>
-                  Object.values(d)
+                  Object.values(d.hour)
                     .map(
                       (hr) =>
                         hr.reduce((accu, value) => {
@@ -53,7 +58,7 @@ function useChartDataFormat() {
                     )
                     .reduce((accu, hrAvg) => {
                       return accu + hrAvg;
-                    }, 0) / Object.values(d).length
+                    }, 0) / Object.values(d.hour).length
               )
               .reduce((accu, value) => {
                 return accu + value;
@@ -89,7 +94,7 @@ function useChartDataFormat() {
 
         if (matchedDay) {
           const dayData =
-            Object.values(matchedDay)
+            Object.values(matchedDay.hour)
               .map(
                 (hr) =>
                   hr.reduce((accu, value) => {
@@ -98,7 +103,7 @@ function useChartDataFormat() {
               )
               .reduce((accu, value) => {
                 return accu + value;
-              }, 0) / Object.values(matchedDay).length;
+              }, 0) / Object.values(matchedDay.hour).length;
 
           return {
             x: day,
@@ -116,9 +121,98 @@ function useChartDataFormat() {
 
     if (filterState == "WEEK") {
       const year = "2022"; // selected year
-      const month = "May"; // selected month
+      const month = 5; // selected month
+      const day = 4;
 
-      const week = Array.from({ length: 7 }, (_, i) => i + 1);
+      const weekArr = Array.from({ length: 7 }, (_, i) =>
+        new Date(
+          new Date(`${year}-${month}-${day}`).getTime() - i * 60000 * 60 * 24
+        ).getDate()
+      ).reverse();
+
+      const yearGroup = dateTree[year];
+      const monthGroup = yearGroup.May;
+
+      const filledChart = weekArr.map((dayItem) => {
+        const matchedDay = monthGroup[dayItem];
+
+        if (matchedDay) {
+          const weekDayData =
+            Object.values(matchedDay.hour)
+              .map(
+                (hr) =>
+                  hr.reduce((accu, value) => {
+                    return accu + value;
+                  }, 0) / hr.length
+              )
+              .reduce((accu, value) => {
+                return accu + value;
+              }, 0) / Object.values(matchedDay.hour).length;
+
+          return {
+            x: new Date(`${year}-${month}-${dayItem}`).toLocaleString("en-US", {
+              weekday: "short",
+            }),
+            y: weekDayData.toFixed(1),
+          };
+        } else {
+          return {
+            x: new Date(`${year}-${month}-${dayItem}`).toLocaleString("en-US", {
+              weekday: "short",
+            }),
+            y: null,
+          };
+        }
+      });
+
+      setChartDataFormat(filledChart);
+    }
+
+    if (filterState === "DAY") {
+      const year = "2022"; // selected year
+      const month = 5; // selected month
+      const day = 4;
+
+      const yearGroup = dateTree[year];
+      const monthGroup = yearGroup.May;
+      const dayGroup = monthGroup[day];
+
+      const hourArr = Array.from(Array(24).keys());
+
+      const filledChart = hourArr.map((hourItem) => {
+        const hourFormat = (hr) => {
+          if (hr === 0) return "12 AM";
+          else if (hr === 12) return "12 PM";
+          else if (hr > 12) return hr - 12;
+          else return hr;
+        };
+
+        if (dayGroup) {
+          const matchedHour = dayGroup.hour[hourItem];
+
+          if (matchedHour) {
+            const hourData = matchedHour.reduce((accu, value) => {
+              return accu + value;
+            }, 0);
+
+            return {
+              x: hourFormat(hourItem),
+              y: hourData,
+            };
+          } else {
+            return {
+              x: hourFormat(hourItem),
+              y: null,
+            };
+          }
+        } else {
+          return {
+            x: hourFormat(hourItem),
+            y: null,
+          };
+        }
+      });
+      setChartDataFormat(filledChart);
     }
   }, []);
 

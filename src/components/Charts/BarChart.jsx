@@ -1,5 +1,5 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 import useChartDataFormat from "../../hooks/useChartDataFormat";
 import {
@@ -25,6 +25,9 @@ ChartJS.register(
   Legend
 );
 
+const skipped = (ctx, value) =>
+  ctx.p0.skip || ctx.p1.skip ? value : undefined;
+
 const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -49,6 +52,18 @@ const options = {
           return "May";
         },
       },
+    },
+  },
+  datasets: {
+    line: {
+      spanGaps: true,
+      segment: {
+        borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132, 0.8)"),
+        borderDash: (ctx) => skipped(ctx, [6, 4]),
+      },
+      borderWidth: 2.5,
+      pointRadius: 2.5,
+      hoverRadius: 5,
     },
   },
 };
@@ -79,23 +94,6 @@ function BarChart({ data }) {
         borderWidth: 2,
         borderColor: "rgba(53, 162, 235, 0.7)",
         backgroundColor: "rgba(53, 162, 235, 0.7)",
-        tooltip: {
-          titleColor: "rgba(200, 162, 100, 0.7)",
-
-          callbacks: {
-            label: function (context) {
-              let label = context.dataset.label || "";
-
-              if (label) {
-                label = "BMI: ";
-              }
-              if (context.parsed.y !== null) {
-                label += context.parsed.y;
-              }
-              return label;
-            },
-          },
-        },
       },
     ],
   });
@@ -103,7 +101,7 @@ function BarChart({ data }) {
   const { chartDataFormat, formatData } = useChartDataFormat();
   React.useEffect(() => {
     if (data.length === 0) return;
-    formatData(data, "MONTH");
+    formatData(data, "DAY");
   }, [formatData, data]);
 
   React.useEffect(() => {
@@ -115,13 +113,33 @@ function BarChart({ data }) {
 
       datasets: [
         {
-          label: "Body Mass Index",
+          label: "Body Temperature (°F)",
           data: chartDataFormat.map((item) => item.y),
 
           // maxBarThickness: 60,
           borderWidth: 2,
           borderColor: "rgba(53, 162, 235, 0.7)",
           backgroundColor: "rgba(53, 162, 235, 0.7)",
+          // borderColor: "rgb(255, 99, 132)",
+          // backgroundColor: "rgba(255, 99, 132, 0.5)",
+          // pointBackgroundColor: "rgba(255, 99, 132, 1)",
+          tooltip: {
+            titleColor: "rgba(200, 162, 100, 0.7)",
+
+            callbacks: {
+              label: function (context) {
+                let label = context.dataset.label || "";
+
+                if (label) {
+                  label = ": °F";
+                }
+                if (context.parsed.y !== null) {
+                  label = "Average " + context.parsed.y + label;
+                }
+                return label;
+              },
+            },
+          },
         },
       ],
     });

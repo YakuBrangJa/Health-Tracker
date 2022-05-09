@@ -79,6 +79,18 @@ const labels = [
   "Oct",
   "Nov",
   "Dec",
+  // "2022 Jan",
+  // "Feb",
+  // "Mar",
+  // "Apr",
+  // "May",
+  // "Jun",
+  // "Jul",
+  // "Aug",
+  // "Sep",
+  // "Oct",
+  // "Nov",
+  // "Dec",
 ];
 
 // const down = (ctx, value) =>

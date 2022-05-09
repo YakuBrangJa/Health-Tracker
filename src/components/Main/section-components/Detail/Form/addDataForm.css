@@ -12,6 +12,7 @@
   transform-origin: top right;
   transform: scale(0);
   transition: transform 200ms ease;
+  z-index: 2;
 }
 
 .addDataForm.open {

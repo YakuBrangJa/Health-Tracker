@@ -11,19 +11,34 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import MedicationIcon from "@mui/icons-material/Medication";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./cardItem.css";
 
-import ValueContainer from "./ValueContainer";
+import ValueContainer from "../ValueContainer";
 
-import useUnitTransformer from "../../../hooks/useUnitTransformer";
-import useDateTimeFormatter from "../../../hooks/useDateTimeFormatter";
+import useUnitTransformer from "../../../../hooks/useUnitTransformer";
+import useDateTimeFormatter from "../../../../hooks/useDateTimeFormatter";
 
 function CardItem({ id, title, data, unit, type, selected, actions }) {
   const unitArray = Object.values(unit);
   const selectedUnit = unitArray.find((item) => item.selected === true);
-  const latestData = data[data.length - 1];
+  const [latestData, setLatestData] = useState(undefined);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      setLatestData(
+        data.reduce((a, b) =>
+          new Date(`${a.date}T${a.time}`) > new Date(`${b.date}T${b.time}`)
+            ? a
+            : b
+        )
+      );
+    } else {
+      setLatestData(undefined);
+    }
+  }, [data]);
+
   const { transform, singleValues, doubleValues } = useUnitTransformer();
   const dispatch = useDispatch();
 

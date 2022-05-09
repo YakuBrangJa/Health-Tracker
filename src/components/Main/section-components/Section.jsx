@@ -1,8 +1,8 @@
 import "./section.css";
 
 import SectionContainer from "./SectionContainer";
-import CardItem from "./CardItem";
-import Detail from "./Detail";
+import CardItem from "./CardItem/CardItem";
+import Detail from "./Detail/Detail";
 import { useEffect } from "react";
 
 function Section({ data, title, componentState, error, actions }) {
