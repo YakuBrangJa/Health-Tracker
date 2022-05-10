@@ -1,12 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./valueHeader.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { formStateActions } from "../../../../store/form-state";
 
-function ValueHeader({ unit, actions }) {
-  const { unitState } = useSelector((state) => state.formState);
+import ValueContainer from "../ValueContainer";
+
+function ValueHeader({ data, unit, actions }) {
   const dispatch = useDispatch();
+  const { unitState } = useSelector((state) => state.formState);
+  const [latestData, setLatestData] = useState(undefined);
+
+  useEffect(() => {
+    if (data.length > 0) {
+      setLatestData(
+        data.reduce((a, b) =>
+          new Date(`${a.date}T${a.time}`) > new Date(`${b.date}T${b.time}`)
+            ? a
+            : b
+        )
+      );
+    } else {
+      setLatestData(undefined);
+    }
+  }, [data]);
 
   const unitArray = Object.values(unit);
   const initialUnit = unitArray.find((item) => item.selected === true);
@@ -20,6 +37,13 @@ function ValueHeader({ unit, actions }) {
     );
   }, [initialUnit]);
 
+  // const { formattedDate, format } = useDateTimeFormatter();
+
+  // useEffect(() => {
+  //   if (!latestData) return;
+  //   format(latestData.date, latestData.time);
+  // }, [latestData, format]);
+
   const unitSelectHandler = (e) => {
     e.preventDefault();
 
@@ -28,11 +52,18 @@ function ValueHeader({ unit, actions }) {
         unit: e.target.value,
       })
     );
+
+    dispatch(formStateActions.setDataSubmitted(true));
   };
 
   return (
     <div className="value-header">
-      <div className="value">{0}</div>
+      <ValueContainer
+        latestData={latestData}
+        unit={unit}
+        selectedUnit={initialUnit.name}
+      />
+      {/* <div className="value">{0}</div> */}
       <select
         name="unit"
         className="unit"

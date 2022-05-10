@@ -4,6 +4,7 @@ const initialState = {
   dataState: "",
   sidebarState: "",
   unitState: {},
+  dataSubmitted: false,
 };
 
 const formStateSlice = createSlice({
@@ -18,6 +19,9 @@ const formStateSlice = createSlice({
     },
     setUnitState(state, action) {
       state.unitState = action.payload;
+    },
+    setDataSubmitted(state, action) {
+      state.dataSubmitted = action.payload;
     },
   },
 });

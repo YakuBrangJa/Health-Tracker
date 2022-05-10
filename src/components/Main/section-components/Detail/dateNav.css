@@ -1,19 +1,21 @@
 /* DATE NAVIGATION */
+
 .date-navigation ul {
+  position: relative;
+
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   border-radius: 0.5rem;
   background-color: var(--color-grey7b);
-  padding: 0.2rem 0.1rem;
+  padding: 0.3rem 0.1rem;
 }
 .date-navigation ul li {
   text-align: center;
   padding: 0 0.1rem;
-  /* padding-left: 0.3rem; */
   border-right: 2px solid var(--color-grey6b);
 }
 
-.date-navigation ul li:last-child {
+.date-navigation ul li:nth-child(5) {
   border-right: none;
 }
 .date-navigation ul li > span:last-child {
@@ -22,12 +24,43 @@
 .date-navigation ul li > span {
   display: inline-block;
   width: 100%;
-  padding: 0.2rem 0;
-  border-radius: 0.4rem;
+  padding: 0.1rem 0;
   cursor: pointer;
 }
-.date-navigation ul li:nth-child(2) > span {
-  background: var(--color-white3);
-  box-shadow: 0px 0px 0.5rem 0.1rem rgba(50, 50, 50, 0.3);
-  /* display: none; */
+
+/* NAVIGATOR CONFIG*/
+.date-navigation .navigator {
+  height: 1.8rem;
+  position: absolute;
+  top: 50%;
+  left: 0.5%;
+  transform: translateY(-50%);
+  width: 19%;
+  text-align: center;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  background-color: var(--color-white3);
+  box-shadow: 0px 0px 0.5rem 0.2rem rgba(50, 50, 50, 0.3);
+  transition: transform 300ms ease;
+}
+
+.date-navigation ul li:not(:nth-child(6)) {
+  background: none;
+  z-index: 1;
+}
+
+/* .date-navigation ul li:nth-child(1).active ~ .navigator {
+  transform: translate(106%, -50%);
+} */
+.date-navigation ul li:nth-child(2).active ~ .navigator {
+  transform: translate(106%, -50%);
+}
+.date-navigation ul li:nth-child(3).active ~ .navigator {
+  transform: translate(211%, -50%);
+}
+.date-navigation ul li:nth-child(4).active ~ .navigator {
+  transform: translate(315%, -50%);
+}
+.date-navigation ul li:nth-child(5).active ~ .navigator {
+  transform: translate(421%, -50%);
 }

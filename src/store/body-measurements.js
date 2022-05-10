@@ -6,7 +6,7 @@ const initialState = {
       id: "body1",
       title: "Height",
       type: "body-measurements",
-      data: [],
+      data: [{ date: "2022-05-09", time: "12:23:00", value: 150 }],
       unit: {
         foot: {
           selected: true,

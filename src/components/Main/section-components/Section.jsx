@@ -1,15 +1,53 @@
 import "./section.css";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import SectionContainer from "./SectionContainer";
+import SectionLoading from "./SectionLoading";
 import CardItem from "./CardItem/CardItem";
 import Detail from "./Detail/Detail";
-import { useEffect } from "react";
+
+import useHttps from "../../../hooks/useHttps";
+import { formStateActions } from "../../../store/form-state";
 
 function Section({ data, title, componentState, error, actions }) {
-  const itemWithData = data.filter((item) => item.data.length > 0);
-  const itemWithoutData = data.filter((item) => item.data.length === 0);
-
+  const dataArray = Object.values(data);
   const dataState = componentState.dataState;
+  const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
+
+  console.log(dataKey, data[dataKey]);
+
+  const itemWithData = dataArray.filter((item) => item.data.length > 0);
+  const itemWithoutData = dataArray.filter((item) => item.data.length === 0);
+
+  const dispatch = useDispatch();
+  const { sidebarState, dataSubmitted } = useSelector(
+    (state) => state.formState
+  );
+
+  useEffect(() => {
+    if (componentState.firstClick) return;
+
+    if (itemWithData.length > 0) {
+      dispatch(actions.updateDataState(itemWithData[0].id));
+    } else {
+      dispatch(actions.updateDataState(itemWithoutData[0].id));
+    }
+  }, [itemWithData, itemWithoutData, componentState, actions]);
+
+  const { sendRequest } = useHttps();
+
+  useEffect(() => {
+    if (!dataSubmitted) return;
+
+    sendRequest({
+      url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${sidebarState}/${dataKey}.json`,
+      method: "PUT",
+      body: data[dataKey],
+    });
+
+    dispatch(formStateActions.setDataSubmitted(false));
+  }, [data, dataKey, sendRequest]);
 
   return (
     <SectionContainer title={title}>
@@ -18,7 +56,7 @@ function Section({ data, title, componentState, error, actions }) {
           <div className="container-child">
             <div className="summary">
               {itemWithData.length > 0 && <h3>Summary</h3>}
-              {itemWithData.map((value, i) => {
+              {itemWithData.map((value) => {
                 return (
                   <CardItem
                     key={value.id}
@@ -53,7 +91,7 @@ function Section({ data, title, componentState, error, actions }) {
           </div>
         </div>
         <div className="container-right">
-          {data
+          {/* {dataArray
             .filter((value) => value.id === dataState)
             .map((value) => (
               <Detail
@@ -64,7 +102,17 @@ function Section({ data, title, componentState, error, actions }) {
                 unit={value.unit}
                 actions={actions}
               />
-            ))}
+            ))} */}
+          {data[dataKey] && (
+            <Detail
+              key={data[dataKey].id}
+              id={data[dataKey].id}
+              title={data[dataKey].title}
+              data={data[dataKey].data}
+              unit={data[dataKey].unit}
+              actions={actions}
+            />
+          )}
         </div>
       </div>
     </SectionContainer>

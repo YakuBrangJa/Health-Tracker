@@ -58,7 +58,8 @@ const options = {
     line: {
       spanGaps: true,
       segment: {
-        borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132, 0.8)"),
+        // borderColor: (ctx) => skipped(ctx, "rgba(53, 162, 235, 0.7)"),
+        borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132, 07)"),
         borderDash: (ctx) => skipped(ctx, [6, 4]),
       },
       borderWidth: 2.5,
@@ -118,10 +119,10 @@ function BarChart({ data }) {
 
           // maxBarThickness: 60,
           borderWidth: 2,
-          borderColor: "rgba(53, 162, 235, 0.7)",
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
-          // borderColor: "rgb(255, 99, 132)",
-          // backgroundColor: "rgba(255, 99, 132, 0.5)",
+          // borderColor: "rgba(53, 162, 235, 0.7)",
+          // backgroundColor: "rgba(53, 162, 235, 0.7)",
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
           // pointBackgroundColor: "rgba(255, 99, 132, 1)",
           tooltip: {
             titleColor: "rgba(200, 162, 100, 0.7)",
@@ -147,7 +148,7 @@ function BarChart({ data }) {
 
   if (data.length === 0) return <p>No Data</p>;
 
-  return <Bar data={valueData} options={options}></Bar>;
+  return <Line data={valueData} options={options}></Line>;
 }
 
 export default BarChart;

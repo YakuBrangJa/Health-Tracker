@@ -17,12 +17,10 @@ import "./cardItem.css";
 
 import ValueContainer from "../ValueContainer";
 
-import useUnitTransformer from "../../../../hooks/useUnitTransformer";
 import useDateTimeFormatter from "../../../../hooks/useDateTimeFormatter";
 
 function CardItem({ id, title, data, unit, type, selected, actions }) {
-  const unitArray = Object.values(unit);
-  const selectedUnit = unitArray.find((item) => item.selected === true);
+  const dispatch = useDispatch();
   const [latestData, setLatestData] = useState(undefined);
 
   useEffect(() => {
@@ -39,20 +37,12 @@ function CardItem({ id, title, data, unit, type, selected, actions }) {
     }
   }, [data]);
 
-  const { transform, singleValues, doubleValues } = useUnitTransformer();
-  const dispatch = useDispatch();
-
   const { formattedDate, format } = useDateTimeFormatter();
 
   useEffect(() => {
     if (!latestData) return;
     format(latestData.date, latestData.time);
   }, [latestData, format]);
-
-  useEffect(() => {
-    if (!latestData) return;
-    transform(latestData.value, selectedUnit.name);
-  }, [latestData, selectedUnit, transform]);
 
   const onClickHandler = () => {
     dispatch(actions.updateDataState(id));
@@ -128,17 +118,7 @@ function CardItem({ id, title, data, unit, type, selected, actions }) {
       >
         <div className="cardItem-left">
           <span className="cardItem-name">{title}</span>
-          <div className="cardItem-value__container">
-            <ValueContainer
-              latestData={latestData}
-              selectedUnit={selectedUnit.name}
-              transformedValue={singleValues}
-              doubleValues={doubleValues}
-            />
-            {selectedUnit.name != "foot" && (
-              <span className="cardItem-unit">{selectedUnit.symbol}</span>
-            )}
-          </div>
+          <ValueContainer unit={unit} latestData={latestData} />
         </div>
         <div className="cardItem-right">
           {/* {dataType.icon} */}

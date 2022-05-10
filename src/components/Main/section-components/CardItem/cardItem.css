@@ -4,10 +4,10 @@
   align-items: stretch;
   background: var(--color-grey8b);
   border-radius: 0.5rem;
-  /* transition: all linear; */
   flex-shrink: 0;
   cursor: default;
   border: 2px solid var(--color-grey8b);
+  transition: border 200ms ease;
 }
 
 .cardItem {

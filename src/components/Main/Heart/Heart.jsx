@@ -11,7 +11,7 @@ import SectionLoading from "../section-components/SectionLoading";
 function Heart() {
   const { heart: data, componentState } = useSelector((state) => state.heart);
   const dataArray = Object.values(data);
-  const dispatch = useDispatch();
+
   // FETCHING
   const { isLoading, error, fetchData } = useDataRequest("heart", heartActions);
 
@@ -21,20 +21,15 @@ function Heart() {
   }, [fetchData]);
 
   // POSTING
-  const { sendRequest } = useHttps();
-  useEffect(() => {
-    if (componentState.firstRun) return;
-    sendRequest({
-      url: "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/heart.json",
-      method: "PUT",
-      body: data,
-    });
-  }, [data, sendRequest]);
-
-  useEffect(() => {
-    if (componentState.firstClick) return;
-    dispatch(heartActions.updateDataState(dataArray[0].id));
-  }, [dataArray]);
+  // const { sendRequest } = useHttps();
+  // useEffect(() => {
+  //   if (componentState.firstRun) return;
+  //   sendRequest({
+  //     url: "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/heart.json",
+  //     method: "PUT",
+  //     body: data,
+  //   });
+  // }, [data, sendRequest]);
 
   if (isLoading) {
     return <SectionLoading title={"Heart"}></SectionLoading>;

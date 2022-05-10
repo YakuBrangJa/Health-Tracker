@@ -43,7 +43,7 @@ function Detail({ id, title, data, unit, actions }) {
       </div>
       <div className="container-child">
         <DateNav />
-        <ValueHeader unit={unit} actions={actions} />
+        <ValueHeader data={data} unit={unit} actions={actions} />
         <div className="section-chart">
           <BarChart data={data} className="chart" />
         </div>

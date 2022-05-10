@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useFormDateFormat from "../../../../../hooks/useFormDateFormat";
 
 import ValueInput from "./ValueInput";
+import { formStateActions } from "../../../../../store/form-state";
 
 import "./addDataForm.css";
 
@@ -11,21 +12,31 @@ function AddDataForm({ formClose, formOpenState, actions }) {
   const [formData, setFormData] = useState({});
   const [formDate, setFormDate] = useState();
   const [formTime, setFormTime] = useState();
-  const [inputIsValid, setInputIsValid] = useState(false);
+  const [inputIsValid, setInputIsValid] = useState(true);
   const dispatch = useDispatch();
-  const unitState = useSelector((state) => state.formState.unitState);
+  const { sidebarState, unitState } = useSelector((state) => state.formState);
+
+  // const targetData = sidebarState
+  //   .split("-")
+  //   .reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1))
+  //   .replace("/", "");
+
+  // const dataBranch = useSelector((state) => state[targetData][targetData]);
+  // const dataState = useSelector(
+  //   (state) => state[targetData].componentState.dataState
+  // );
 
   const onChangeHandler = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),
     });
-    if (formData.value.length > 0) {
-      setInputIsValid(true);
-    }
-    if (formData.value.length === 0) {
-      setInputIsValid(false);
-    }
+    // if (formData.value.length > 0) {
+    //   setInputIsValid(true);
+    // }
+    // if (formData.value.length === 0) {
+    //   setInputIsValid(false);
+    // }
   };
 
   const { date, time } = useFormDateFormat();
@@ -41,14 +52,16 @@ function AddDataForm({ formClose, formOpenState, actions }) {
 
   const addDataHandler = (event) => {
     event.preventDefault();
-
     console.log(formData);
+
     dispatch(
       actions.addData({
         unitState,
         formData,
       })
     );
+
+    dispatch(formStateActions.setDataSubmitted(true));
 
     formClose();
   };

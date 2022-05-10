@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./dateNav.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { dateNavActions } from "../../../../store/date-nav";
+
 function DateNav(props) {
+  const dispatch = useDispatch();
+  const { dateTabs, activeTabState } = useSelector((state) => state.dateNav);
+
+  useEffect(() => {
+    dispatch(dateNavActions.setActiveTabState("D"));
+  }, [dateNavActions]);
+
+  const selectTabHandler = (tab) => {
+    dispatch(dateNavActions.setActiveTabState(tab));
+  };
+
   return (
     <div className="date-navigation">
       <ul>
-        <li>
-          <span>Day</span>
-          <span>D</span>
-        </li>
-        <li>
-          <span>Week</span>
-          <span>W</span>
-        </li>
-        <li>
-          <span>Month</span>
-          <span>M</span>
-        </li>
-        <li>
-          <span>6 Months</span>
-          <span>6M</span>
-        </li>
-        <li>
-          <span>Year</span>
-          <span>Y</span>
-        </li>
+        {dateTabs.map((tab) => (
+          <li
+            className={`${activeTabState === tab.short && "active"}`}
+            onClick={() => selectTabHandler(tab.short)}
+          >
+            <span>{tab.long}</span>
+            <span>{tab.short}</span>
+          </li>
+        ))}
+
+        <li className="navigator"></li>
       </ul>
     </div>
   );

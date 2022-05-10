@@ -39,7 +39,7 @@ function useChartDataFormat() {
         return new Date(0, i).toLocaleString("en-US", { month: "short" });
       });
 
-      const yearGroup = dateTree[2022]; // selected year (default is latest year)
+      const yearGroup = dateTree[2021]; // selected year (default is latest year)
 
       const filledChart = monthsArr.map((month) => {
         const matchedMonth = yearGroup[month];
@@ -122,7 +122,7 @@ function useChartDataFormat() {
     if (filterState == "WEEK") {
       const year = "2022"; // selected year
       const month = 5; // selected month
-      const day = 4;
+      const day = 9;
 
       const weekArr = Array.from({ length: 7 }, (_, i) =>
         new Date(
@@ -171,7 +171,7 @@ function useChartDataFormat() {
     if (filterState === "DAY") {
       const year = "2022"; // selected year
       const month = 5; // selected month
-      const day = 4;
+      const day = 9;
 
       const yearGroup = dateTree[year];
       const monthGroup = yearGroup.May;
@@ -191,9 +191,10 @@ function useChartDataFormat() {
           const matchedHour = dayGroup.hour[hourItem];
 
           if (matchedHour) {
-            const hourData = matchedHour.reduce((accu, value) => {
-              return accu + value;
-            }, 0);
+            const hourData =
+              matchedHour.reduce((accu, value) => {
+                return accu + value;
+              }, 0) / matchedHour.length;
 
             return {
               x: hourFormat(hourItem),

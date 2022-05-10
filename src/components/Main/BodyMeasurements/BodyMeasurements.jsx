@@ -12,9 +12,6 @@ function BodyMeasurements() {
     (state) => state.bodyMeasurements
   );
 
-  const dataArray = Object.values(data);
-  const dispatch = useDispatch();
-
   const { isLoading, error, fetchData } = useDataRequest(
     "body-measurements",
     bodyMeasurementsActions
@@ -25,22 +22,6 @@ function BodyMeasurements() {
     fetchData();
   }, [fetchData]);
 
-  const { sendRequest } = useHttps();
-
-  useEffect(() => {
-    if (componentState.firstRun) return;
-    sendRequest({
-      url: "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/body-measurements.json",
-      method: "PUT",
-      body: data,
-    });
-  }, [data, sendRequest]);
-
-  useEffect(() => {
-    if (componentState.firstClick) return;
-    dispatch(bodyMeasurementsActions.updateDataState(dataArray[0].id));
-  }, [dataArray]);
-
   if (isLoading) {
     return <SectionLoading title={"Body Measurements"}></SectionLoading>;
   }
@@ -48,7 +29,7 @@ function BodyMeasurements() {
   return (
     <Section
       title={"Body Measurements"}
-      data={dataArray}
+      data={data}
       error={error}
       componentState={componentState}
       actions={bodyMeasurementsActions}

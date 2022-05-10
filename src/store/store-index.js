@@ -1,16 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import formStateReducer from "./form-state";
+import dateNavReducer from "./date-nav";
 import bodyMeasurementsReducer from "./body-measurements";
 import heartReducer from "./heart";
-// import healthTrackerReducer from "./health-tracker";
-import formStateReducer from "./form-state";
 
 const store = configureStore({
   reducer: {
-    // healthTracker: healthTrackerReducer,
+    formState: formStateReducer,
+    dateNav: dateNavReducer,
     bodyMeasurements: bodyMeasurementsReducer,
     heart: heartReducer,
-    formState: formStateReducer,
   },
 });
 
