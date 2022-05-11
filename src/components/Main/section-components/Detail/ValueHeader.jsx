@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { formStateActions } from "../../../../store/form-state";
 
 import ValueContainer from "../ValueContainer";
+import DateControl from "./DateControl";
 
 function ValueHeader({ data, unit, actions }) {
   const dispatch = useDispatch();
@@ -58,24 +59,27 @@ function ValueHeader({ data, unit, actions }) {
 
   return (
     <div className="value-header">
-      <ValueContainer
-        latestData={latestData}
-        unit={unit}
-        selectedUnit={initialUnit.name}
-      />
-      {/* <div className="value">{0}</div> */}
-      <select
-        name="unit"
-        className="unit"
-        value={unitState.state}
-        onChange={unitSelectHandler}
-      >
-        {unitArray.map((value) => (
-          <option key={value.name} value={value.name}>
-            {value.symbol}
-          </option>
-        ))}
-      </select>
+      <div className="value-control">
+        <ValueContainer
+          latestData={latestData}
+          unit={unit}
+          isDetailTab={true}
+        />
+        {/* <div className="value">{0}</div> */}
+        <select
+          name="unit"
+          className="unit"
+          value={unitState.state}
+          onChange={unitSelectHandler}
+        >
+          {unitArray.map((value) => (
+            <option key={value.name} value={value.name}>
+              {value.symbol}
+            </option>
+          ))}
+        </select>
+      </div>
+      <DateControl data={data} />
     </div>
   );
 }

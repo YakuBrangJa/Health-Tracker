@@ -21,20 +21,17 @@ import useDateTimeFormatter from "../../../../hooks/useDateTimeFormatter";
 
 function CardItem({ id, title, data, unit, type, selected, actions }) {
   const dispatch = useDispatch();
-  const [latestData, setLatestData] = useState(undefined);
+  const [latestData, setLatestData] = useState(null);
 
   useEffect(() => {
-    if (data.length > 0) {
-      setLatestData(
-        data.reduce((a, b) =>
-          new Date(`${a.date}T${a.time}`) > new Date(`${b.date}T${b.time}`)
-            ? a
-            : b
-        )
-      );
-    } else {
-      setLatestData(undefined);
-    }
+    if (data.length === 0) return;
+    setLatestData(
+      data.reduce((a, b) =>
+        new Date(`${a.date}T${a.time}`) > new Date(`${b.date}T${b.time}`)
+          ? a
+          : b
+      )
+    );
   }, [data]);
 
   const { formattedDate, format } = useDateTimeFormatter();
@@ -118,7 +115,11 @@ function CardItem({ id, title, data, unit, type, selected, actions }) {
       >
         <div className="cardItem-left">
           <span className="cardItem-name">{title}</span>
-          <ValueContainer unit={unit} latestData={latestData} />
+          <ValueContainer
+            unit={unit}
+            latestData={latestData}
+            isDetailTab={false}
+          />
         </div>
         <div className="cardItem-right">
           {/* {dataType.icon} */}

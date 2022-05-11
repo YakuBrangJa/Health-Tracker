@@ -33,10 +33,12 @@ html::-webkit-scrollbar-track {
 
   --color-grey1: #555;
   --color-grey2: #666;
+  --color-grey2b: #686868;
   --color-grey3: #777;
   --color-grey3b: #787878;
-  --color-grey4: #888;
-  --color-grey5: #999;
+  --color-grey4: #808080;
+  --color-grey4b: #888888;
+  --color-grey5: #909090;
   --color-grey5b: #989898;
   --color-grey6: #aaa;
   --color-grey6b: #a8a8a8;

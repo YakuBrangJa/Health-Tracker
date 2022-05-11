@@ -1,0 +1,29 @@
+.value-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin-top: 1rem;
+}
+
+.value-control {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.3rem;
+}
+
+.value-header .unit {
+  border: none;
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  font-weight: 650;
+  color: var(--color-grey1);
+  outline: none;
+  cursor: pointer;
+  background-color: var(--color-grey8);
+  transition: all 200ms ease;
+}
+.value-header .unit:hover {
+  background-color: var(--color-grey7b);
+}

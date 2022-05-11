@@ -49,29 +49,3 @@
   width: 100%;
   /* overflow-x: scroll; */
 }
-
-.value-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 0 1rem;
-  margin-top: 1rem;
-}
-
-.value-header .value {
-  font-size: 2.8rem;
-  line-height: 2.2rem;
-  font-weight: 600;
-  color: var(--color-grey2);
-}
-
-.value-header .unit {
-  border: none;
-  padding: 0.4rem 0.5rem;
-  border-radius: 0.3rem;
-  font-size: 0.9rem;
-  font-weight: 650;
-  color: var(--color-grey2);
-  outline: none;
-  /* cursor: pointer; */
-}

@@ -20,17 +20,6 @@ function Heart() {
     fetchData();
   }, [fetchData]);
 
-  // POSTING
-  // const { sendRequest } = useHttps();
-  // useEffect(() => {
-  //   if (componentState.firstRun) return;
-  //   sendRequest({
-  //     url: "https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/heart.json",
-  //     method: "PUT",
-  //     body: data,
-  //   });
-  // }, [data, sendRequest]);
-
   if (isLoading) {
     return <SectionLoading title={"Heart"}></SectionLoading>;
   }

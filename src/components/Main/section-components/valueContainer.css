@@ -7,6 +7,9 @@
   height: 2rem;
   line-height: 2rem;
 }
+.cardItem-value.detail-value {
+  font-size: 2.6rem;
+}
 .foot-unit {
   color: var(--color-grey4);
 }

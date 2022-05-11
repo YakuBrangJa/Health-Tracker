@@ -21,6 +21,7 @@ function DateNav(props) {
       <ul>
         {dateTabs.map((tab) => (
           <li
+            key={tab.short}
             className={`${activeTabState === tab.short && "active"}`}
             onClick={() => selectTabHandler(tab.short)}
           >

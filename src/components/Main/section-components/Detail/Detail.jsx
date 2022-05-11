@@ -48,9 +48,9 @@ function Detail({ id, title, data, unit, actions }) {
           <BarChart data={data} className="chart" />
         </div>
         <div className="section-chart">
-          <div className="chart-wrapper">
+          {/* <div className="chart-wrapper">
             <DemoChart />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

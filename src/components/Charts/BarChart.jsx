@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Bar, Line } from "react-chartjs-2";
 
 import useChartDataFormat from "../../hooks/useChartDataFormat";
+import useDateTree from "../../hooks/useDateTree";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -45,6 +47,8 @@ const options = {
   plugins: {
     legend: {
       position: "top",
+      align: "end",
+      onClick: null,
     },
     tooltip: {
       callbacks: {
@@ -69,45 +73,26 @@ const options = {
   },
 };
 
-const labels = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
 function BarChart({ data }) {
   const [valueData, setValueData] = React.useState({
-    labels: labels,
-
     datasets: [
       {
-        label: "Body Mass Index",
         data: [],
-        borderWidth: 2,
-        borderColor: "rgba(53, 162, 235, 0.7)",
-        backgroundColor: "rgba(53, 162, 235, 0.7)",
       },
     ],
   });
 
+  const { dateTree } = useDateTree(data);
   const { chartDataFormat, formatData } = useChartDataFormat();
+
   React.useEffect(() => {
     if (data.length === 0) return;
-    formatData(data, "DAY");
-  }, [formatData, data]);
+    formatData(dateTree);
+  }, [formatData, data, dateTree]);
 
   React.useEffect(() => {
     if (!chartDataFormat) return;
-    console.log(chartDataFormat);
+    // console.log(chartDataFormat);
 
     setValueData({
       labels: chartDataFormat.map((item) => item.x),
@@ -118,11 +103,11 @@ function BarChart({ data }) {
           data: chartDataFormat.map((item) => item.y),
 
           // maxBarThickness: 60,
-          borderWidth: 2,
+          borderWidth: 0,
           // borderColor: "rgba(53, 162, 235, 0.7)",
-          // backgroundColor: "rgba(53, 162, 235, 0.7)",
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
           borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          // backgroundColor: "rgba(255, 99, 132, 0.8)",
           // pointBackgroundColor: "rgba(255, 99, 132, 1)",
           tooltip: {
             titleColor: "rgba(200, 162, 100, 0.7)",
@@ -148,7 +133,7 @@ function BarChart({ data }) {
 
   if (data.length === 0) return <p>No Data</p>;
 
-  return <Line data={valueData} options={options}></Line>;
+  return <Bar data={valueData} options={options}></Bar>;
 }
 
 export default BarChart;
