@@ -13,6 +13,8 @@ function DateControl({ data }) {
 
   const [yearArray, setYearArray] = useState([]);
   const [monthArray, setMonthArray] = useState([]);
+  const [fourteenDayArray, setFourteenDayArray] = useState([]);
+  const [weekArray, setWeekArray] = useState([]);
   const [dayArray, setDayArray] = useState([]);
 
   function convertMonthArray(value) {
@@ -25,17 +27,24 @@ function DateControl({ data }) {
     return new Date(Date.parse(mon + " 1, 1970")).getMonth();
   }
 
-  // // YEAR
+  // YEAR
   useEffect(() => {
     if (!dateTree) return;
     setYearArray(Object.keys(dateTree).reverse());
   }, [dateTree]);
-  // // MONTH
+  // MONTH
   useEffect(() => {
     if (!dateTree || !activeDate.year) return;
     setMonthArray(convertMonthArray(activeDate.year));
   }, [dateTree, activeDate.year]);
-  // // DAY
+  // 14 DAYS
+  useEffect(() => {
+    if (!dateTree || !activeDate.year || !activeDate.month) return;
+    setFourteenDayArray(
+      Object.keys(dateTree[activeDate.year][activeDate.month])
+    );
+  }, [dateTree, activeDate.year, activeDate.month]);
+  // DAY
   useEffect(() => {
     if (!dateTree || !activeDate.year || !activeDate.month) return;
     setDayArray(Object.keys(dateTree[activeDate.year][activeDate.month]));
@@ -58,20 +67,24 @@ function DateControl({ data }) {
 
   return (
     <div className="date-control">
-      {activeDateTab === "D" && (
-        <select
-          value={activeDate.day}
-          onChange={(e) =>
-            dispatch(activeDataActions.setActiveDay(e.target.value))
-          }
-        >
-          {dayArray.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-      )}
+      <select
+        value={activeDate.year}
+        onChange={(e) => {
+          dispatch(activeDataActions.setActiveYear(e.target.value));
+
+          const monthLastIndex = convertMonthArray(e.target.value)
+            .slice(-1)
+            .pop();
+
+          dispatch(activeDataActions.setActiveMonth(monthLastIndex));
+        }}
+      >
+        {yearArray.map((y) => (
+          <option key={y} value={y}>
+            {y}
+          </option>
+        ))}
+      </select>
 
       {activeDateTab === "Y" || activeDateTab === "6M" ? (
         ""
@@ -90,28 +103,30 @@ function DateControl({ data }) {
         </select>
       )}
 
-      <select
-        value={activeDate.year}
-        onChange={(e) => {
-          dispatch(activeDataActions.setActiveYear(e.target.value));
+      {activeDateTab === "W" && (
+        <select>
+          <option>Day range1</option>
+          <option>Day range2</option>
+          <option>Day range3</option>
+        </select>
+      )}
 
-          const monthLastIndex = convertMonthArray(e.target.value)
-            .slice(-1)
-            .pop();
-
-          dispatch(activeDataActions.setActiveMonth(monthLastIndex));
-
-          dispatch(
-            activeDataActions.setActiveDay(monthLastIndex.slice(-1).pop())
-          );
-        }}
-      >
-        {yearArray.map((y) => (
-          <option key={y} value={y}>
-            {y}
-          </option>
-        ))}
-      </select>
+      {activeDateTab === "D" || activeDateTab === "14D" ? (
+        <select
+          value={activeDate.day}
+          onChange={(e) =>
+            dispatch(activeDataActions.setActiveDay(e.target.value))
+          }
+        >
+          {dayArray.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

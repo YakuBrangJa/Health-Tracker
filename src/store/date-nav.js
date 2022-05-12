@@ -11,12 +11,12 @@ const initialState = {
       short: "W",
     },
     {
-      long: "Month",
-      short: "M",
+      long: "14 Days",
+      short: "14D",
     },
     {
-      long: "6 Month",
-      short: "6M",
+      long: "Month",
+      short: "M",
     },
     {
       long: "Year",
