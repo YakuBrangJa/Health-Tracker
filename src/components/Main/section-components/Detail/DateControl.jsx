@@ -8,8 +8,13 @@ import useDateTree from "../../../../hooks/useDateTree";
 function DateControl({ data }) {
   const dispatch = useDispatch();
   const activeDateTab = useSelector((state) => state.dateNav.activeTabState);
-  const { activeDate } = useSelector((state) => state.activeData);
+  const { year, month, day, day14, week } = useSelector(
+    (state) => state.activeData.activeDate
+  );
   const { dateTree } = useDateTree(data);
+
+  const [earliestData, setEarliestData] = useState();
+  const [latestData, setLatestData] = useState();
 
   const [yearArray, setYearArray] = useState([]);
   const [monthArray, setMonthArray] = useState([]);
@@ -27,6 +32,37 @@ function DateControl({ data }) {
     return new Date(Date.parse(mon + " 1, 1970")).getMonth();
   }
 
+  function intervalStartDate(date, interval) {
+    const dateDiff = new Date(
+      new Date(
+        `${date.monthItem} ${date.dayItem}, ${date.yearItem}`
+      ).getTime() -
+        60000 * 60 * 24 * interval
+    );
+
+    return {
+      day: dateDiff.toLocaleString("en-US", {
+        day: "numeric",
+      }),
+      month: dateDiff.toLocaleString("en-US", {
+        month: "short",
+      }),
+    };
+  }
+
+  useEffect(() => {
+    if (data.length === 0) return;
+    const early = data.reduce((a, b) =>
+      new Date(`${a.date}T${a.time}`) > new Date(`${b.date}T${b.time}`) ? b : a
+    );
+    const late = data.reduce((a, b) =>
+      new Date(`${a.date}T${a.time}`) > new Date(`${b.date}T${b.time}`) ? a : b
+    );
+
+    setEarliestData(early);
+    setLatestData(late);
+  }, [data]);
+
   // YEAR
   useEffect(() => {
     if (!dateTree) return;
@@ -34,23 +70,66 @@ function DateControl({ data }) {
   }, [dateTree]);
   // MONTH
   useEffect(() => {
-    if (!dateTree || !activeDate.year) return;
-    setMonthArray(convertMonthArray(activeDate.year));
-  }, [dateTree, activeDate.year]);
+    if (!dateTree || !year) return;
+    setMonthArray(convertMonthArray(year));
+  }, [dateTree, year]);
   // 14 DAYS
   useEffect(() => {
-    if (!dateTree || !activeDate.year || !activeDate.month) return;
-    setFourteenDayArray(
-      Object.keys(dateTree[activeDate.year][activeDate.month])
-    );
-  }, [dateTree, activeDate.year, activeDate.month]);
+    if (!earliestData || !latestData || !dateTree || !year || !month) return;
+
+    const totalInterval = (
+      (new Date(latestData.date).getTime() -
+        new Date(earliestData.date).getTime()) /
+      (60000 * 60 * 24 * 14)
+    ).toFixed(0);
+
+    const dayArr = Array.from({ length: totalInterval }, (_, i) => {
+      const day14 = new Date(
+        new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 14
+      );
+
+      return {
+        dayItem: day14.getDate(),
+        monthItem: day14.toLocaleString("en-US", { month: "short" }),
+        yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
+      };
+    }).filter((item) => item.yearItem === year);
+
+    setFourteenDayArray(dayArr);
+  }, [earliestData, latestData, dateTree, year, month]);
+
+  // WEEK
+  useEffect(() => {
+    if (!earliestData || !latestData || !dateTree || !year || !month) return;
+
+    const totalInterval = (
+      (new Date(latestData.date).getTime() -
+        new Date(earliestData.date).getTime()) /
+      (60000 * 60 * 24 * 7)
+    ).toFixed(0);
+
+    const dayArr = Array.from({ length: totalInterval }, (_, i) => {
+      const day14 = new Date(
+        new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 7
+      );
+
+      return {
+        dayItem: day14.getDate(),
+        monthItem: day14.toLocaleString("en-US", { month: "short" }),
+        yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
+      };
+    }).filter((item) => item.yearItem === year && item.monthItem === month);
+
+    setWeekArray(dayArr);
+  }, [earliestData, latestData, dateTree, year, month]);
+
   // DAY
   useEffect(() => {
-    if (!dateTree || !activeDate.year || !activeDate.month) return;
-    setDayArray(Object.keys(dateTree[activeDate.year][activeDate.month]));
-  }, [dateTree, activeDate.year, activeDate.month]);
+    if (!dateTree || !year || !month) return;
+    setDayArray(Object.keys(dateTree[year][month]));
+  }, [dateTree, year, month]);
 
-  // DISPATCH ACTIVEDATE STATE
+  // DISPATCH STATE
   useEffect(() => {
     dispatch(activeDataActions.setActiveYear(yearArray[0]));
   }, [yearArray, activeDataActions]);
@@ -63,12 +142,22 @@ function DateControl({ data }) {
     dispatch(activeDataActions.setActiveDay(dayArray.slice(-1).pop()));
   }, [dayArray, activeDataActions]);
 
+  useEffect(() => {
+    dispatch(
+      activeDataActions.setActiveDay14(JSON.stringify(fourteenDayArray[0]))
+    );
+  }, [fourteenDayArray, activeDataActions]);
+
+  useEffect(() => {
+    dispatch(activeDataActions.setActiveWeek(JSON.stringify(weekArray[0])));
+  }, [weekArray, activeDataActions]);
+
   if (yearArray.length === 0 || !dateTree) return <div></div>;
 
   return (
     <div className="date-control">
       <select
-        value={activeDate.year}
+        value={year}
         onChange={(e) => {
           dispatch(activeDataActions.setActiveYear(e.target.value));
 
@@ -86,11 +175,11 @@ function DateControl({ data }) {
         ))}
       </select>
 
-      {activeDateTab === "Y" || activeDateTab === "6M" ? (
+      {activeDateTab === "Y" || activeDateTab === "14D" ? (
         ""
       ) : (
         <select
-          value={activeDate.month}
+          value={month}
           onChange={(e) =>
             dispatch(activeDataActions.setActiveMonth(e.target.value))
           }
@@ -103,17 +192,9 @@ function DateControl({ data }) {
         </select>
       )}
 
-      {activeDateTab === "W" && (
-        <select>
-          <option>Day range1</option>
-          <option>Day range2</option>
-          <option>Day range3</option>
-        </select>
-      )}
-
-      {activeDateTab === "D" || activeDateTab === "14D" ? (
+      {activeDateTab === "D" ? (
         <select
-          value={activeDate.day}
+          value={day}
           onChange={(e) =>
             dispatch(activeDataActions.setActiveDay(e.target.value))
           }
@@ -126,6 +207,40 @@ function DateControl({ data }) {
         </select>
       ) : (
         ""
+      )}
+
+      {activeDateTab === "14D" && (
+        <select
+          value={day14}
+          onChange={(e) => {
+            dispatch(activeDataActions.setActiveDay14(e.target.value));
+          }}
+        >
+          {fourteenDayArray.map((d) => (
+            <option key={d.dayItem + d.monthItem} value={JSON.stringify(d)}>
+              {`${intervalStartDate(d, 13).month}${
+                intervalStartDate(d, 13).day
+              } - ${d.monthItem}${d.dayItem}`}
+            </option>
+          ))}
+        </select>
+      )}
+
+      {activeDateTab === "W" && (
+        <select
+          value={week}
+          onChange={(e) => {
+            dispatch(activeDataActions.setActiveWeek(e.target.value));
+          }}
+        >
+          {weekArray.map((d) => (
+            <option key={d.dayItem + d.monthItem} value={JSON.stringify(d)}>
+              {`${d.monthItem}${d.dayItem} - ${intervalStartDate(d, -6).month}${
+                intervalStartDate(d, -6).day
+              }`}
+            </option>
+          ))}
+        </select>
       )}
     </div>
   );

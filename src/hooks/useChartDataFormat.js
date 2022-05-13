@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 function useChartDataFormat() {
   const [chartDataFormat, setChartDataFormat] = React.useState();
   const activeDateTab = useSelector((state) => state.dateNav.activeTabState);
-  const { year, month, day } = useSelector(
+  const { year, month, day, day14, week } = useSelector(
     (state) => state.activeData.activeDate
   );
 
@@ -82,25 +82,31 @@ function useChartDataFormat() {
       }
 
       if (activeDateTab === "14D") {
+        const day14Parsed = JSON.parse(day14);
         const dayArr = Array.from({ length: 14 }, (_, i) => {
+          const date = new Date(
+            new Date(
+              `${day14Parsed.monthItem} ${day14Parsed.dayItem}, ${day14Parsed.yearItem}`
+            ).getTime() -
+              i * 60000 * 60 * 24
+          );
+
           return {
-            dayItem: new Date(
-              new Date(`${month} ${day}, ${year}`).getTime() -
-                i * 60000 * 60 * 24
-            ).getDate(),
-            monthItem: new Date(
-              new Date(`${month} ${day}, ${year}`).getTime() -
-                i * 60000 * 60 * 24
-            ).toLocaleString("en-US", { month: "short" }),
+            dayItem: date.getDate(),
+            monthItem: date.toLocaleString("en-US", { month: "short" }),
           };
         }).reverse();
 
-        const monthGroup = dateTree[year][month];
-        const prevMonthGroup = dateTree[year][dayArr[0].monthItem];
+        const monthGroup =
+          dateTree[day14Parsed.yearItem][day14Parsed.monthItem];
+        const prevMonthGroup =
+          dateTree[day14Parsed.yearItem][dayArr[0].monthItem];
 
         const dayArr2 = dayArr.splice(
-          dayArr.findIndex((item) => item.monthItem === month)
+          dayArr.findIndex((item) => item.monthItem === day14Parsed.monthItem)
         );
+
+        // console.log(dayArr, dayArr2);
 
         const filledChart1 = dayArr.map(({ dayItem, monthItem }) => {
           if (!prevMonthGroup)
@@ -115,7 +121,7 @@ function useChartDataFormat() {
           const matchedDay = prevMonthGroup[dayItem];
 
           if (matchedDay) {
-            const weekDayData = reduceToAvg(
+            const dayData = reduceToAvg(
               Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
             );
             return {
@@ -123,7 +129,7 @@ function useChartDataFormat() {
                 dayItem === dayArr[0].dayItem
                   ? monthItem + " " + dayItem
                   : dayItem,
-              y: weekDayData.toFixed(1),
+              y: dayData.toFixed(1),
             };
           } else {
             return {
@@ -135,11 +141,12 @@ function useChartDataFormat() {
             };
           }
         });
+
         const filledChart2 = dayArr2.map(({ dayItem, monthItem }) => {
           const matchedDay = monthGroup[dayItem];
 
           if (matchedDay) {
-            const weekDayData = reduceToAvg(
+            const dayData = reduceToAvg(
               Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
             );
             return {
@@ -147,7 +154,7 @@ function useChartDataFormat() {
                 dayItem === dayArr2[0].dayItem
                   ? monthItem + " " + dayItem
                   : dayItem,
-              y: weekDayData.toFixed(1),
+              y: dayData.toFixed(1),
             };
           } else {
             return {
@@ -162,47 +169,93 @@ function useChartDataFormat() {
 
         setChartDataFormat(filledChart1.concat(filledChart2));
       }
+
+      // WEEK
       if (activeDateTab === "W") {
-        const weekArr = Array.from({ length: 7 }, (_, i) =>
-          new Date(
-            new Date(year, monthIndex(month), day).getTime() -
+        const weekParsed = JSON.parse(week);
+
+        function nextSunday(date) {
+          return (
+            new Date(date).getTime() +
+            (6 - new Date(date).getDay()) * 60000 * 60 * 24
+          );
+        }
+
+        const weekArr = Array.from({ length: 7 }, (_, i) => {
+          const date = new Date(
+            nextSunday(
+              `${weekParsed.monthItem} ${weekParsed.dayItem}, ${weekParsed.yearItem}`
+            ) -
               i * 60000 * 60 * 24
-          ).getDate()
-        ).reverse();
+          );
+
+          return {
+            dayItem: date.getDate(),
+            monthItem: date.toLocaleString("en-US", { month: "short" }),
+            weekItem: date.toLocaleString("en-US", { weekday: "short" }),
+          };
+        }).reverse();
+
         console.log(weekArr);
 
-        const monthGroup = dateTree[year][month];
+        const weekGroup = dateTree[weekParsed.yearItem][weekParsed.monthItem];
+        const prevWeekGroup =
+          dateTree[weekParsed.yearItem][weekArr[0].monthItem];
 
-        const filledChart = weekArr.map((dayItem) => {
-          const matchedDay = monthGroup[dayItem];
+        const weekArr2 = weekArr.splice(
+          weekArr.findIndex((item) => item.monthItem === weekParsed.monthItem)
+        );
+
+        const filledChart1 = weekArr.map(({ dayItem, monthItem, weekItem }) => {
+          if (!prevWeekGroup)
+            return {
+              x:
+                dayItem === weekArr[0].dayItem
+                  ? monthItem + " " + dayItem
+                  : dayItem,
+              y: null,
+            };
+
+          const matchedDay = prevWeekGroup[dayItem];
 
           if (matchedDay) {
             const weekDayData = reduceToAvg(
               Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
             );
             return {
-              x: new Date(`${year}-${month}-${dayItem}`).toLocaleString(
-                "en-US",
-                {
-                  weekday: "short",
-                }
-              ),
+              x: `${monthItem + dayItem} ${weekItem}`,
               y: weekDayData.toFixed(1),
             };
           } else {
             return {
-              x: new Date(`${year}-${month}-${dayItem}`).toLocaleString(
-                "en-US",
-                {
-                  weekday: "short",
-                }
-              ),
+              x: `${monthItem + dayItem} ${weekItem}`,
               y: null,
             };
           }
         });
 
-        setChartDataFormat(filledChart);
+        const filledChart2 = weekArr2.map(
+          ({ dayItem, monthItem, weekItem }) => {
+            const matchedDay = weekGroup[dayItem];
+
+            if (matchedDay) {
+              const weekDayData = reduceToAvg(
+                Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
+              );
+              return {
+                x: `${monthItem + dayItem} ${weekItem}`,
+                y: weekDayData.toFixed(1),
+              };
+            } else {
+              return {
+                x: `${monthItem + dayItem} ${weekItem}`,
+                y: null,
+              };
+            }
+          }
+        );
+
+        setChartDataFormat(filledChart1.concat(filledChart2));
       }
 
       if (activeDateTab === "D") {
@@ -243,7 +296,7 @@ function useChartDataFormat() {
         setChartDataFormat(filledChart);
       }
     },
-    [activeDateTab, year, month, day]
+    [activeDateTab, year, month, day, day14, week]
   );
 
   return { chartDataFormat, formatData };

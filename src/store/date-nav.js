@@ -23,7 +23,7 @@ const initialState = {
       short: "Y",
     },
   ],
-  activeTabState: "W",
+  activeTabState: "",
 };
 
 const dateNavSlice = createSlice({

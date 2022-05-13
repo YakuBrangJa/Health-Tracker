@@ -5,6 +5,8 @@ const initialState = {
     day: null,
     month: null,
     year: null,
+    day14: null,
+    week: null,
   },
 };
 
@@ -20,6 +22,12 @@ const activeDataSlice = createSlice({
     },
     setActiveYear(state, action) {
       state.activeDate.year = action.payload;
+    },
+    setActiveDay14(state, action) {
+      state.activeDate.day14 = action.payload;
+    },
+    setActiveWeek(state, action) {
+      state.activeDate.week = action.payload;
     },
   },
 });
