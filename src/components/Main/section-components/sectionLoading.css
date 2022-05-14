@@ -105,3 +105,19 @@
   width: 3rem;
   background-color: var(--color-grey8b);
 }
+
+.loading-animation {
+  animation: loading 1.5s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    background: hsl(360, 0%, 74%);
+  }
+  50% {
+    background: hsl(360, 0%, 80%);
+  }
+  100% {
+    background: hsl(360, 0%, 74%);
+  }
+}

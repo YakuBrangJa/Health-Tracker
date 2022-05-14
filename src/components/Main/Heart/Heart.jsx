@@ -21,9 +21,9 @@ function Heart() {
     fetchData();
   }, [fetchData]);
 
-  // if (isLoading) {
-  //   return <SectionLoading title={"Heart"}></SectionLoading>;
-  // }
+  if (isLoading) {
+    return <SectionLoading title={"Heart"}></SectionLoading>;
+  }
 
   return (
     <Section

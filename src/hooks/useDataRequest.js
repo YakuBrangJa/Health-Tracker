@@ -22,7 +22,7 @@ function useDataRequest(branch, actions) {
   }, []);
 
   return {
-    isLoading,
+    isLoading: false,
     error,
     fetchData,
   };
