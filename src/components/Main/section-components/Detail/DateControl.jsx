@@ -83,17 +83,20 @@ function DateControl({ data }) {
       (60000 * 60 * 24 * 14)
     ).toFixed(0);
 
-    const dayArr = Array.from({ length: totalInterval }, (_, i) => {
-      const day14 = new Date(
-        new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 14
-      );
+    const dayArr = Array.from(
+      { length: totalInterval == 0 ? 1 : totalInterval },
+      (_, i) => {
+        const day14 = new Date(
+          new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 14
+        );
 
-      return {
-        dayItem: day14.getDate(),
-        monthItem: day14.toLocaleString("en-US", { month: "short" }),
-        yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
-      };
-    }).filter((item) => item.yearItem === year);
+        return {
+          dayItem: day14.getDate(),
+          monthItem: day14.toLocaleString("en-US", { month: "short" }),
+          yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
+        };
+      }
+    ).filter((item) => item.yearItem === year);
 
     setFourteenDayArray(dayArr);
   }, [earliestData, latestData, dateTree, year, month]);
@@ -101,24 +104,26 @@ function DateControl({ data }) {
   // WEEK
   useEffect(() => {
     if (!earliestData || !latestData || !dateTree || !year || !month) return;
-
     const totalInterval = (
       (new Date(latestData.date).getTime() -
         new Date(earliestData.date).getTime()) /
       (60000 * 60 * 24 * 7)
     ).toFixed(0);
 
-    const dayArr = Array.from({ length: totalInterval }, (_, i) => {
-      const day14 = new Date(
-        new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 7
-      );
+    const dayArr = Array.from(
+      { length: totalInterval == 0 ? 1 : totalInterval },
+      (_, i) => {
+        const day14 = new Date(
+          new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 7
+        );
 
-      return {
-        dayItem: day14.getDate(),
-        monthItem: day14.toLocaleString("en-US", { month: "short" }),
-        yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
-      };
-    }).filter((item) => item.yearItem === year && item.monthItem === month);
+        return {
+          dayItem: day14.getDate(),
+          monthItem: day14.toLocaleString("en-US", { month: "short" }),
+          yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
+        };
+      }
+    ).filter((item) => item.yearItem === year && item.monthItem === month);
 
     setWeekArray(dayArr);
   }, [earliestData, latestData, dateTree, year, month]);

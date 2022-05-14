@@ -6,22 +6,40 @@ const initialState = {
       id: "body1",
       title: "Height",
       type: "body-measurements",
-      data: [],
+      data: [
+        {
+          value: 150,
+          date: "2022-05-10",
+          time: "17:54:00",
+        },
+      ],
+      selectedUnit: "foot",
       unit: {
         foot: {
           selected: true,
           name: "foot",
           symbol: "ft",
+          to: (value) => {
+            return {
+              foot: parseFloat((value / 30.48).toFixed(0)),
+              inch: Math.round((value % 30.48) / 2.54),
+            };
+          },
+          from: (value) => value.foot * 30.48 + value.inch * 2.54,
         },
         centimeter: {
           selected: false,
           name: "centimeter",
           symbol: "cm",
+          to: (value) => value,
+          from: (value) => value,
         },
         meter: {
           selected: false,
           name: "meter",
           symbol: "m",
+          to: (value) => parseFloat((value / 100).toFixed(1)),
+          from: (value) => value * 100,
         },
       },
     },
@@ -29,17 +47,28 @@ const initialState = {
       id: "body2",
       title: "Weight",
       type: "body-measurements",
-      data: [],
+      data: [
+        {
+          value: 110,
+          date: "2022-08-18",
+          time: "15:23:00",
+        },
+      ],
+      selectedUnit: "pound",
       unit: {
         pound: {
           name: "pound",
           selected: true,
           symbol: "lbs",
+          to: (value) => value,
+          from: (value) => value,
         },
         kilogram: {
           name: "kilogram",
           selected: false,
           symbol: "kg",
+          to: (value) => parseFloat((value / 2.205).toFixed(1)),
+          from: (value) => value * 2.205,
         },
       },
     },
@@ -48,16 +77,21 @@ const initialState = {
       title: "Body Temperature",
       type: "body-measurements",
       data: [],
+      selectedUnit: "fahrenheit",
       unit: {
         fahrenheit: {
           name: "fahrenheit",
           selected: true,
           symbol: "°F",
+          to: (value) => value,
+          from: (value) => value,
         },
         celcius: {
           name: "celcius",
           selected: false,
           symbol: "°C",
+          to: (value) => parseFloat(((value - 32) * (5 / 9)).toFixed(1)),
+          from: (value) => value * (9 / 5) + 32,
         },
       },
     },
@@ -66,11 +100,14 @@ const initialState = {
       title: "Body Fat Percentage",
       type: "body-measurements",
       data: [],
+      selectedUnit: "percentage",
       unit: {
         percentage: {
           name: "percentage",
           selected: true,
           symbol: "%",
+          to: (value) => value,
+          from: (value) => value,
         },
       },
     },
@@ -79,11 +116,14 @@ const initialState = {
       title: "Body Mass Index",
       type: "body-measurements",
       data: [],
+      selectedUnit: "bmi",
       unit: {
         bmi: {
-          name: "body mass index",
+          name: "body mass Index",
           selected: true,
           symbol: "bmi",
+          to: (value) => value,
+          from: (value) => value,
         },
       },
     },
@@ -92,16 +132,21 @@ const initialState = {
       title: "Waist Circumference",
       type: "body-measurements",
       data: [],
+      selectedUnit: "inch",
       unit: {
         inch: {
           name: "inch",
           selected: true,
           symbol: "in",
+          to: (value) => parseFloat((value / 2.54).toFixed(1)),
+          from: (value) => value * 2.54,
         },
         centimeter: {
           name: "centimeter",
           selected: false,
           symbol: "cm",
+          to: (value) => value,
+          from: (value) => value,
         },
       },
     },
@@ -111,16 +156,21 @@ const initialState = {
       title: "Lean Body Mass",
       type: "body-measurements",
       data: [],
+      selectedUnit: "pound",
       unit: {
         pound: {
           selected: true,
           name: "pound",
           symbol: "lbs",
+          to: (value) => value,
+          from: (value) => value,
         },
         kilogram: {
           selected: false,
           name: "kilogram",
           symbol: "kg",
+          to: (value) => parseFloat((value / 2.205).toFixed(1)),
+          from: (value) => value * 2.205,
         },
       },
     },

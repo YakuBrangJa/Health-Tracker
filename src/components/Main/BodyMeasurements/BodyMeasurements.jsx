@@ -18,13 +18,14 @@ function BodyMeasurements() {
   );
 
   useEffect(() => {
+    return;
     if (!componentState.firstRun) return;
     fetchData();
   }, [fetchData]);
 
-  if (isLoading) {
-    return <SectionLoading title={"Body Measurements"}></SectionLoading>;
-  }
+  // if (isLoading) {
+  //   return <SectionLoading title={"Body Measurements"}></SectionLoading>;
+  // }
 
   return (
     <Section

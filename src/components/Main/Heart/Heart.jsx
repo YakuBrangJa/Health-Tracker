@@ -16,13 +16,14 @@ function Heart() {
   const { isLoading, error, fetchData } = useDataRequest("heart", heartActions);
 
   useEffect(() => {
+    return;
     if (!componentState.firstRun) return;
     fetchData();
   }, [fetchData]);
 
-  if (isLoading) {
-    return <SectionLoading title={"Heart"}></SectionLoading>;
-  }
+  // if (isLoading) {
+  //   return <SectionLoading title={"Heart"}></SectionLoading>;
+  // }
 
   return (
     <Section

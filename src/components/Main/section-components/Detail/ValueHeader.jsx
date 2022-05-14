@@ -11,6 +11,8 @@ function ValueHeader({ data, unit, actions }) {
   const dispatch = useDispatch();
   const { unitState } = useSelector((state) => state.formState);
   const [latestData, setLatestData] = useState(undefined);
+  const unitArray = Object.values(unit);
+  const initialUnit = unitArray.find((item) => item.selected === true);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -26,9 +28,6 @@ function ValueHeader({ data, unit, actions }) {
     }
   }, [data]);
 
-  const unitArray = Object.values(unit);
-  const initialUnit = unitArray.find((item) => item.selected === true);
-
   useEffect(() => {
     dispatch(
       formStateActions.setUnitState({
@@ -37,13 +36,6 @@ function ValueHeader({ data, unit, actions }) {
       })
     );
   }, [initialUnit]);
-
-  // const { formattedDate, format } = useDateTimeFormatter();
-
-  // useEffect(() => {
-  //   if (!latestData) return;
-  //   format(latestData.date, latestData.time);
-  // }, [latestData, format]);
 
   const unitSelectHandler = (e) => {
     e.preventDefault();
@@ -56,6 +48,12 @@ function ValueHeader({ data, unit, actions }) {
 
     dispatch(formStateActions.setDataSubmitted(true));
   };
+  // const { formattedDate, format } = useDateTimeFormatter();
+
+  // useEffect(() => {
+  //   if (!latestData) return;
+  //   format(latestData.date, latestData.time);
+  // }, [latestData, format]);
 
   return (
     <div className="value-header">

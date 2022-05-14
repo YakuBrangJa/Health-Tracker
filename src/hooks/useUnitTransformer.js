@@ -13,7 +13,7 @@ function useUnitTransformer() {
         setSingleValues(parseFloat((value / 100).toFixed(1)));
         break;
       case "inch":
-        setSingleValues(parseFloat((value * 0.393701).toFixed(1)));
+        setSingleValues(parseFloat((value / 2.54).toFixed(1)));
         break;
       case "celcius":
         setSingleValues(parseFloat(((value - 32) * (5 / 9)).toFixed(1)));

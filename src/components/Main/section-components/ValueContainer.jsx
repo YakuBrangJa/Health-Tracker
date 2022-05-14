@@ -8,10 +8,13 @@ function ValueContainer({ unit, latestData, isDetailTab }) {
   const selectedUnit = unitArray.find((item) => item.selected === true);
 
   const { transform, singleValues, doubleValues } = useUnitTransformer();
+
   useEffect(() => {
     if (!latestData) return;
     transform(latestData.value, selectedUnit.name);
   }, [latestData, selectedUnit, transform]);
+
+  console.log(unit);
 
   if (selectedUnit.name === "milimeter mercury") {
     return (

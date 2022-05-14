@@ -37,17 +37,18 @@ function Section({ data, title, componentState, error, actions }) {
   const { sendRequest } = useHttps();
 
   // SENDING DATA TO FIREBASE
-  useEffect(() => {
-    if (!dataSubmitted) return;
+  // useEffect(() => {
+  //   return;
+  //   if (!dataSubmitted) return;
 
-    sendRequest({
-      url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${sidebarState}/${dataKey}.json`,
-      method: "PUT",
-      body: data[dataKey],
-    });
+  //   sendRequest({
+  //     url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${sidebarState}/${dataKey}.json`,
+  //     method: "PUT",
+  //     body: data[dataKey],
+  //   });
 
-    dispatch(formStateActions.setDataSubmitted(false));
-  }, [data, dataKey, sendRequest]);
+  //   dispatch(formStateActions.setDataSubmitted(false));
+  // }, [data, dataKey, sendRequest]);
 
   return (
     <SectionContainer title={title}>
