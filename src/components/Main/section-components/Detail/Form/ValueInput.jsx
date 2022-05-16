@@ -8,6 +8,8 @@ function ValueInput({ unitState, onChangeHandler }) {
     onChangeHandler(e);
   };
 
+  // const inchArray = Array.from()
+
   if (unitState.state === "milimeter mercury") {
     return (
       <>

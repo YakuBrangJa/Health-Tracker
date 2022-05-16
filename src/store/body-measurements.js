@@ -16,31 +16,37 @@ const initialState = {
       selectedUnit: "foot",
       unit: {
         foot: {
-          selected: true,
           name: "foot",
           symbol: "ft",
-          to: (value) => {
-            return {
-              foot: parseFloat((value / 30.48).toFixed(0)),
-              inch: Math.round((value % 30.48) / 2.54),
-            };
+          to: (value, chart) => {
+            if (chart) return parseFloat((value / 30.48).toFixed(1));
+            return `${Math.floor(value / 30.48)}'${Math.round(
+              (value % 30.48) / 2.54
+            )}"`;
           },
           from: (value) => value.foot * 30.48 + value.inch * 2.54,
         },
         centimeter: {
-          selected: false,
           name: "centimeter",
           symbol: "cm",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
         meter: {
-          selected: false,
           name: "meter",
           symbol: "m",
           to: (value) => parseFloat((value / 100).toFixed(1)),
-          from: (value) => value * 100,
+          from: (value) => value.value * 100,
         },
+      },
+      chartConfig: {
+        type: "bar",
+        config: {
+          label: "Height",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
       },
     },
     weight: {
@@ -50,7 +56,7 @@ const initialState = {
       data: [
         {
           value: 110,
-          date: "2022-08-18",
+          date: "2022-03-18",
           time: "15:23:00",
         },
       ],
@@ -58,20 +64,28 @@ const initialState = {
       unit: {
         pound: {
           name: "pound",
-          selected: true,
           symbol: "lbs",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
         kilogram: {
           name: "kilogram",
-          selected: false,
           symbol: "kg",
           to: (value) => parseFloat((value / 2.205).toFixed(1)),
-          from: (value) => value * 2.205,
+          from: (value) => value.value * 2.205,
         },
       },
+      chartConfig: {
+        type: "bar",
+        config: {
+          label: "Weight",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
+      },
     },
+
     bodyTemperature: {
       id: "body6",
       title: "Body Temperature",
@@ -81,20 +95,29 @@ const initialState = {
       unit: {
         fahrenheit: {
           name: "fahrenheit",
-          selected: true,
           symbol: "°F",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
         celcius: {
           name: "celcius",
-          selected: false,
           symbol: "°C",
           to: (value) => parseFloat(((value - 32) * (5 / 9)).toFixed(1)),
-          from: (value) => value * (9 / 5) + 32,
+          from: (value) => value.value * (9 / 5) + 32,
         },
       },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: "Body Temperature",
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132)",
+          pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        },
+        multiValue: false,
+      },
     },
+
     bodyFatPercentage: {
       id: "body3",
       title: "Body Fat Percentage",
@@ -104,13 +127,22 @@ const initialState = {
       unit: {
         percentage: {
           name: "percentage",
-          selected: true,
           symbol: "%",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
       },
+      chartConfig: {
+        type: "bar",
+        config: {
+          label: "Body Fat Percentage",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
+      },
     },
+
     bmi: {
       id: "body4",
       title: "Body Mass Index",
@@ -119,14 +151,24 @@ const initialState = {
       selectedUnit: "bmi",
       unit: {
         bmi: {
-          name: "body mass Index",
-          selected: true,
+          name: "bmi",
           symbol: "bmi",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
       },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: "BMI",
+          borderWidth: 1,
+          borderColor: "rgba(53, 162, 235, 0.8)",
+          backgroundColor: "rgba(53, 162, 235, 0.4)",
+        },
+        multiValue: false,
+      },
     },
+
     waistCircumference: {
       id: "body5",
       title: "Waist Circumference",
@@ -136,18 +178,25 @@ const initialState = {
       unit: {
         inch: {
           name: "inch",
-          selected: true,
           symbol: "in",
           to: (value) => parseFloat((value / 2.54).toFixed(1)),
-          from: (value) => value * 2.54,
+          from: (value) => value.value * 2.54,
         },
         centimeter: {
           name: "centimeter",
-          selected: false,
           symbol: "cm",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
+      },
+      chartConfig: {
+        type: "scatter",
+        config: {
+          label: "Waist Circumference",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
       },
     },
 
@@ -159,19 +208,26 @@ const initialState = {
       selectedUnit: "pound",
       unit: {
         pound: {
-          selected: true,
           name: "pound",
           symbol: "lbs",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
         kilogram: {
-          selected: false,
           name: "kilogram",
           symbol: "kg",
           to: (value) => parseFloat((value / 2.205).toFixed(1)),
-          from: (value) => value * 2.205,
+          from: (value) => value.value * 2.205,
         },
+      },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: "Lean Body Mass",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
       },
     },
   },
@@ -193,20 +249,7 @@ const bodyMeasurementsSlice = createSlice({
           state.bodyMeasurements[key].id === state.componentState.dataState
       );
 
-      let transformedValue;
-      if (unitState.state === "kilogram") {
-        transformedValue = formData.value * 2.205;
-      } else if (unitState.state === "meter") {
-        transformedValue = formData.value * 100;
-      } else if (unitState.state === "inch") {
-        transformedValue = formData.value * 2.54;
-      } else if (unitState.state === "celcius") {
-        transformedValue = formData.value * (9 / 5) + 32;
-      } else if (unitState.state === "foot") {
-        transformedValue = formData.foot * 30.48 + formData.inch * 2.54;
-      } else {
-        transformedValue = parseFloat(formData.value);
-      }
+      const transformedValue = unitState.from(formData);
 
       state.bodyMeasurements[key].data.push({
         date: formData.date,
@@ -216,21 +259,13 @@ const bodyMeasurementsSlice = createSlice({
     },
 
     changeUnit(state, action) {
-      const unitData = action.payload;
+      const { unit } = action.payload;
       const dataKey = Object.keys(state.bodyMeasurements).find(
         (key) =>
           state.bodyMeasurements[key].id === state.componentState.dataState
       );
 
-      const unit = state.bodyMeasurements[dataKey].unit;
-
-      for (let key in unit) {
-        if (unit[key].name === unitData.unit) {
-          unit[key].selected = true;
-        } else {
-          unit[key].selected = false;
-        }
-      }
+      state.bodyMeasurements[dataKey].selectedUnit = unit;
     },
 
     populateData(state, action) {

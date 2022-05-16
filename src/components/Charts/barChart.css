@@ -1,0 +1,41 @@
+.empty-chart__button {
+  border: none;
+  outline: none;
+  font-size: 3rem;
+  font-weight: 800;
+  padding: 0.8rem 1.4rem;
+  border-radius: 1rem;
+  background-color: var(--color-grey7b);
+  color: var(--color-grey11);
+  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  animation: notify 1.5s ease infinite;
+}
+.empty-chart__button:hover {
+  cursor: pointer;
+  background-color: var(--bg-blue2);
+  animation: none;
+}
+.empty-chart__button:active {
+  background-color: var(--bg-blue3);
+  animation: none;
+}
+
+.empty-chart__button .icon {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+@keyframes notify {
+  0% {
+    /* background: hsl(360, 0%, 70%); */
+    background: hsl(360, 0%, 75%);
+  }
+  50% {
+    background: hsl(360, 0%, 65%);
+  }
+  100% {
+    background: hsl(360, 0%, 75%);
+  }
+}

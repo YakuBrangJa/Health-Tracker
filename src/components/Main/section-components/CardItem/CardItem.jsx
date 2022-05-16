@@ -19,9 +19,20 @@ import ValueContainer from "../ValueContainer";
 
 import useDateTimeFormatter from "../../../../hooks/useDateTimeFormatter";
 
-function CardItem({ id, title, data, unit, type, selected, actions }) {
+function CardItem({
+  id,
+  title,
+  data,
+  unit,
+  type,
+  selectedUnit,
+  selected,
+  actions,
+}) {
   const dispatch = useDispatch();
   const [latestData, setLatestData] = useState(null);
+
+  // console.log(unit[selectedUnit]);
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -117,6 +128,7 @@ function CardItem({ id, title, data, unit, type, selected, actions }) {
           <span className="cardItem-name">{title}</span>
           <ValueContainer
             unit={unit}
+            selectedUnit={selectedUnit}
             latestData={latestData}
             isDetailTab={false}
           />

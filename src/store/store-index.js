@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 
 import formStateReducer from "./form-state";
 import dateNavReducer from "./date-nav";
@@ -15,6 +15,10 @@ const store = configureStore({
     bodyMeasurements: bodyMeasurementsReducer,
     heart: heartReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;

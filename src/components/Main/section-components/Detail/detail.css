@@ -36,6 +36,8 @@
 .section-chart {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1rem;
   flex-shrink: 0;
   height: 21rem;
@@ -48,4 +50,26 @@
   height: 100%;
   width: 100%;
   /* overflow-x: scroll; */
+}
+
+/* VIEW ALL DATA SECTION */
+.view-all__data {
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+  height: 3rem;
+  background-color: var(--color-grey8b);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-grey2);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: background 100ms ease;
+}
+
+.view-all__data:hover {
+  background-color: var(--color-grey7);
 }

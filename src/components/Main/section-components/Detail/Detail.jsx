@@ -1,10 +1,9 @@
 import PushPinIcon from "@mui/icons-material/PushPin";
 import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import KeyboardArrowRightSharpIcon from "@mui/icons-material/KeyboardArrowRightSharp";
 
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import "./detail.css";
 
 import AddDataForm from "./Form/AddDataForm";
@@ -13,7 +12,7 @@ import ValueHeader from "./ValueHeader";
 import BarChart from "../../../Charts/BarChart";
 import { DemoChart } from "../../../Charts/DemoChart";
 
-function Detail({ id, title, data, unit, actions }) {
+function Detail({ id, title, data, unit, selectedUnit, actions, chartConfig }) {
   const [formOpen, setFormOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -43,14 +42,27 @@ function Detail({ id, title, data, unit, actions }) {
       </div>
       <div className="container-child">
         <DateNav />
-        <ValueHeader data={data} unit={unit} actions={actions} />
+        <ValueHeader
+          data={data}
+          unit={unit}
+          selectedUnit={selectedUnit}
+          actions={actions}
+        />
         <div className="section-chart">
-          <BarChart data={data} className="chart" />
+          <BarChart
+            id={id}
+            data={data}
+            chartConfig={chartConfig}
+            className="chart"
+            formOpen={formToggleHandler}
+          />
+        </div>
+        <div className="view-all__data">
+          <span>View all data</span>
+          <KeyboardArrowRightSharpIcon />
         </div>
         <div className="section-chart">
-          {/* <div className="chart-wrapper">
-            <DemoChart />
-          </div> */}
+          <DemoChart />
         </div>
       </div>
     </>

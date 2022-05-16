@@ -4,12 +4,13 @@ import { useSelector } from "react-redux";
 function useChartDataFormat() {
   const [chartDataFormat, setChartDataFormat] = React.useState();
   const activeDateTab = useSelector((state) => state.dateNav.activeTabState);
+  const unitState = useSelector((state) => state.formState.unitState);
   const { year, month, day, day14, week } = useSelector(
     (state) => state.activeData.activeDate
   );
 
   const formatData = useCallback(
-    (dateTree) => {
+    (dateTree, multiValue) => {
       if (!dateTree || !day || !month || !year) return;
 
       // REUSABLE FUNCTIONS
@@ -17,13 +18,55 @@ function useChartDataFormat() {
         return new Date(mon + " 1, 1970").getMonth();
       }
       function reduceToAvg(value) {
-        return (
+        if (multiValue) {
+          const reducedValue = value.reduce((a, b) => {
+            for (const key in b) {
+              if (!a[key]) a[key] = 0;
+              a[key] = a[key] + b[key];
+            }
+            return a;
+          }, {});
+
+          let finalAvg = {};
+          for (const key in reducedValue) {
+            finalAvg[key] = reducedValue[key] / value.length;
+          }
+
+          return finalAvg;
+        }
+        // if (id === "heart2") {
+        //   const reducedValue = value.reduce(
+        //     (a, b) => {
+        //       return {
+        //         systolic: a.systolic + b.systolic,
+        //         diastolic: a.diastolic + b.diastolic,
+        //       };
+        //     },
+        //     {
+        //       systolic: 0,
+        //       diastolic: 0,
+        //     }
+        //   );
+
+        //   return {
+        //     systolic: reducedValue.systolic / value.length,
+        //     diastolic: reducedValue.diastolic / value.length,
+        //   };
+        // }
+        console.log(
           value.reduce((a, b) => {
             return a + b;
-          }, 0) / value.length
+          }, 0)
         );
+        if (!multiValue)
+          return (
+            value.reduce((a, b) => {
+              return a + b;
+            }, 0) / value.length
+          );
       }
 
+      // YEAR
       if (activeDateTab === "Y") {
         const monthsArr = Array.from({ length: 12 }, (item, i) => {
           return new Date(0, i).toLocaleString("en-US", { month: "short" });
@@ -41,7 +84,7 @@ function useChartDataFormat() {
 
             return {
               x: monthItem,
-              y: monthData.toFixed(1),
+              y: unitState.to(monthData, true),
             };
           } else {
             return {
@@ -53,6 +96,7 @@ function useChartDataFormat() {
         setChartDataFormat(filledChart);
       }
 
+      // MONTH
       if (activeDateTab === "M") {
         const daysOfMonth = new Date(year, monthIndex(month) + 1, 0).getDate();
         const dayArr = Array.from({ length: daysOfMonth }, (_, i) => i + 1);
@@ -69,7 +113,7 @@ function useChartDataFormat() {
 
             return {
               x: dayItem,
-              y: dayData.toFixed(1),
+              y: unitState.to(dayData, true),
             };
           } else {
             return {
@@ -129,7 +173,7 @@ function useChartDataFormat() {
                 dayItem === dayArr[0].dayItem
                   ? monthItem + " " + dayItem
                   : dayItem,
-              y: dayData.toFixed(1),
+              y: unitState.to(dayData, true),
             };
           } else {
             return {
@@ -154,7 +198,7 @@ function useChartDataFormat() {
                 dayItem === dayArr2[0].dayItem
                   ? monthItem + " " + dayItem
                   : dayItem,
-              y: dayData.toFixed(1),
+              y: unitState.to(dayData, true),
             };
           } else {
             return {
@@ -196,8 +240,6 @@ function useChartDataFormat() {
           };
         }).reverse();
 
-        console.log(weekArr);
-
         const weekGroup = dateTree[weekParsed.yearItem][weekParsed.monthItem];
         const prevWeekGroup =
           dateTree[weekParsed.yearItem][weekArr[0].monthItem];
@@ -224,7 +266,7 @@ function useChartDataFormat() {
             );
             return {
               x: `${monthItem + dayItem} ${weekItem}`,
-              y: weekDayData.toFixed(1),
+              y: unitState.to(weekDayData, true),
             };
           } else {
             return {
@@ -244,7 +286,7 @@ function useChartDataFormat() {
               );
               return {
                 x: `${monthItem + dayItem} ${weekItem}`,
-                y: weekDayData.toFixed(1),
+                y: unitState.to(weekDayData, true),
               };
             } else {
               return {
@@ -278,7 +320,7 @@ function useChartDataFormat() {
 
               return {
                 x: hourFormat(hourItem),
-                y: hourData.toFixed(1),
+                y: unitState.to(hourData, true),
               };
             } else {
               return {
@@ -296,7 +338,7 @@ function useChartDataFormat() {
         setChartDataFormat(filledChart);
       }
     },
-    [activeDateTab, year, month, day, day14, week]
+    [activeDateTab, year, month, day, day14, week, unitState]
   );
 
   return { chartDataFormat, formatData };
@@ -304,35 +346,3 @@ function useChartDataFormat() {
 
 export default useChartDataFormat;
 // --------------------------------------------------
-// YEAR
-// const monthData =
-//   Object.values(matchedMonth)
-//     .map(
-//       (d) =>
-//         Object.values(d.hour)
-//           .map(
-//             (hr) =>
-//               hr.reduce((accu, value) => {
-//                 return accu + value;
-//               }, 0) / hr.length
-//           )
-//           .reduce((accu, hrAvg) => {
-//             return accu + hrAvg;
-//           }, 0) / Object.values(d.hour).length
-//     )
-//     .reduce((accu, value) => {
-//       return accu + value;
-//     }, 0) / Object.values(matchedMonth).length;
-// ---------------------------------------------------
-// MONTH
-// const dayData =
-//   Object.values(matchedDay.hour)
-//     .map(
-//       (hr) =>
-//         hr.reduce((accu, value) => {
-//           return accu + value;
-//         }, 0) / hr.length
-//     )
-//     .reduce((accu, value) => {
-//       return accu + value;
-//     }, 0) / Object.values(matchedDay.hour).length;

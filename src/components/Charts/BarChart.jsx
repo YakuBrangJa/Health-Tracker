@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
 import { Bar, Line } from "react-chartjs-2";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import { useSelector } from "react-redux";
+
+import "./barChart.css";
 
 import useChartDataFormat from "../../hooks/useChartDataFormat";
 import useDateTree from "../../hooks/useDateTree";
@@ -30,50 +34,7 @@ ChartJS.register(
 const skipped = (ctx, value) =>
   ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
-const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-      beginAtZero: false,
-      grace: 1,
-    },
-  },
-  plugins: {
-    legend: {
-      position: "top",
-      align: "end",
-      onClick: null,
-    },
-    tooltip: {
-      callbacks: {
-        beforeTitle: function (context) {
-          return "May";
-        },
-      },
-    },
-  },
-  datasets: {
-    line: {
-      spanGaps: true,
-      segment: {
-        // borderColor: (ctx) => skipped(ctx, "rgba(53, 162, 235, 0.7)"),
-        borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132, 07)"),
-        borderDash: (ctx) => skipped(ctx, [6, 4]),
-      },
-      borderWidth: 2.5,
-      pointRadius: 2.5,
-      hoverRadius: 5,
-    },
-  },
-};
-
-function BarChart({ data }) {
+function BarChart({ data, formOpen, chartConfig }) {
   const [valueData, setValueData] = React.useState({
     datasets: [
       {
@@ -84,56 +45,117 @@ function BarChart({ data }) {
 
   const { dateTree } = useDateTree(data);
   const { chartDataFormat, formatData } = useChartDataFormat();
+  const unitState = useSelector((state) => state.formState.unitState);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (data.length === 0) return;
-    formatData(dateTree);
-  }, [formatData, data, dateTree]);
+    formatData(dateTree, chartConfig.multiValue);
+  }, [formatData, data, dateTree, chartConfig]);
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: false,
+        beginAtZero: chartConfig.multiValue ? true : false,
+        grace: 1,
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top",
+        align: "end",
+        onClick: null,
+      },
+      tooltip: {
+        callbacks: {
+          beforeTitle: function (context) {
+            return "June";
+          },
+          label: function (context) {
+            let label = context.dataset.label || "";
+
+            if (label) {
+              label = ` ${unitState.symbol}`;
+            }
+            if (context.parsed.y !== null) {
+              label = "Average: " + context.parsed.y + label;
+            }
+            return label;
+          },
+        },
+      },
+    },
+    datasets: {
+      line: {
+        spanGaps: true,
+        segment: {
+          borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132, 07)"),
+          borderDash: (ctx) => skipped(ctx, [0, 0]),
+        },
+        borderWidth: 2.5,
+        pointRadius: 2.5,
+        hoverRadius: 5,
+      },
+    },
+  };
 
   React.useEffect(() => {
     if (!chartDataFormat) return;
-    // console.log(chartDataFormat);
 
-    setValueData({
-      labels: chartDataFormat.map((item) => item.x),
+    console.log(chartDataFormat);
 
-      datasets: [
-        {
-          label: "Body Temperature (°F)",
-          data: chartDataFormat.map((item) => item.y),
+    let dataForMapping;
 
-          // maxBarThickness: 60,
-          borderWidth: 0,
-          // borderColor: "rgba(53, 162, 235, 0.7)",
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
-          borderColor: "rgb(255, 99, 132)",
-          // backgroundColor: "rgba(255, 99, 132, 0.8)",
-          // pointBackgroundColor: "rgba(255, 99, 132, 1)",
-          tooltip: {
-            titleColor: "rgba(200, 162, 100, 0.7)",
+    if (chartConfig.multiValue) {
+      dataForMapping = {
+        labels: chartDataFormat.map((item) => item.x),
 
-            callbacks: {
-              label: function (context) {
-                let label = context.dataset.label || "";
+        datasets: chartConfig.config.map((item) => {
+          return {
+            data: chartDataFormat.map((value) =>
+              value.y === null ? null : value.y[item.path]
+            ),
+            ...item,
+          };
+        }),
+      };
+    }
 
-                if (label) {
-                  label = ": °F";
-                }
-                if (context.parsed.y !== null) {
-                  label = "Average " + context.parsed.y + label;
-                }
-                return label;
-              },
-            },
+    if (!chartConfig.multiValue) {
+      dataForMapping = {
+        labels: chartDataFormat.map((item) => item.x),
+
+        datasets: [
+          {
+            data: chartDataFormat.map((item) => item.y),
+            ...chartConfig.config,
           },
-        },
-      ],
-    });
-  }, [chartDataFormat]);
+        ],
+      };
+    }
 
-  if (data.length === 0) return <p>No Data</p>;
+    setValueData(dataForMapping);
+  }, [chartDataFormat, chartConfig]);
 
-  return <Bar data={valueData} options={options}></Bar>;
+  if (data.length === 0)
+    return (
+      <button type="button" className="empty-chart__button" onClick={formOpen}>
+        <span>Add Data</span>
+        <AddRoundedIcon className="icon" />
+      </button>
+    );
+
+  if (chartConfig.type === "line")
+    return <Line data={valueData} options={options}></Line>;
+
+  if (chartConfig.type === "bar")
+    return <Bar data={valueData} options={options}></Bar>;
 }
 
 export default BarChart;

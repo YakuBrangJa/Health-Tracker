@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./valueHeader.css";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { formStateActions } from "../../../../store/form-state";
 
 import ValueContainer from "../ValueContainer";
 import DateControl from "./DateControl";
 
-function ValueHeader({ data, unit, actions }) {
+function ValueHeader({ data, unit, selectedUnit, actions }) {
   const dispatch = useDispatch();
-  const { unitState } = useSelector((state) => state.formState);
   const [latestData, setLatestData] = useState(undefined);
   const unitArray = Object.values(unit);
-  const initialUnit = unitArray.find((item) => item.selected === true);
+  const initialUnit = selectedUnit && unit[selectedUnit];
 
   useEffect(() => {
     if (data.length > 0) {
@@ -33,6 +32,8 @@ function ValueHeader({ data, unit, actions }) {
       formStateActions.setUnitState({
         state: initialUnit.name,
         symbol: initialUnit.symbol,
+        to: initialUnit.to,
+        from: initialUnit.from,
       })
     );
   }, [initialUnit]);
@@ -57,17 +58,19 @@ function ValueHeader({ data, unit, actions }) {
 
   return (
     <div className="value-header">
+      <DateControl data={data} />
       <div className="value-control">
         <ValueContainer
           latestData={latestData}
           unit={unit}
+          selectedUnit={selectedUnit}
           isDetailTab={true}
         />
-        {/* <div className="value">{0}</div> */}
+
         <select
           name="unit"
           className="unit"
-          value={unitState.state}
+          value={initialUnit.name}
           onChange={unitSelectHandler}
         >
           {unitArray.map((value) => (
@@ -77,7 +80,6 @@ function ValueHeader({ data, unit, actions }) {
           ))}
         </select>
       </div>
-      <DateControl data={data} />
     </div>
   );
 }

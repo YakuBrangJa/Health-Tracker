@@ -13,3 +13,11 @@
 .foot-unit {
   color: var(--color-grey4);
 }
+
+.empty-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-grey3);
+  line-height: 2rem;
+  margin-right: 0.5rem;
+}

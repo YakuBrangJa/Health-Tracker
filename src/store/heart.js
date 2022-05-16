@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const initialState = {
   heart: {
@@ -14,11 +13,23 @@ const initialState = {
           name: "beat per minute",
           selected: true,
           symbol: "bpm",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
       },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: "Heart Rate",
+          borderWidth: 2.5,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        },
+        multiValue: false,
+      },
     },
+
     bloodPressure: {
       id: "heart2",
       title: "Blood Pressure",
@@ -30,9 +41,39 @@ const initialState = {
           name: "milimeter mercury",
           selected: true,
           symbol: "mmHg",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value, chart) => {
+            if (chart)
+              return {
+                systolic: value.systolic.toFixed(1),
+                diastolic: value.diastolic.toFixed(1),
+              };
+            return `${value.systolic}/${value.diastolic}`;
+          },
+          from: (value) => {
+            return {
+              systolic: parseFloat(value.systolic),
+              diastolic: parseFloat(value.diastolic),
+            };
+          },
         },
+      },
+      chartConfig: {
+        type: "bar",
+        config: [
+          {
+            label: "Diastolic",
+            path: "diastolic",
+            borderWidth: 0,
+            backgroundColor: "rgba(53, 162, 235, 0.7)",
+          },
+          {
+            label: "Systolic",
+            path: "systolic",
+            borderWidth: 0,
+            backgroundColor: "rgba(255, 99, 132, 0.8)",
+          },
+        ],
+        multiValue: true,
       },
     },
     heartRateVariability: {
@@ -46,9 +87,20 @@ const initialState = {
           name: "milisecond",
           selected: true,
           symbol: "ms",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
+      },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: "Heart Rate",
+          borderWidth: 2.5,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        },
+        multiValue: false,
       },
     },
     cardioFitness: {
@@ -59,12 +111,21 @@ const initialState = {
       selectedUnit: "maxOxygenVolume",
       unit: {
         maxOxygenVolume: {
-          name: "max oxygen volume",
+          name: "maxOxygenVolume",
           selected: true,
           symbol: `VO2max`,
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
+      },
+      chartConfig: {
+        type: "bar",
+        config: {
+          label: "Cardio Fitness",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
       },
     },
     peripheralPerfusionIndex: {
@@ -78,9 +139,18 @@ const initialState = {
           name: "percentage",
           selected: true,
           symbol: "%",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
+      },
+      chartConfig: {
+        type: "bar",
+        config: {
+          label: "Peripheral Perfusion Index",
+          borderWidth: 0,
+          backgroundColor: "rgba(53, 162, 235, 0.7)",
+        },
+        multiValue: false,
       },
     },
     restingHR: {
@@ -91,14 +161,26 @@ const initialState = {
       selectedUnit: "beatPerMinute",
       unit: {
         beatPerMinute: {
-          name: "beat per minute",
+          name: "beatPerMinute",
           selected: true,
           symbol: "bpm",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
       },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: "Resting Heart Rate",
+          borderWidth: 2.5,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        },
+        multiValue: false,
+      },
     },
+
     walkingHR: {
       id: "heart7",
       title: "Walking Heart Rate",
@@ -107,12 +189,23 @@ const initialState = {
       selectedUnit: "beatPerMinute",
       unit: {
         beatPerMinute: {
-          name: "beat per minute",
+          name: "beatPerMinute",
           selected: true,
           symbol: "bpm",
-          to: (value) => value,
-          from: (value) => value,
+          to: (value) => parseFloat(value.toFixed(1)),
+          from: (value) => parseFloat(value.value),
         },
+      },
+      chartConfig: {
+        type: "line",
+        config: {
+          label: " Walking Heart Rate",
+          borderWidth: 2.5,
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          pointBackgroundColor: "rgba(255, 99, 132, 1)",
+        },
+        multiValue: false,
       },
     },
   },
@@ -134,16 +227,7 @@ const heartSlice = createSlice({
         (key) => state.heart[key].id === state.componentState.dataState
       );
 
-      let transformedValue;
-
-      if (unitState.state === "milimeter mercury") {
-        transformedValue = {
-          systolic: parseFloat(formData.systolic),
-          diastolic: parseFloat(formData.diastolic),
-        };
-      } else {
-        transformedValue = parseFloat(formData.value);
-      }
+      const transformedValue = unitState.from(formData);
 
       state.heart[key].data.push({
         date: formData.date,
@@ -153,20 +237,12 @@ const heartSlice = createSlice({
     },
 
     changeUnit(state, action) {
-      const unitData = action.payload;
+      const { unit } = action.payload;
       const dataKey = Object.keys(state.heart).find(
         (key) => state.heart[key].id === state.componentState.dataState
       );
 
-      const unit = state.heart[dataKey].unit;
-
-      for (let key in unit) {
-        if (unit[key].name === unitData.unit) {
-          unit[key].selected = true;
-        } else {
-          unit[key].selected = false;
-        }
-      }
+      state.heart[dataKey].selectedUnit = unit;
     },
 
     populateData(state, action) {

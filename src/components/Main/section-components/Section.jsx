@@ -65,6 +65,7 @@ function Section({ data, title, componentState, error, actions }) {
                     title={value.title}
                     data={value.data}
                     unit={value.unit}
+                    selectedUnit={value.selectedUnit}
                     type={value.type}
                     selected={dataState === value.id}
                     actions={actions}
@@ -82,6 +83,7 @@ function Section({ data, title, componentState, error, actions }) {
                     title={value.title}
                     data={value.data}
                     unit={value.unit}
+                    selectedUnit={value.selectedUnit}
                     type={value.type}
                     selected={dataState === value.id}
                     actions={actions}
@@ -92,18 +94,6 @@ function Section({ data, title, componentState, error, actions }) {
           </div>
         </div>
         <div className="container-right">
-          {/* {dataArray
-            .filter((value) => value.id === dataState)
-            .map((value) => (
-              <Detail
-                key={value.id}
-                id={value.id}
-                title={value.title}
-                data={value.data}
-                unit={value.unit}
-                actions={actions}
-              />
-            ))} */}
           {data[dataKey] && (
             <Detail
               key={data[dataKey].id}
@@ -111,7 +101,9 @@ function Section({ data, title, componentState, error, actions }) {
               title={data[dataKey].title}
               data={data[dataKey].data}
               unit={data[dataKey].unit}
+              selectedUnit={data[dataKey].selectedUnit}
               actions={actions}
+              chartConfig={data[dataKey].chartConfig}
             />
           )}
         </div>
