@@ -34,30 +34,7 @@ function useChartDataFormat() {
 
           return finalAvg;
         }
-        // if (id === "heart2") {
-        //   const reducedValue = value.reduce(
-        //     (a, b) => {
-        //       return {
-        //         systolic: a.systolic + b.systolic,
-        //         diastolic: a.diastolic + b.diastolic,
-        //       };
-        //     },
-        //     {
-        //       systolic: 0,
-        //       diastolic: 0,
-        //     }
-        //   );
 
-        //   return {
-        //     systolic: reducedValue.systolic / value.length,
-        //     diastolic: reducedValue.diastolic / value.length,
-        //   };
-        // }
-        console.log(
-          value.reduce((a, b) => {
-            return a + b;
-          }, 0)
-        );
         if (!multiValue)
           return (
             value.reduce((a, b) => {

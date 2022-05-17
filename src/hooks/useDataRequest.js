@@ -14,7 +14,7 @@ function useDataRequest(branch, actions) {
   const fetchData = useCallback(() => {
     sendRequest(
       {
-        url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}.json`,
+        url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}/.json`,
       },
       applyData
     );
@@ -22,7 +22,7 @@ function useDataRequest(branch, actions) {
   }, []);
 
   return {
-    isLoading: false,
+    isLoading,
     error,
     fetchData,
   };

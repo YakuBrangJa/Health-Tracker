@@ -62,7 +62,7 @@ function BarChart({ data, formOpen, chartConfig }) {
       },
       y: {
         stacked: false,
-        beginAtZero: chartConfig.multiValue ? true : false,
+        beginAtZero: chartConfig.multiValue,
         grace: 1,
       },
     },
@@ -95,8 +95,8 @@ function BarChart({ data, formOpen, chartConfig }) {
       line: {
         spanGaps: true,
         segment: {
-          borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132, 07)"),
-          borderDash: (ctx) => skipped(ctx, [0, 0]),
+          borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132)"),
+          borderDash: (ctx) => skipped(ctx, [6, 4]),
         },
         borderWidth: 2.5,
         pointRadius: 2.5,
@@ -107,8 +107,6 @@ function BarChart({ data, formOpen, chartConfig }) {
 
   React.useEffect(() => {
     if (!chartDataFormat) return;
-
-    console.log(chartDataFormat);
 
     let dataForMapping;
 

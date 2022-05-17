@@ -13,6 +13,7 @@ import { formStateActions } from "../../../store/form-state";
 function Section({ data, title, componentState, error, actions }) {
   const dataArray = Object.values(data);
   const dataState = componentState.dataState;
+  console.log(data);
   const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
 
   const itemWithData = dataArray.filter((item) => item.data.length > 0);
@@ -38,13 +39,19 @@ function Section({ data, title, componentState, error, actions }) {
 
   // SENDING DATA TO FIREBASE
   useEffect(() => {
-    return;
+    // return;
     if (!dataSubmitted) return;
+    console.log(dataKey);
 
     sendRequest({
       url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${sidebarState}/${dataKey}.json`,
       method: "PUT",
-      body: data[dataKey],
+      body: {
+        id: data[dataKey].id,
+        title: data[dataKey].title,
+        selectedUnit: data[dataKey].selectedUnit,
+        data: data[dataKey].data,
+      },
     });
 
     dispatch(formStateActions.setDataSubmitted(false));

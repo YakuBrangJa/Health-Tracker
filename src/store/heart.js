@@ -249,12 +249,9 @@ const heartSlice = createSlice({
       const data = action.payload;
 
       for (let key in data) {
-        if (!data[key].data) {
-          data[key].data = [];
-        }
+        state.heart[key].data = !data[key].data ? [] : data[key].data;
+        state.heart[key].selectedUnit = data[key].selectedUnit;
       }
-
-      state.heart = data;
     },
 
     updateFirstRunState(state, action) {

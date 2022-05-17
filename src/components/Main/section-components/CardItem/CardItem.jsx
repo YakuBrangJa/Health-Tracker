@@ -32,8 +32,6 @@ function CardItem({
   const dispatch = useDispatch();
   const [latestData, setLatestData] = useState(null);
 
-  // console.log(unit[selectedUnit]);
-
   useEffect(() => {
     if (data.length === 0) return;
     setLatestData(

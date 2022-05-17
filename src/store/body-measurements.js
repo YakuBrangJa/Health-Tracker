@@ -6,13 +6,7 @@ const initialState = {
       id: "body1",
       title: "Height",
       type: "body-measurements",
-      data: [
-        {
-          value: 150,
-          date: "2022-05-10",
-          time: "17:54:00",
-        },
-      ],
+      data: [],
       selectedUnit: "foot",
       unit: {
         foot: {
@@ -53,13 +47,7 @@ const initialState = {
       id: "body2",
       title: "Weight",
       type: "body-measurements",
-      data: [
-        {
-          value: 110,
-          date: "2022-03-18",
-          time: "15:23:00",
-        },
-      ],
+      data: [],
       selectedUnit: "pound",
       unit: {
         pound: {
@@ -250,7 +238,6 @@ const bodyMeasurementsSlice = createSlice({
       );
 
       const transformedValue = unitState.from(formData);
-
       state.bodyMeasurements[key].data.push({
         date: formData.date,
         time: formData.time,
@@ -272,12 +259,11 @@ const bodyMeasurementsSlice = createSlice({
       const data = action.payload;
 
       for (let key in data) {
-        if (!data[key].data) {
-          data[key].data = [];
-        }
+        state.bodyMeasurements[key].data = !data[key].data
+          ? []
+          : data[key].data;
+        state.bodyMeasurements[key].selectedUnit = data[key].selectedUnit;
       }
-
-      state.bodyMeasurements = data;
     },
 
     updateFirstRunState(state, action) {

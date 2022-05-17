@@ -18,7 +18,7 @@ function BodyMeasurements() {
   );
 
   useEffect(() => {
-    return;
+    // return;
     if (!componentState.firstRun) return;
     fetchData();
   }, [fetchData]);

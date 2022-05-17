@@ -10,13 +10,12 @@ import SectionLoading from "../section-components/SectionLoading";
 
 function Heart() {
   const { heart: data, componentState } = useSelector((state) => state.heart);
-  const dataArray = Object.values(data);
-
+  console.log(componentState);
   // FETCHING
   const { isLoading, error, fetchData } = useDataRequest("heart", heartActions);
 
   useEffect(() => {
-    return;
+    // return;
     if (!componentState.firstRun) return;
     fetchData();
   }, [fetchData]);
@@ -28,7 +27,7 @@ function Heart() {
   return (
     <Section
       title={"Heart"}
-      data={dataArray}
+      data={data}
       error={error}
       componentState={componentState}
       actions={heartActions}
