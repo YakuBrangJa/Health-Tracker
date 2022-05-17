@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import useDataRequest from "../../../hooks/useDataRequest";
-import useHttps from "../../../hooks/useHttps";
 
 import Section from "../section-components/Section";
 import SectionLoading from "../section-components/SectionLoading";
@@ -13,25 +12,19 @@ function BodyMeasurements() {
   );
 
   const { isLoading, error, fetchData } = useDataRequest(
-    "body-measurements",
     bodyMeasurementsActions
   );
 
   useEffect(() => {
-    // return;
     if (!componentState.firstRun) return;
-    fetchData();
-  }, [fetchData]);
-
-  if (isLoading) {
-    return <SectionLoading title={"Body Measurements"}></SectionLoading>;
-  }
+    fetchData("body-measurements");
+  }, [fetchData, componentState.firstRun]);
 
   return (
     <Section
       title={"Body Measurements"}
       data={data}
-      error={error}
+      isLoading={isLoading}
       componentState={componentState}
       actions={bodyMeasurementsActions}
     />

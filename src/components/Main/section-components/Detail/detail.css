@@ -41,8 +41,10 @@
   gap: 1rem;
   flex-shrink: 0;
   height: 21rem;
+  /* background-color: var(--color-white3); */
   background-color: var(--color-grey8);
-  padding: 0.5rem 1rem 0.7rem 1rem;
+  background-color: var(--color-grey10);
+  padding: 0.2rem 1rem 0.5rem 0.5rem;
   position: relative;
 }
 

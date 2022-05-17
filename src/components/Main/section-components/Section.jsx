@@ -10,10 +10,9 @@ import Detail from "./Detail/Detail";
 import useHttps from "../../../hooks/useHttps";
 import { formStateActions } from "../../../store/form-state";
 
-function Section({ data, title, componentState, error, actions }) {
+function Section({ data, title, componentState, actions, isLoading }) {
   const dataArray = Object.values(data);
   const dataState = componentState.dataState;
-  console.log(data);
   const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
 
   const itemWithData = dataArray.filter((item) => item.data.length > 0);
@@ -35,13 +34,11 @@ function Section({ data, title, componentState, error, actions }) {
     }
   }, [itemWithData, itemWithoutData, componentState, actions]);
 
-  const { sendRequest } = useHttps();
-
   // SENDING DATA TO FIREBASE
+  const { sendRequest } = useHttps();
   useEffect(() => {
     // return;
     if (!dataSubmitted) return;
-    console.log(dataKey);
 
     sendRequest({
       url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${sidebarState}/${dataKey}.json`,
@@ -56,6 +53,8 @@ function Section({ data, title, componentState, error, actions }) {
 
     dispatch(formStateActions.setDataSubmitted(false));
   }, [data, dataKey, sendRequest]);
+
+  if (isLoading) return <SectionLoading title={title}></SectionLoading>;
 
   return (
     <SectionContainer title={title}>

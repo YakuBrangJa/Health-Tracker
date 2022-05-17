@@ -69,8 +69,9 @@ function BarChart({ data, formOpen, chartConfig }) {
     plugins: {
       legend: {
         position: "top",
-        align: "end",
+        align: "start",
         onClick: null,
+        reverse: true,
       },
       tooltip: {
         callbacks: {

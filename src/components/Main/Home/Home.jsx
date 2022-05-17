@@ -1,14 +1,14 @@
 import React from "react";
-import "./summary.css";
+import "./home.css";
 
 import SectionContainer from "../section-components/SectionContainer";
 import Favourites from "./Favourites";
 import Highlights from "./Highlights";
 
-function Summary() {
+function Home() {
   return (
-    <SectionContainer title={"Summary"}>
-      <div className="summary-container">
+    <SectionContainer title={"Home"}>
+      <div className="home-container">
         <Favourites />
         <Highlights />
       </div>
@@ -16,4 +16,4 @@ function Summary() {
   );
 }
 
-export default Summary;
+export default Home;

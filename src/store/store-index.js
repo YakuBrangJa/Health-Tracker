@@ -3,6 +3,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import formStateReducer from "./form-state";
 import dateNavReducer from "./date-nav";
 import activeDataReducer from "./activeData";
+import respiratoryReducer from "./respiratory";
 
 import bodyMeasurementsReducer from "./body-measurements";
 import heartReducer from "./heart";
@@ -14,6 +15,7 @@ const store = configureStore({
     activeData: activeDataReducer,
     bodyMeasurements: bodyMeasurementsReducer,
     heart: heartReducer,
+    respiratory: respiratoryReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

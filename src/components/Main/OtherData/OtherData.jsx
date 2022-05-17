@@ -4,7 +4,7 @@ import React from "react";
 import Section from "../section-components/Section";
 
 function OtherData() {
-  return <Section title={"Other Data"} />;
+  return <h2>Other Data</h2>;
 }
 
 export default OtherData;

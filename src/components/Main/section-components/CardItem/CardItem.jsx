@@ -55,8 +55,19 @@ function CardItem({
     dispatch(actions.updateFirstClick(true));
   };
 
-  let dataType;
+  const typeColor = {
+    vitals: "#d55",
+    symptoms: "#7707B3",
+    medications: "#14b309",
+    "body-measurements": "#bf5af2",
+    heart: "#fe375f",
+    respiratory: "#54a1ff",
+    sleep: "#69B389",
+    "cycle-tracker": "#E60E9A",
+    "other-data": "#0e74dc",
+  };
 
+  let dataType;
   switch (type) {
     case "vitals":
       dataType = {

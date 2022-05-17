@@ -10,7 +10,7 @@
   transition: all 200ms ease;
   display: flex;
   align-items: center;
-  animation: notify 1.5s ease infinite;
+  animation: notify 2s ease infinite;
 }
 .empty-chart__button:hover {
   cursor: pointer;

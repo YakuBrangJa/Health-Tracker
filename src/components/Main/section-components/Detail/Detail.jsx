@@ -61,9 +61,6 @@ function Detail({ id, title, data, unit, selectedUnit, actions, chartConfig }) {
           <span>View all data</span>
           <KeyboardArrowRightSharpIcon />
         </div>
-        <div className="section-chart">
-          <DemoChart />
-        </div>
       </div>
     </>
   );

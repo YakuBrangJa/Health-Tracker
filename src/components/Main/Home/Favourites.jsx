@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./favourites.css";
 
-import SummaryHeader2 from "./summary-childs/SummaryHeader2";
-import Card from "./summary-childs/Card";
+import HomeHeaders from "./home-childs/HomeHeaders";
+import Card from "./home-childs/Card";
 
 function Favourites() {
   const [fetchedData, setFetchedData] = useState([]);
@@ -23,7 +23,7 @@ function Favourites() {
 
   return (
     <div className="favourite">
-      <SummaryHeader2 title={"Favourites"} />
+      <HomeHeaders title={"Favourites"} />
       <div className="favourite-card">
         <Card
           key="0"

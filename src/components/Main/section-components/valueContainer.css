@@ -1,3 +1,12 @@
+.cardItem-value__container {
+  display: flex;
+  gap: 0.3rem;
+  align-items: flex-end;
+}
+/* .cardItem-value__container.active {
+  color: var(--color-white3);
+} */
+
 .cardItem-value {
   font-size: 2.3rem;
   font-weight: 650;
@@ -10,6 +19,13 @@
 .cardItem-value.detail-value {
   font-size: 2.6rem;
 }
+
+.cardItem-unit {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-grey3);
+}
+
 .foot-unit {
   color: var(--color-grey4);
 }

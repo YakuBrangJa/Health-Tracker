@@ -1,34 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { heartActions } from "../../../store/heart";
-import { formStateActions } from "../../../store/form-state";
 
-import useHttps from "../../../hooks/useHttps";
 import useDataRequest from "../../../hooks/useDataRequest";
 import Section from "../section-components/Section";
 import SectionLoading from "../section-components/SectionLoading";
 
 function Heart() {
   const { heart: data, componentState } = useSelector((state) => state.heart);
-  console.log(componentState);
+
   // FETCHING
-  const { isLoading, error, fetchData } = useDataRequest("heart", heartActions);
+  const { isLoading, error, fetchData } = useDataRequest(heartActions);
 
   useEffect(() => {
-    // return;
     if (!componentState.firstRun) return;
-    fetchData();
-  }, [fetchData]);
-
-  if (isLoading) {
-    return <SectionLoading title={"Heart"}></SectionLoading>;
-  }
+    fetchData("heart");
+  }, [fetchData, componentState.firstRun]);
 
   return (
     <Section
       title={"Heart"}
       data={data}
-      error={error}
+      isLoading={isLoading}
       componentState={componentState}
       actions={heartActions}
     />

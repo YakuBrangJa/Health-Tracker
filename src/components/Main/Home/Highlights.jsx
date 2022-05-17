@@ -1,12 +1,12 @@
 import React from "react";
 import "./highlights.css";
 
-import SummaryHeader2 from "./summary-childs/SummaryHeader2";
+import HomeHeaders from "./home-childs/HomeHeaders";
 
 function Highlights() {
   return (
     <div>
-      <SummaryHeader2 title={"Highlights"} />
+      <HomeHeaders title={"Highlights"} />
     </div>
   );
 }

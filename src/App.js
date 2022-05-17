@@ -9,7 +9,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Sidebar from "./components/SideBar/Sidebar";
 
 // MAIN COMPNENTS
-import Summary from "./components/Main/Summary/Summary";
+import Home from "./components/Main/Home/Home";
 import Vitals from "./components/Main/Vitals/Vitals";
 import Symptoms from "./components/Main/Symptoms/Symptoms";
 import Medications from "./components/Main/Medications/Medications";
@@ -21,7 +21,6 @@ import CycleTracker from "./components/Main/CycleTracker/CycleTracker";
 import OtherData from "./components/Main/OtherData/OtherData";
 
 import { formStateActions } from "./store/form-state";
-import { bodyMeasurementsActions } from "./store/body-measurements";
 
 function App() {
   const location = useLocation();
@@ -40,7 +39,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/">
-            <Route index element={<Summary />} />
+            <Route index element={<Home />} />
             <Route path="vitals" element={<Vitals />} />
             <Route path="symptoms" element={<Symptoms />} />
             <Route path="medications" element={<Medications />} />

@@ -1,7 +1,7 @@
 import React from "react";
 
 function CycleTracker() {
-  return <div>CycleTracker</div>;
+  return <h2>CycleTracker</h2>;
 }
 
 export default CycleTracker;

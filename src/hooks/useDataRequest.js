@@ -2,7 +2,7 @@ import useHttps from "./useHttps";
 import { useDispatch } from "react-redux";
 import { useCallback } from "react";
 
-function useDataRequest(branch, actions) {
+function useDataRequest(actions) {
   const dispatch = useDispatch();
 
   const applyData = (data) => {
@@ -11,15 +11,18 @@ function useDataRequest(branch, actions) {
 
   const { isLoading, error, sendRequest } = useHttps();
 
-  const fetchData = useCallback(() => {
-    sendRequest(
-      {
-        url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}/.json`,
-      },
-      applyData
-    );
-    dispatch(actions.updateFirstRunState(false));
-  }, []);
+  const fetchData = useCallback(
+    (branch) => {
+      sendRequest(
+        {
+          url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}/.json`,
+        },
+        applyData
+      );
+      dispatch(actions.updateFirstRunState(false));
+    },
+    [actions]
+  );
 
   return {
     isLoading,

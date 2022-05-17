@@ -7,11 +7,10 @@ const initialState = {
       title: "Heart Rate",
       type: "heart",
       data: [],
-      selectedUnit: "beatPerMinute",
+      selectedUnit: "beatsPerMinute",
       unit: {
-        beatPerMinute: {
-          name: "beat per minute",
-          selected: true,
+        beatsPerMinute: {
+          name: "beatsPerMinute",
           symbol: "bpm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
@@ -39,7 +38,6 @@ const initialState = {
       unit: {
         milimeterMercury: {
           name: "milimeter mercury",
-          selected: true,
           symbol: "mmHg",
           to: (value, chart) => {
             if (chart)
@@ -85,7 +83,6 @@ const initialState = {
       unit: {
         milisecond: {
           name: "milisecond",
-          selected: true,
           symbol: "ms",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
@@ -112,7 +109,6 @@ const initialState = {
       unit: {
         maxOxygenVolume: {
           name: "maxOxygenVolume",
-          selected: true,
           symbol: `VO2max`,
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
@@ -137,7 +133,6 @@ const initialState = {
       unit: {
         percentage: {
           name: "percentage",
-          selected: true,
           symbol: "%",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
@@ -158,11 +153,10 @@ const initialState = {
       title: "Resting Heart Rate",
       type: "heart",
       data: [],
-      selectedUnit: "beatPerMinute",
+      selectedUnit: "beatsPerMinute",
       unit: {
-        beatPerMinute: {
-          name: "beatPerMinute",
-          selected: true,
+        beatsPerMinute: {
+          name: "beatsPerMinute",
           symbol: "bpm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
@@ -186,11 +180,10 @@ const initialState = {
       title: "Walking Heart Rate",
       type: "heart",
       data: [],
-      selectedUnit: "beatPerMinute",
+      selectedUnit: "beatsPerMinute",
       unit: {
-        beatPerMinute: {
-          name: "beatPerMinute",
-          selected: true,
+        beatsPerMinute: {
+          name: "beatsPerMinute",
           symbol: "bpm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
@@ -199,7 +192,7 @@ const initialState = {
       chartConfig: {
         type: "line",
         config: {
-          label: " Walking Heart Rate",
+          label: "Walking Heart Rate",
           borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
