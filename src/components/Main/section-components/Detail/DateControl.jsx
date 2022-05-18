@@ -50,6 +50,12 @@ function DateControl({ data }) {
     };
   }
 
+  function nextSunday(date) {
+    return (
+      new Date(date).getTime() + (7 - new Date(date).getDay()) * 60000 * 60 * 24
+    );
+  }
+
   useEffect(() => {
     if (data.length === 0) return;
     const early = data.reduce((a, b) =>
@@ -114,7 +120,7 @@ function DateControl({ data }) {
       { length: totalInterval == 0 ? 1 : totalInterval },
       (_, i) => {
         const day14 = new Date(
-          new Date(latestData.date).getTime() - i * 60000 * 60 * 24 * 7
+          nextSunday(latestData.date) - (i + 1) * 60000 * 60 * 24 * 7
         );
 
         return {

@@ -178,11 +178,13 @@ const initialState = {
         },
       },
       chartConfig: {
-        type: "scatter",
+        type: "line",
+
         config: {
-          label: "Waist Circumference",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
+          label: "Body Temperature",
+          borderColor: "rgb(255, 99, 132)",
+          backgroundColor: "rgba(255, 99, 132)",
+          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },

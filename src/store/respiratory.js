@@ -104,9 +104,9 @@ const initialState = {
       },
     },
 
-    forcedExpiratoryVolme1sec: {
+    forcedExpiratoryVolme: {
       id: "respi5",
-      title: "Forced Expiratory Volume, 1sec",
+      title: "Forced Expiratory Volume",
       type: "respiratory",
       data: [],
       selectedUnit: "liter",
@@ -137,7 +137,7 @@ const initialState = {
       selectedUnit: "meter",
       unit: {
         meter: {
-          name: "liter",
+          name: "meter",
           symbol: "m",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),

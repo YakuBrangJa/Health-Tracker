@@ -25,3 +25,9 @@
 .main-section::-webkit-scrollbar-track {
   background-color: transparent;
 }
+
+@media (max-width: 1210px) {
+  .main-section {
+    padding-left: 3.5rem;
+  }
+}

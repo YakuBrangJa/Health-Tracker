@@ -9,7 +9,7 @@ import "./detail.css";
 import AddDataForm from "./Form/AddDataForm";
 import DateNav from "./DateNav";
 import ValueHeader from "./ValueHeader";
-import BarChart from "../../../Charts/BarChart";
+import Chart from "../../../Charts/Chart";
 import { DemoChart } from "../../../Charts/DemoChart";
 
 function Detail({ id, title, data, unit, selectedUnit, actions, chartConfig }) {
@@ -49,13 +49,13 @@ function Detail({ id, title, data, unit, selectedUnit, actions, chartConfig }) {
           actions={actions}
         />
         <div className="section-chart">
-          <BarChart
+          {/* <Chart
             id={id}
             data={data}
             chartConfig={chartConfig}
             className="chart"
             formOpen={formToggleHandler}
-          />
+          /> */}
         </div>
         <div className="view-all__data">
           <span>View all data</span>

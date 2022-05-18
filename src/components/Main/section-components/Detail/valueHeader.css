@@ -1,7 +1,7 @@
 .value-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 0 1rem;
   margin-top: 1rem;
 }

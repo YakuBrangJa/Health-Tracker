@@ -4,7 +4,6 @@ import { heartActions } from "../../../store/heart";
 
 import useDataRequest from "../../../hooks/useDataRequest";
 import Section from "../section-components/Section";
-import SectionLoading from "../section-components/SectionLoading";
 
 function Heart() {
   const { heart: data, componentState } = useSelector((state) => state.heart);

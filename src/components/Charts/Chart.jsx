@@ -34,7 +34,7 @@ ChartJS.register(
 const skipped = (ctx, value) =>
   ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
-function BarChart({ data, formOpen, chartConfig }) {
+function Chart({ data, formOpen, chartConfig }) {
   const [valueData, setValueData] = React.useState({
     datasets: [
       {
@@ -45,7 +45,11 @@ function BarChart({ data, formOpen, chartConfig }) {
 
   const { dateTree } = useDateTree(data);
   const { chartDataFormat, formatData } = useChartDataFormat();
+  const activeDateTab = useSelector((state) => state.dateNav.activeTabState);
   const unitState = useSelector((state) => state.formState.unitState);
+  const { year, month, day, day14, week } = useSelector(
+    (state) => state.activeData.activeDate
+  );
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -76,7 +80,11 @@ function BarChart({ data, formOpen, chartConfig }) {
       tooltip: {
         callbacks: {
           beforeTitle: function (context) {
-            return "June";
+            if (activeDateTab === "D") return `${year} ${month}${day}`;
+            if (activeDateTab === "W") return year;
+            if (activeDateTab === "14D") return year;
+            if (activeDateTab === "M") return `${year} ${month}`;
+            if (activeDateTab === "Y") return year;
           },
           label: function (context) {
             let label = context.dataset.label || "";
@@ -157,4 +165,4 @@ function BarChart({ data, formOpen, chartConfig }) {
     return <Bar data={valueData} options={options}></Bar>;
 }
 
-export default BarChart;
+export default Chart;

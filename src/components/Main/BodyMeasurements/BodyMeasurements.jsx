@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import useDataRequest from "../../../hooks/useDataRequest";
 
 import Section from "../section-components/Section";
-import SectionLoading from "../section-components/SectionLoading";
 import { bodyMeasurementsActions } from "../../../store/body-measurements";
 
 function BodyMeasurements() {

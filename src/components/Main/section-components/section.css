@@ -23,6 +23,7 @@
 
 .container-left {
   flex: 1;
+  min-width: 21rem;
 }
 
 .container-right {

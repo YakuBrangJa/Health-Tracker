@@ -35,7 +35,7 @@
   background-color: rgb(150, 183, 255); */
   background-color: var(--color-grey7);
   /* border-color: rgb(116, 160, 255); */
-  border-color: var(--color-grey7);
+  border: 0.1rem solid var(--color-grey6b);
 }
 
 .cardItem-date__container.active,

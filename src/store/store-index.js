@@ -4,9 +4,9 @@ import formStateReducer from "./form-state";
 import dateNavReducer from "./date-nav";
 import activeDataReducer from "./activeData";
 import respiratoryReducer from "./respiratory";
-
 import bodyMeasurementsReducer from "./body-measurements";
 import heartReducer from "./heart";
+import otherDataReducer from "./other-data";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +16,7 @@ const store = configureStore({
     bodyMeasurements: bodyMeasurementsReducer,
     heart: heartReducer,
     respiratory: respiratoryReducer,
+    otherData: otherDataReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
