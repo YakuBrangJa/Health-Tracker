@@ -17,7 +17,7 @@ import BodyMeasurements from "./components/Main/BodyMeasurements/BodyMeasurement
 import Heart from "./components/Main/Heart/Heart";
 import Respiratory from "./components/Main/Respiratory/Respiratory";
 import Sleep from "./components/Main/Sleep/Sleep";
-import CycleTracker from "./components/Main/CycleTracker/CycleTracker";
+import MenstrualCycle from "./components/Main/MenstrualCycle/MenstrualCycle";
 import OtherData from "./components/Main/OtherData/OtherData";
 
 import { formStateActions } from "./store/form-state";
@@ -50,7 +50,7 @@ function App() {
             <Route path="heart" element={<Heart />} />
             <Route path="respiratory" element={<Respiratory />} />
             <Route path="sleep" element={<Sleep />} />
-            <Route path="cycle-tracker" element={<CycleTracker />} />
+            <Route path="cycle-tracker" element={<MenstrualCycle />} />
             <Route path="other-data" element={<OtherData />} />
           </Route>
         </Routes>

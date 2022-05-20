@@ -5,31 +5,49 @@
   gap: 0.5rem;
   padding-right: 0.5rem;
 }
+
+.container-head2 {
+  display: none;
+}
+
 .container-head h3 {
   font-size: 1.1rem;
   font-weight: bold;
   transition: transform 300ms ease;
   transform: scale(0.3);
+  /* white-space: nowrap; */
 }
 .container-head.loaded h3 {
   transform: scale(1);
 }
-.container-head .form-button {
-  position: relative;
-}
+
 .container-head button {
   all: unset;
   cursor: pointer;
   display: flex;
   align-items: center;
   font-weight: 700;
-  color: rgb(69, 125, 223);
+  color: var(--color-primary1);
 }
 .container-head button > .icon {
   font-size: 1.2rem;
 }
 .container-head button:hover {
-  color: rgba(69, 125, 223, 0.785);
+  color: var(--color-primary1b);
+}
+
+.container-head .form-button {
+  position: relative;
+  white-space: nowrap;
+}
+
+.container-head .back-btn {
+  display: none;
+}
+
+.container-child {
+  display: flex;
+  margin-top: 1rem;
 }
 
 /* CHART */
@@ -40,7 +58,8 @@
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
-  height: 21rem;
+  min-height: 20rem;
+  flex-grow: 1;
   /* background-color: var(--color-white3); */
   background-color: var(--color-grey8);
   background-color: var(--color-grey10);
@@ -51,12 +70,10 @@
 .chart-wrapper {
   height: 100%;
   width: 100%;
-  /* overflow-x: scroll; */
 }
 
 /* VIEW ALL DATA SECTION */
 .view-all__data {
-  margin-top: 0.5rem;
   flex-shrink: 0;
   height: 3rem;
   background-color: var(--color-grey8b);
@@ -74,4 +91,49 @@
 
 .view-all__data:hover {
   background-color: var(--color-grey7);
+}
+
+@media (max-width: 1024px) {
+  .section-chart {
+    min-height: 20rem;
+    max-height: 24rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-chart {
+    padding: 0.2rem 0.5rem 0.5rem 0.2rem;
+  }
+
+  .container-right .container-child {
+    margin-top: 1rem;
+  }
+
+  .container-head {
+    padding: 0;
+    text-align: center;
+  }
+
+  .container-head h3 {
+    font-size: 1rem;
+  }
+
+  .container-head .preferance-control {
+    display: none;
+  }
+
+  .container-head .back-btn {
+    display: flex;
+    transform: translateX(-0.5rem);
+  }
+
+  .addData-btn .icon {
+    display: none;
+  }
+}
+
+@media (max-width: 370px) {
+  .section-chart {
+    padding: 0.2rem 0rem 0.5rem 0rem;
+  }
 }

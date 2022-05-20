@@ -18,3 +18,9 @@
 .date-control select:hover {
   background-color: var(--color-grey6);
 }
+
+@media (max-width: 576px) {
+  .date-control select {
+    background-color: var(--color-grey6b);
+  }
+}

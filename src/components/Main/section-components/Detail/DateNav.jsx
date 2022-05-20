@@ -25,8 +25,8 @@ function DateNav(props) {
             className={`${activeTabState === tab.short && "active"}`}
             onClick={() => selectTabHandler(tab.short)}
           >
-            <span>{tab.long}</span>
-            <span>{tab.short}</span>
+            <span className="long">{tab.long}</span>
+            <span className="short">{tab.short}</span>
           </li>
         ))}
 

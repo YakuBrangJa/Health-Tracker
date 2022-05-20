@@ -4,10 +4,10 @@
   align-items: stretch;
   background: var(--color-grey8b);
   background: var(--color-white3);
+  border: 0.1rem solid var(--color-grey7);
   border-radius: 0.5rem;
   flex-shrink: 0;
   cursor: pointer;
-  border: 0.1rem solid var(--color-grey7);
   /* border: 2px solid var(--color-gerey11); */
   transition: background 100ms ease, border 100ms ease;
 }
@@ -102,4 +102,12 @@
 
 .emptyCardItem-add {
   font-size: 0.8rem;
+}
+
+@media (max-width: 576px) {
+  .cardItem.active,
+  .emptyCardItem.active {
+    background: var(--color-white3);
+    border: 0.1rem solid var(--color-grey7);
+  }
 }

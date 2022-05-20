@@ -1,5 +1,5 @@
 import "./section.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import SectionContainer from "./SectionContainer";
@@ -9,11 +9,17 @@ import Detail from "./Detail/Detail";
 
 import useHttps from "../../../hooks/useHttps";
 import { formStateActions } from "../../../store/form-state";
+import { uiStateActions } from "../../../store/ui-state";
 
 function Section({ data, title, componentState, actions, isLoading }) {
   const dataArray = Object.values(data);
   const dataState = componentState.dataState;
-  const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
+  const [dataKey, setDataKey] = useState();
+
+  useEffect(() => {
+    setDataKey(Object.keys(data).find((key) => data[key].id === dataState));
+  }, [dataState]);
+  // const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
 
   const itemWithData = dataArray.filter((item) => item.data.length > 0);
   const itemWithoutData = dataArray.filter((item) => item.data.length === 0);
@@ -22,17 +28,24 @@ function Section({ data, title, componentState, actions, isLoading }) {
   const { sidebarState, dataSubmitted } = useSelector(
     (state) => state.formState
   );
+  const cardSelectState = useSelector((state) => state.uiState.cardSelectState);
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    dispatch(uiStateActions.setCardSelectState(false));
+  }, []);
 
   // SETTING ACTIVE ITEM ON LOAD
   useEffect(() => {
-    if (componentState.firstClick) return;
+    if (componentState.firstClick || screenWidth < 577) return;
 
     if (itemWithData.length > 0) {
       dispatch(actions.updateDataState(itemWithData[0].id));
     } else {
       dispatch(actions.updateDataState(itemWithoutData[0].id));
     }
-  }, [itemWithData, itemWithoutData, componentState, actions]);
+  }, [itemWithData, itemWithoutData, componentState, actions, screenWidth]);
 
   // SENDING DATA TO FIREBASE
   const { sendRequest } = useHttps();
@@ -59,47 +72,51 @@ function Section({ data, title, componentState, actions, isLoading }) {
   return (
     <SectionContainer title={title}>
       <div className="section-container">
-        <div className="container-left">
+        <div className={`container-left ${cardSelectState && "selected"}`}>
           <div className="container-child">
             <div className="summary">
               {itemWithData.length > 0 && <h3>Summary</h3>}
-              {itemWithData.map((value) => {
-                return (
-                  <CardItem
-                    key={value.id}
-                    id={value.id}
-                    title={value.title}
-                    data={value.data}
-                    unit={value.unit}
-                    selectedUnit={value.selectedUnit}
-                    type={value.type}
-                    selected={dataState === value.id}
-                    actions={actions}
-                  />
-                );
-              })}
+              <div>
+                {itemWithData.map((value) => {
+                  return (
+                    <CardItem
+                      key={value.id}
+                      id={value.id}
+                      title={value.title}
+                      data={value.data}
+                      unit={value.unit}
+                      selectedUnit={value.selectedUnit}
+                      type={value.type}
+                      selected={dataState === value.id}
+                      actions={actions}
+                    />
+                  );
+                })}
+              </div>
             </div>
             <div className="noData">
               {itemWithoutData.length > 0 && <h3>No Data</h3>}
-              {itemWithoutData.map((value) => {
-                return (
-                  <CardItem
-                    key={value.id}
-                    id={value.id}
-                    title={value.title}
-                    data={value.data}
-                    unit={value.unit}
-                    selectedUnit={value.selectedUnit}
-                    type={value.type}
-                    selected={dataState === value.id}
-                    actions={actions}
-                  />
-                );
-              })}
+              <div>
+                {itemWithoutData.map((value) => {
+                  return (
+                    <CardItem
+                      key={value.id}
+                      id={value.id}
+                      title={value.title}
+                      data={value.data}
+                      unit={value.unit}
+                      selectedUnit={value.selectedUnit}
+                      type={value.type}
+                      selected={dataState === value.id}
+                      actions={actions}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-        <div className="container-right">
+        <div className={`container-right ${cardSelectState && "selected"}`}>
           {data[dataKey] && (
             <Detail
               key={data[dataKey].id}

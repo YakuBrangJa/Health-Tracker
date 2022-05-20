@@ -58,6 +58,7 @@
   display: none;
 }
 .sidebar-close .icon {
+  font-size: 1.4rem;
   cursor: pointer;
   color: var(--color-grey5);
 }
@@ -76,7 +77,7 @@ ul .title {
   align-items: center;
   margin-top: 0.7rem;
   padding-left: 1rem;
-  transition: height 200ms ease, margin 200ms ease, opacity 200ms ease;
+  transition: all 200ms ease;
 }
 
 .sidebar ul li a {
@@ -109,9 +110,8 @@ ul li a span {
   .sidebar {
     position: fixed;
     z-index: 2;
-    width: 14.5rem;
+    width: 15rem;
     box-shadow: 0 0 0.6rem rgba(50, 50, 50, 0.6);
-    /* overflow-x: hidden; */
     transition: all 200ms ease;
   }
 
@@ -122,14 +122,14 @@ ul li a span {
     width: 100%;
     position: relative;
   }
+  .sidebar-mid {
+    overflow-x: hidden;
+  }
 
   .sidebar.collapse ul .title {
     height: 0;
     margin-top: 0;
     opacity: 0;
-    letter-spacing: -0.6rem;
-    /* to enable collapse animation */
-    /* display: none; */
   }
 
   .sidebar.collapse ul li a {
@@ -146,29 +146,32 @@ ul li a span {
     padding: 0.2rem 0.5rem;
     color: var(--color-white3);
     display: none;
-    opacity: 0;
-    transition: opacity 200ms ease;
-  }
-  .sidebar.collapse ul li a:hover span {
-    display: block;
-    opacity: 1;
   }
 
-  .sidebar.collapse .sidebar-close {
-    /* display: none; */
+  /* .sidebar:hover ul li a span {
+    display: none;
+  } */
+  .sidebar ul li:hover a span {
+    display: block;
   }
 
   .sidebar.collapse .sidebar-close {
     display: flex;
-    transform: translateX(-0.2rem) rotateZ(180deg);
+    transform: translateX(-0.1rem) rotateY(180deg);
     transition: all 200ms ease;
   }
   .sidebar-close {
     display: flex;
-    transform: translateX(10rem) rotateZ(0deg);
     transition: all 200ms ease;
   }
-  .sidebar-logo {
+
+  .sidebar.collapse .sidebar-logo {
     display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar.collapse {
+    transform: translateX(-3.3rem);
   }
 }

@@ -4,21 +4,22 @@
   display: flex;
   flex-direction: row;
   gap: 1.5rem;
-  height: auto;
+  height: 100%;
+  min-height: 85%;
   max-height: 94%;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .container-left,
 .container-right {
   background-color: var(--color-grey10);
   border-radius: 0.5rem;
-  padding: 0.9rem;
-  height: auto;
-  max-height: 100%;
-  padding-right: 0.3rem;
   display: flex;
   flex-direction: column;
+  padding: 0.9rem;
+  padding-right: 0.3rem;
+  max-height: 100%;
 }
 
 .container-left {
@@ -28,7 +29,8 @@
 
 .container-right {
   flex: 2;
-  gap: 1rem;
+  height: auto;
+  max-height: none;
 }
 
 .container-left .container-child,
@@ -46,11 +48,21 @@
   padding-bottom: 2rem;
 }
 
+.container-right .container-child {
+  height: auto;
+}
+
 .summary,
 .noData {
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
+}
+.section-container .summary > div,
+.section-container .noData > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .summary > p {
@@ -73,4 +85,95 @@
 }
 .container-child::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+@media (max-width: 1024px) {
+  .section-container {
+    flex-direction: column-reverse;
+    height: auto;
+    min-height: auto;
+    max-height: auto;
+    align-items: stretch;
+    padding-bottom: 5rem;
+  }
+  .container-left,
+  .container-right {
+    height: auto;
+    max-height: auto;
+    min-height: auto;
+    flex-shrink: 0;
+  }
+
+  .section-container .summary > div,
+  .section-container .noData > div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 0.6rem;
+  }
+
+  .container-left .container-child {
+    gap: 2.5rem;
+    padding-bottom: 0rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-container .summary > div,
+  .section-container .noData > div {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem 0.6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-container {
+    padding: 0 0;
+    height: auto;
+    position: relative;
+    gap: 0;
+  }
+
+  .container-left,
+  .container-right {
+    border-radius: 0;
+  }
+  .container-right {
+    display: none;
+    background-color: none;
+    padding: 0 0.9rem;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .container-left {
+    margin-top: 0.5rem;
+    padding: 0.9rem 0.9rem 3rem 0.9rem;
+    height: auto;
+    background-color: none;
+  }
+
+  .container-right.selected {
+    display: block;
+  }
+  .container-left.selected {
+    display: none;
+  }
+  .container-left .container-child,
+  .container-right .container-child {
+    padding: 0;
+    padding-right: 0;
+    margin: 0;
+    height: auto;
+    min-height: auto;
+    overflow-y: auto;
+  }
+
+  .container-left .container-child {
+    gap: 1.3rem;
+  }
+
+  .section-container .summary > div,
+  .section-container .noData > div {
+    gap: 0.5rem;
+  }
 }

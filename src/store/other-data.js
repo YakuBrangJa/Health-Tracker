@@ -87,7 +87,7 @@ const initialState = {
   },
   componentState: {
     firstRun: true,
-    dataState: "",
+    dataState: null,
     firstClick: false,
   },
 };

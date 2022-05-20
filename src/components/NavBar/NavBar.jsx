@@ -12,10 +12,24 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoMdMenu } from "react-icons/io";
+
+import { uiStateActions } from "../../store/ui-state";
+import { useSelector, useDispatch } from "react-redux";
+
 function NavBar() {
+  const sidebarOpen = useSelector((state) => state.uiState.sidebarOpen);
+  const dispatch = useDispatch();
+
+  const openSidebarHandler = () => {
+    dispatch(uiStateActions.setSideBarOpenState(!sidebarOpen));
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-left">
+        <IoMdMenu className="icon" onClick={openSidebarHandler} />
         <div className="nav-search">
           <input type="search" placeholder="Search..." />
           <SearchIcon className="nav-search-icon" />
@@ -27,14 +41,14 @@ function NavBar() {
           <DarkModeIcon />
           {/* <LightModeOutlinedIcon /> */}
         </div>
-        <div className="item">
+        {/* <div className="item">
           <NotificationsIcon />
           <span>2</span>
         </div>
         <div className="item">
           <DateRangeIcon />
           <span>1</span>
-        </div>
+        </div> */}
         <div className="item">
           <img src="#" />
         </div>

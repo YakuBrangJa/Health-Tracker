@@ -2,13 +2,13 @@
 
 .date-navigation ul {
   position: relative;
-
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   border-radius: 0.5rem;
   background-color: var(--color-grey7b);
   padding: 0.3rem 0.1rem;
 }
+
 .date-navigation ul li {
   text-align: center;
   padding: 0 0.1rem;
@@ -18,7 +18,7 @@
 .date-navigation ul li:nth-child(5) {
   border-right: none;
 }
-.date-navigation ul li > span:last-child {
+.date-navigation ul li .short {
   display: none;
 }
 .date-navigation ul li > span {
@@ -63,4 +63,23 @@
 }
 .date-navigation ul li:nth-child(5).active ~ .navigator {
   transform: translate(421%, -50%);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 576px) {
+  .date-navigation ul li .short {
+    display: block;
+  }
+  .date-navigation ul li .long {
+    display: none;
+  }
+
+  .date-navigation ul li > span {
+    padding: 0rem 0;
+  }
+
+  .date-navigation .navigator {
+    height: 1.7rem;
+  }
 }

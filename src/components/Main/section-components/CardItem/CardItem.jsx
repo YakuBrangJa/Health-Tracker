@@ -14,6 +14,7 @@ import MedicationIcon from "@mui/icons-material/Medication";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./cardItem.css";
+import { uiStateActions } from "../../../../store/ui-state";
 
 import ValueContainer from "../ValueContainer";
 
@@ -53,6 +54,7 @@ function CardItem({
   const onClickHandler = () => {
     dispatch(actions.updateDataState(id));
     dispatch(actions.updateFirstClick(true));
+    dispatch(uiStateActions.setCardSelectState(true));
   };
 
   const typeColor = {
@@ -131,7 +133,7 @@ function CardItem({
     return (
       <div
         className={`cardItem ${selected && "active"}`}
-        onClick={() => onClickHandler()}
+        onClick={onClickHandler}
       >
         <div className="cardItem-left">
           <span className="cardItem-name">{title}</span>

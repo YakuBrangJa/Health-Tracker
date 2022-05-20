@@ -69,6 +69,15 @@ function Chart({ data, formOpen, chartConfig }) {
         beginAtZero: chartConfig.multiValue,
         grace: 1,
       },
+      // xAxes: [
+      //   {
+      //     ticks: {
+      //       autoSkip: false,
+      //       minRotation: 0,
+      //       maxRotation: 0,
+      //     },
+      //   },
+      // ],
     },
     plugins: {
       legend: {

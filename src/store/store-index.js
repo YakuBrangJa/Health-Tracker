@@ -7,6 +7,8 @@ import respiratoryReducer from "./respiratory";
 import bodyMeasurementsReducer from "./body-measurements";
 import heartReducer from "./heart";
 import otherDataReducer from "./other-data";
+import uiStateReducer from "./ui-state";
+import sidebarReducer from "./sidebar-list";
 
 const store = configureStore({
   reducer: {
@@ -17,6 +19,8 @@ const store = configureStore({
     heart: heartReducer,
     respiratory: respiratoryReducer,
     otherData: otherDataReducer,
+    uiState: uiStateReducer,
+    sideBar: sidebarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
