@@ -9,6 +9,7 @@ import heartReducer from "./heart";
 import otherDataReducer from "./other-data";
 import uiStateReducer from "./ui-state";
 import sidebarReducer from "./sidebar-list";
+import vitalsReducer from "./vitals";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     otherData: otherDataReducer,
     uiState: uiStateReducer,
     sideBar: sidebarReducer,
+    vitals: vitalsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

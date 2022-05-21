@@ -29,8 +29,8 @@
 
 .container-right {
   flex: 2;
-  height: auto;
-  max-height: none;
+  /* height: auto; */
+  height: 100%;
 }
 
 .container-left .container-child,
@@ -49,7 +49,7 @@
 }
 
 .container-right .container-child {
-  height: auto;
+  height: 100%;
 }
 
 .summary,

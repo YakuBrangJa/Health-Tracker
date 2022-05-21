@@ -11,7 +11,14 @@ import useHttps from "../../../hooks/useHttps";
 import { formStateActions } from "../../../store/form-state";
 import { uiStateActions } from "../../../store/ui-state";
 
-function Section({ data, title, componentState, actions, isLoading }) {
+function Section({
+  data,
+  title,
+  componentState,
+  actions,
+  isLoading,
+  vitalsActions,
+}) {
   const dataArray = Object.values(data);
   const dataState = componentState.dataState;
   const [dataKey, setDataKey] = useState();
@@ -19,7 +26,6 @@ function Section({ data, title, componentState, actions, isLoading }) {
   useEffect(() => {
     setDataKey(Object.keys(data).find((key) => data[key].id === dataState));
   }, [dataState]);
-  // const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
 
   const itemWithData = dataArray.filter((item) => item.data.length > 0);
   const itemWithoutData = dataArray.filter((item) => item.data.length === 0);
@@ -39,13 +45,29 @@ function Section({ data, title, componentState, actions, isLoading }) {
   // SETTING ACTIVE ITEM ON LOAD
   useEffect(() => {
     if (componentState.firstClick || screenWidth < 577) return;
-
+    // if (title === "Vitals") return;
     if (itemWithData.length > 0) {
       dispatch(actions.updateDataState(itemWithData[0].id));
     } else {
       dispatch(actions.updateDataState(itemWithoutData[0].id));
     }
   }, [itemWithData, itemWithoutData, componentState, actions, screenWidth]);
+
+  // useEffect(() => {
+  //   if (componentState.firstClick || screenWidth < 577) return;
+  //   if (title !== "Vitals") return;
+  //   if (itemWithData.length > 0) {
+  //     dispatch(vitalsActions.updateDataState(itemWithData[0].id));
+  //   } else {
+  //     dispatch(vitalsActions.updateDataState(itemWithoutData[0].id));
+  //   }
+  // }, [
+  //   itemWithData,
+  //   itemWithoutData,
+  //   componentState,
+  //   vitalsActions,
+  //   screenWidth,
+  // ]);
 
   // SENDING DATA TO FIREBASE
   const { sendRequest } = useHttps();
@@ -89,6 +111,8 @@ function Section({ data, title, componentState, actions, isLoading }) {
                       type={value.type}
                       selected={dataState === value.id}
                       actions={actions}
+                      // actions={title === "Vitals" ? value.actions : actions}
+                      vitalsActions={vitalsActions}
                     />
                   );
                 })}
@@ -109,6 +133,8 @@ function Section({ data, title, componentState, actions, isLoading }) {
                       type={value.type}
                       selected={dataState === value.id}
                       actions={actions}
+                      // actions={title === "Vitals" ? value.actions : actions}
+                      vitalsActions={vitalsActions}
                     />
                   );
                 })}
@@ -126,6 +152,7 @@ function Section({ data, title, componentState, actions, isLoading }) {
               unit={data[dataKey].unit}
               selectedUnit={data[dataKey].selectedUnit}
               actions={actions}
+              // actions={title === "Vitals" ? data[dataKey].actions : actions}
               chartConfig={data[dataKey].chartConfig}
             />
           )}
