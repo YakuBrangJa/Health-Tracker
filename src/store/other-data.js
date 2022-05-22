@@ -86,8 +86,9 @@ const initialState = {
     },
   },
   componentState: {
-    firstRun: true,
     dataState: null,
+    vitalsDataState: null,
+    firstRun: true,
     firstClick: false,
   },
 };
@@ -97,9 +98,13 @@ const otherDataSlice = createSlice({
   initialState,
   reducers: {
     addData(state, action) {
-      const { formData, unitState } = action.payload;
+      const { formData, unitState, sidebarState } = action.payload;
       const key = Object.keys(state.otherData).find(
-        (key) => state.otherData[key].id === state.componentState.dataState
+        (key) =>
+          state.otherData[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
       );
 
       const transformedValue = unitState.from(formData);
@@ -111,9 +116,13 @@ const otherDataSlice = createSlice({
     },
 
     changeUnit(state, action) {
-      const { unit } = action.payload;
+      const { unit, sidebarState } = action.payload;
       const dataKey = Object.keys(state.otherData).find(
-        (key) => state.otherData[key].id === state.componentState.dataState
+        (key) =>
+          state.otherData[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
       );
 
       state.otherData[dataKey].selectedUnit = unit;
@@ -136,6 +145,9 @@ const otherDataSlice = createSlice({
     },
     updateFirstClick(state, action) {
       state.componentState.firstClick = action.payload;
+    },
+    updateVitalsDataState(state, action) {
+      state.componentState.vitalsDataState = action.payload;
     },
   },
 });

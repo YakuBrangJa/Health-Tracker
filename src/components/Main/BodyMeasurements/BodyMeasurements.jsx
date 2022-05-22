@@ -10,20 +10,21 @@ function BodyMeasurements() {
     (state) => state.bodyMeasurements
   );
 
-  const { isLoading, error, fetchData } = useDataRequest(
-    bodyMeasurementsActions
-  );
+  // FETCHING
+  // const { isLoading, error, fetchData } = useDataRequest(
+  //   bodyMeasurementsActions
+  // );
 
-  useEffect(() => {
-    if (!componentState.firstRun) return;
-    fetchData("body-measurements");
-  }, [fetchData, componentState.firstRun]);
+  // useEffect(() => {
+  //   if (!componentState.firstRun) return;
+  //   fetchData("body-measurements");
+  // }, [fetchData, componentState.firstRun]);
 
   return (
     <Section
       title={"Body Measurements"}
       data={data}
-      isLoading={isLoading}
+      isLoading={false}
       componentState={componentState}
       actions={bodyMeasurementsActions}
     />

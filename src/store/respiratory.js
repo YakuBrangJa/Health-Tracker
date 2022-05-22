@@ -157,8 +157,9 @@ const initialState = {
     },
   },
   componentState: {
-    firstRun: true,
     dataState: null,
+    vitalsDataState: null,
+    firstRun: true,
     firstClick: false,
   },
 };
@@ -168,9 +169,14 @@ const respiratorySlice = createSlice({
   initialState,
   reducers: {
     addData(state, action) {
-      const { formData, unitState } = action.payload;
+      const { formData, unitState, sidebarState } = action.payload;
+
       const key = Object.keys(state.respiratory).find(
-        (key) => state.respiratory[key].id === state.componentState.dataState
+        (key) =>
+          state.respiratory[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
       );
 
       const transformedValue = unitState.from(formData);
@@ -182,9 +188,14 @@ const respiratorySlice = createSlice({
     },
 
     changeUnit(state, action) {
-      const { unit } = action.payload;
+      const { unit, sidebarState } = action.payload;
+
       const dataKey = Object.keys(state.respiratory).find(
-        (key) => state.respiratory[key].id === state.componentState.dataState
+        (key) =>
+          state.respiratory[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
       );
 
       state.respiratory[dataKey].selectedUnit = unit;
@@ -207,6 +218,9 @@ const respiratorySlice = createSlice({
     },
     updateFirstClick(state, action) {
       state.componentState.firstClick = action.payload;
+    },
+    updateVitalsDataState(state, action) {
+      state.componentState.vitalsDataState = action.payload;
     },
   },
 });

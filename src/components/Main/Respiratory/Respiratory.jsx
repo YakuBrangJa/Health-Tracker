@@ -10,18 +10,18 @@ function Respiratory() {
     (state) => state.respiratory
   );
 
-  const { isLoading, error, fetchData } = useDataRequest(respiratoryActions);
+  // const { isLoading, error, fetchData } = useDataRequest(respiratoryActions);
 
-  useEffect(() => {
-    if (!componentState.firstRun) return;
-    fetchData("respiratory");
-  }, [fetchData, componentState.firstRun]);
+  // useEffect(() => {
+  //   if (!componentState.firstRun) return;
+  //   fetchData("respiratory");
+  // }, [fetchData, componentState.firstRun]);
 
   return (
     <Section
       title={"Respiratory"}
       data={data}
-      isLoading={isLoading}
+      isLoading={false}
       componentState={componentState}
       actions={respiratoryActions}
     />

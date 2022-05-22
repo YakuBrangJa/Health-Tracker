@@ -11,18 +11,18 @@ function OtherData() {
   );
 
   // FETCHING
-  const { isLoading, error, fetchData } = useDataRequest(otherDataActions);
+  // const { isLoading, error, fetchData } = useDataRequest(otherDataActions);
 
-  useEffect(() => {
-    if (!componentState.firstRun) return;
-    fetchData("other-data");
-  }, [fetchData, componentState.firstRun]);
+  // useEffect(() => {
+  //   if (!componentState.firstRun) return;
+  //   fetchData("other-data");
+  // }, [fetchData, componentState.firstRun]);
 
   return (
     <Section
       title={"Other Data"}
       data={data}
-      isLoading={isLoading}
+      isLoading={false}
       componentState={componentState}
       actions={otherDataActions}
     />

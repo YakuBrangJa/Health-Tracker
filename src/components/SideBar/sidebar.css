@@ -87,7 +87,9 @@ ul .title {
   padding-left: 1.5rem;
   height: 2.3rem;
   cursor: pointer;
+  color: var(--color-grey2);
   background-color: var(--color-grey10);
+  transition: all 200ms ease;
 }
 .sidebar ul li a:hover {
   background: var(--color-grey8b);
@@ -98,9 +100,9 @@ ul .title {
   color: var(--color-grey3);
 }
 
-ul li a span {
+.sidebar ul li a span {
   font-size: 0.9rem;
-  color: var(--color-grey3);
+  /* color: var(--color-grey2); */
   font-weight: 650;
 }
 

@@ -8,19 +8,18 @@ import Section from "../section-components/Section";
 function Heart() {
   const { heart: data, componentState } = useSelector((state) => state.heart);
 
-  // FETCHING
-  const { isLoading, error, fetchData } = useDataRequest(heartActions);
+  // // FETCHING;
+  // const { isLoading, error, fetchData } = useDataRequest(heartActions);
 
-  useEffect(() => {
-    if (!componentState.firstRun) return;
-    fetchData("heart");
-  }, [fetchData, componentState.firstRun]);
-
+  // useEffect(() => {
+  //   if (!componentState.firstRun) return;
+  //   fetchData("heart");
+  // }, [fetchData, componentState.firstRun]);
   return (
     <Section
       title={"Heart"}
       data={data}
-      isLoading={isLoading}
+      isLoading={false}
       componentState={componentState}
       actions={heartActions}
     />

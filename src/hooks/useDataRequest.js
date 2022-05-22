@@ -1,6 +1,6 @@
 import useHttps from "./useHttps";
-import { useDispatch } from "react-redux";
-import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect } from "react";
 
 function useDataRequest(actions) {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ function useDataRequest(actions) {
   };
 
   const { isLoading, error, sendRequest } = useHttps();
-
+  // console.log(isLoading);
   const fetchData = useCallback(
     (branch) => {
       sendRequest(
@@ -21,7 +21,7 @@ function useDataRequest(actions) {
       );
       dispatch(actions.updateFirstRunState(false));
     },
-    [actions]
+    [actions, sendRequest, applyData]
   );
 
   return {

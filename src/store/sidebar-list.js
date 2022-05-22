@@ -41,26 +41,20 @@ const initialState = {
       ),
       route: "/vitals",
     },
-    {
-      title: "Symptoms",
-      icons: (
-        <AssignmentIcon
-          className="icon"
-          style={{
-            color: "#7707b3",
-          }}
-        />
-      ),
-      route: "/symptoms",
-    },
+    // {
+    //   title: "Symptoms",
+    //   icons: (
+    //     <AssignmentIcon
+    //       className="icon"
+    //       style={{
+    //         color: "#7707b3",
+    //       }}
+    //     />
+    //   ),
+    //   route: "/symptoms",
+    // },
   ],
   browse: [
-    // {
-    //   title: "Medications",
-    //   icons: <MedicationIcon />,
-    //   color: "#14b309",
-    //   route: "/medications",
-    // },
     {
       title: "Body Measurements",
       icons: (
@@ -127,6 +121,12 @@ const initialState = {
       ),
       route: "/other-data",
     },
+    // {
+    //   title: "Medications",
+    //   icons: <MedicationIcon />,
+    //   color: "#14b309",
+    //   route: "/medications",
+    // },
   ],
 
   user: [

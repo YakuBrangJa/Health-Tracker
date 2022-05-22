@@ -16,16 +16,13 @@ function Section({
   title,
   componentState,
   actions,
-  isLoading,
+  // isLoading,
   vitalsActions,
 }) {
   const dataArray = Object.values(data);
   const dataState = componentState.dataState;
-  const [dataKey, setDataKey] = useState();
 
-  useEffect(() => {
-    setDataKey(Object.keys(data).find((key) => data[key].id === dataState));
-  }, [dataState]);
+  const dataKey = Object.keys(data).find((key) => data[key].id === dataState);
 
   const itemWithData = dataArray.filter((item) => item.data.length > 0);
   const itemWithoutData = dataArray.filter((item) => item.data.length === 0);
@@ -34,7 +31,7 @@ function Section({
   const { sidebarState, dataSubmitted } = useSelector(
     (state) => state.formState
   );
-  const cardSelectState = useSelector((state) => state.uiState.cardSelectState);
+  const { cardSelectState, isLoading } = useSelector((state) => state.uiState);
   const [screenWidth, setScreenWidth] = useState(0);
 
   useEffect(() => {
@@ -45,29 +42,43 @@ function Section({
   // SETTING ACTIVE ITEM ON LOAD
   useEffect(() => {
     if (componentState.firstClick || screenWidth < 577) return;
-    // if (title === "Vitals") return;
+    if (sidebarState === "/vitals") return;
     if (itemWithData.length > 0) {
       dispatch(actions.updateDataState(itemWithData[0].id));
     } else {
       dispatch(actions.updateDataState(itemWithoutData[0].id));
     }
-  }, [itemWithData, itemWithoutData, componentState, actions, screenWidth]);
+  }, [
+    itemWithData,
+    itemWithoutData,
+    componentState,
+    actions,
+    screenWidth,
+    sidebarState,
+  ]);
 
-  // useEffect(() => {
-  //   if (componentState.firstClick || screenWidth < 577) return;
-  //   if (title !== "Vitals") return;
-  //   if (itemWithData.length > 0) {
-  //     dispatch(vitalsActions.updateDataState(itemWithData[0].id));
-  //   } else {
-  //     dispatch(vitalsActions.updateDataState(itemWithoutData[0].id));
-  //   }
-  // }, [
-  //   itemWithData,
-  //   itemWithoutData,
-  //   componentState,
-  //   vitalsActions,
-  //   screenWidth,
-  // ]);
+  useEffect(() => {
+    if (componentState.firstClick || screenWidth < 577) return;
+    if (sidebarState !== "/vitals") return;
+    if (itemWithData.length > 0) {
+      dispatch(vitalsActions.updateDataState(itemWithData[0].id));
+      dispatch(
+        itemWithData[0].actions.updateVitalsDataState(itemWithData[0].id)
+      );
+    } else {
+      dispatch(vitalsActions.updateDataState(itemWithoutData[0].id));
+      dispatch(
+        itemWithoutData[0].actions.updateVitalsDataState(itemWithoutData[0].id)
+      );
+    }
+  }, [
+    itemWithData,
+    itemWithoutData,
+    componentState,
+    vitalsActions,
+    screenWidth,
+    sidebarState,
+  ]);
 
   // SENDING DATA TO FIREBASE
   const { sendRequest } = useHttps();
@@ -76,7 +87,9 @@ function Section({
     if (!dataSubmitted) return;
 
     sendRequest({
-      url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${sidebarState}/${dataKey}.json`,
+      url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${
+        sidebarState === "/vitals" ? data[dataKey].route : sidebarState
+      }/${dataKey}.json`,
       method: "PUT",
       body: {
         id: data[dataKey].id,
@@ -87,7 +100,7 @@ function Section({
     });
 
     dispatch(formStateActions.setDataSubmitted(false));
-  }, [data, dataKey, sendRequest]);
+  }, [data, dataKey, sendRequest, sidebarState]);
 
   if (isLoading) return <SectionLoading title={title}></SectionLoading>;
 
@@ -110,8 +123,8 @@ function Section({
                       selectedUnit={value.selectedUnit}
                       type={value.type}
                       selected={dataState === value.id}
-                      actions={actions}
-                      // actions={title === "Vitals" ? value.actions : actions}
+                      // actions={actions}
+                      actions={title === "Vitals" ? value.actions : actions}
                       vitalsActions={vitalsActions}
                     />
                   );
@@ -132,8 +145,8 @@ function Section({
                       selectedUnit={value.selectedUnit}
                       type={value.type}
                       selected={dataState === value.id}
-                      actions={actions}
-                      // actions={title === "Vitals" ? value.actions : actions}
+                      // actions={actions}
+                      actions={title === "Vitals" ? value.actions : actions}
                       vitalsActions={vitalsActions}
                     />
                   );
@@ -151,8 +164,8 @@ function Section({
               data={data[dataKey].data}
               unit={data[dataKey].unit}
               selectedUnit={data[dataKey].selectedUnit}
-              actions={actions}
-              // actions={title === "Vitals" ? data[dataKey].actions : actions}
+              // actions={actions}
+              actions={title === "Vitals" ? data[dataKey].actions : actions}
               chartConfig={data[dataKey].chartConfig}
             />
           )}

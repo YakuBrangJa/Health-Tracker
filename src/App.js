@@ -20,13 +20,36 @@ import Sleep from "./components/Main/Sleep/Sleep";
 import MenstrualCycle from "./components/Main/MenstrualCycle/MenstrualCycle";
 import OtherData from "./components/Main/OtherData/OtherData";
 
+import useDataRequest2 from "./hooks/useDataReuquest2";
 import { formStateActions } from "./store/form-state";
+import { uiStateActions } from "./store/ui-state";
+
+import { heartActions } from "./store/heart";
+import { respiratoryActions } from "./store/respiratory";
+import { bodyMeasurementsActions } from "./store/body-measurements";
+import { otherDataActions } from "./store/other-data";
 
 function App() {
-  const location = useLocation();
   const dispatch = useDispatch();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+
+  const firstRun = useSelector((state) => state.uiState.firstRun);
+
+  // FETCHING
+  const { isLoading, error, fetchData } = useDataRequest2();
+
+  useEffect(() => {
+    if (!firstRun) return;
+    fetchData("body-measurements", bodyMeasurementsActions);
+    fetchData("heart", heartActions);
+    fetchData("respiratory", respiratoryActions);
+    fetchData("other-data", otherDataActions);
+  }, [fetchData, firstRun]);
+
+  useEffect(() => {
+    dispatch(uiStateActions.updateLoadingDataState(isLoading));
+  }, [isLoading]);
 
   useEffect(() => {
     dispatch(formStateActions.setSidebarState(location.pathname));
@@ -43,10 +66,7 @@ function App() {
             <Route path="vitals" element={<Vitals />} />
             <Route path="symptoms" element={<Symptoms />} />
             <Route path="medications" element={<Medications />} />
-            <Route
-              path="body-measurements"
-              element={<BodyMeasurements isLoading={isLoading} />}
-            />
+            <Route path="body-measurements" element={<BodyMeasurements />} />
             <Route path="heart" element={<Heart />} />
             <Route path="respiratory" element={<Respiratory />} />
             <Route path="sleep" element={<Sleep />} />

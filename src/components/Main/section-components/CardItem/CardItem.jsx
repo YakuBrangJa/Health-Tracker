@@ -12,7 +12,7 @@ import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 import MedicationIcon from "@mui/icons-material/Medication";
 
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./cardItem.css";
 import { uiStateActions } from "../../../../store/ui-state";
 
@@ -29,9 +29,11 @@ function CardItem({
   selectedUnit,
   selected,
   actions,
+  vitalsActions,
 }) {
   const dispatch = useDispatch();
   const [latestData, setLatestData] = useState(null);
+  const sidebarState = useSelector((state) => state.formState.sidebarState);
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -52,8 +54,16 @@ function CardItem({
   }, [latestData, format]);
 
   const onClickHandler = () => {
-    dispatch(actions.updateDataState(id));
-    dispatch(actions.updateFirstClick(true));
+    if (sidebarState !== "/vitals") {
+      dispatch(actions.updateDataState(id));
+      dispatch(actions.updateFirstClick(true));
+    }
+
+    if (sidebarState === "/vitals") {
+      dispatch(actions.updateVitalsDataState(id));
+      dispatch(vitalsActions.updateDataState(id));
+      dispatch(vitalsActions.updateFirstClick(true));
+    }
     dispatch(uiStateActions.setCardSelectState(true));
   };
 
@@ -68,47 +78,6 @@ function CardItem({
     "cycle-tracker": "#E60E9A",
     "other-data": "#0e74dc",
   };
-
-  let dataType;
-  switch (type) {
-    case "vitals":
-      dataType = {
-        icon: <MonitorHeartIcon className="card-type__icon" />,
-      };
-      break;
-    case "body-measurements":
-      dataType = {
-        icon: <AccessibilityIcon className="card-type__icon" />,
-      };
-      break;
-    case "heart":
-      dataType = {
-        icon: <FavoriteIcon className="card-type__icon" />,
-      };
-      break;
-    case "respiratory":
-      dataType = {
-        icon: <FavoriteIcon className="card-type__icon" />,
-      };
-      break;
-    case "sleep":
-      dataType = {
-        icon: <KingBedIcon className="card-type__icon" />,
-      };
-      break;
-    case "cycleTracker":
-      dataType = {
-        icon: <DataSaverOffIcon className="card-type__icon" />,
-      };
-      break;
-    case "other":
-      dataType = {
-        icon: <AddCircleIcon className="card-type__icon" />,
-      };
-      break;
-    default:
-      break;
-  }
 
   if (data.length === 0) {
     return (

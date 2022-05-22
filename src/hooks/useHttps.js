@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 
 function useHttps() {
   const [isLoading, setIsLoading] = useState(false);
@@ -6,7 +6,6 @@ function useHttps() {
 
   const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
-
     try {
       const response = await fetch(requestConfig.url, {
         method: requestConfig.method ? requestConfig.method : "GET",
@@ -19,8 +18,8 @@ function useHttps() {
       }
 
       const data = await response.json();
-      applyData(data);
       setIsLoading(false);
+      applyData(data);
     } catch {
       setError(true);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./valueHeader.css";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formStateActions } from "../../../../store/form-state";
 
 import ValueContainer from "../ValueContainer";
@@ -12,6 +12,7 @@ function ValueHeader({ data, unit, selectedUnit, actions }) {
   const [latestData, setLatestData] = useState(undefined);
   const unitArray = Object.values(unit);
   const initialUnit = selectedUnit && unit[selectedUnit];
+  const sidebarState = useSelector((state) => state.formState.sidebarState);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -44,6 +45,7 @@ function ValueHeader({ data, unit, selectedUnit, actions }) {
     dispatch(
       actions.changeUnit({
         unit: e.target.value,
+        sidebarState,
       })
     );
 

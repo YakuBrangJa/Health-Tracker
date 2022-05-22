@@ -13,53 +13,55 @@ import { respiratoryActions } from "../../../store/respiratory";
 import { vitalsActions } from "../../../store/vitals";
 
 function Vitals() {
-  // const { bodyMeasurements, heart, respiratory, otherData } = useSelector(
-  //   (state) => state
-  // );
+  const { bodyMeasurements, heart, respiratory, otherData } = useSelector(
+    (state) => state
+  );
 
-  // const componentState = useSelector((state) => state.vitals.componentState);
+  const componentState = useSelector((state) => state.vitals.componentState);
 
-  // const vitals = {
-  //   bodyMeasurements: {
-  //     ...bodyMeasurements.bodyMeasurements.bodyTemperature,
+  const vitals = {
+    bodyMeasurements: {
+      ...bodyMeasurements.bodyMeasurements.bodyTemperature,
+      actions: bodyMeasurementsActions,
+      route: "/body-measurements",
+    },
+    heartRate: {
+      ...heart.heart.heartRate,
+      actions: heartActions,
+      route: "/heart",
+    },
+    bloodPressure: {
+      ...heart.heart.bloodPressure,
+      actions: heartActions,
+      route: "/heart",
+    },
+    bloodOxygen: {
+      ...respiratory.respiratory.bloodOxygen,
+      actions: respiratoryActions,
+      route: "/respiratory",
+    },
+    respiratoryRate: {
+      ...respiratory.respiratory.respiratoryRate,
+      actions: respiratoryActions,
+      route: "/respiratory",
+    },
+  };
 
-  //     actions: bodyMeasurementsActions,
-  //   },
-  //   heartRate: {
-  //     ...heart.heart.heartRate,
-  //     actions: heartActions,
-  //   },
-  //   bloodPressure: {
-  //     ...heart.heart.bloodPressure,
-  //     actions: heartActions,
-  //   },
-  //   bloodOxygen: {
-  //     ...respiratory.respiratory.bloodOxygen,
-  //     actions: respiratoryActions,
-  //   },
-  //   respiratoryRate: {
-  //     ...respiratory.respiratory.respiratoryRate,
-  //     actions: respiratoryActions,
-  //   },
-  // };
-
-  // console.log(heart);
-  // FETCHING
+  // // // FETCHING;
   // const { isLoading, error, fetchData } = useDataRequest();
   // useEffect(() => {
   //   if (!componentState.firstRun) return;
   //   fetchData("vitals");
   // }, [fetchData, componentState.firstRun]);
-  // return (
-  //   <Section
-  //     title={"Vitals"}
-  //     data={vitals}
-  //     isLoading={false}
-  //     componentState={componentState}
-  //     vitalsActions={vitalsActions}
-  //   />
-  // );
-  return <p>Vitals</p>;
+  return (
+    <Section
+      title={"Vitals"}
+      data={vitals}
+      isLoading={false}
+      componentState={componentState}
+      vitalsActions={vitalsActions}
+    />
+  );
 }
 
 export default Vitals;

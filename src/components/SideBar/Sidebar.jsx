@@ -24,7 +24,7 @@ function Sidebar() {
   const selectedList = ({ isActive }) => {
     return {
       backgroundColor: isActive ? "#eee" : "",
-      // color: isActive ? "#fff" : "",
+      color: isActive ? "#457ddfee" : "",
     };
   };
 

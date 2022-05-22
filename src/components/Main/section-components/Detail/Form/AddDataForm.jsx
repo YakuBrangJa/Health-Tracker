@@ -58,6 +58,7 @@ function AddDataForm({ formClose, formOpenState, actions }) {
       actions.addData({
         unitState,
         formData,
+        sidebarState,
       })
     );
 

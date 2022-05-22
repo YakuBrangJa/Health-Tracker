@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  dataState: null,
-  sidebarState: "",
+  sidebarState: null,
   unitState: {},
   dataSubmitted: false,
 };
@@ -11,9 +10,6 @@ const formStateSlice = createSlice({
   name: "form state",
   initialState,
   reducers: {
-    setDataState(state, action) {
-      state.dataState = action.payload;
-    },
     setSidebarState(state, action) {
       state.sidebarState = action.payload;
     },
