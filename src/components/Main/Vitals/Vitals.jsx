@@ -20,7 +20,7 @@ function Vitals() {
   const componentState = useSelector((state) => state.vitals.componentState);
 
   const vitals = {
-    bodyMeasurements: {
+    bodyTemperature: {
       ...bodyMeasurements.bodyMeasurements.bodyTemperature,
       actions: bodyMeasurementsActions,
       route: "/body-measurements",
@@ -47,12 +47,6 @@ function Vitals() {
     },
   };
 
-  // // // FETCHING;
-  // const { isLoading, error, fetchData } = useDataRequest();
-  // useEffect(() => {
-  //   if (!componentState.firstRun) return;
-  //   fetchData("vitals");
-  // }, [fetchData, componentState.firstRun]);
   return (
     <Section
       title={"Vitals"}

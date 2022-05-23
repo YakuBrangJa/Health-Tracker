@@ -2,93 +2,44 @@ import React, { useState, useEffect } from "react";
 import "./favourites.css";
 
 import HomeHeaders from "./home-childs/HomeHeaders";
-import Card from "./home-childs/Card";
+import CardItem from "../section-components/CardItem/CardItem";
+
+import { useSelector } from "react-redux";
 
 function Favourites() {
-  const [fetchedData, setFetchedData] = useState([]);
+  const { bodyMeasurements, heart, respiratory, otherData } = useSelector(
+    (state) => state
+  );
 
-  useEffect(() => {
-    fetch("https://health-tracker-69c66-default-rtdb.firebaseio.com/heart.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setFetchedData(data);
+  const stateArray = [
+    bodyMeasurements.bodyMeasurements,
+    heart.heart,
+    respiratory.respiratory,
+    otherData.otherData,
+  ];
 
-        const dataArray = Object.values(data);
-        console.log(dataArray);
-        setFetchedData(dataArray);
-        console.log(fetchedData);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  let favArr = stateArray
+    .map((item) =>
+      Object.values(item).filter((item) => item.favourite === true)
+    )
+    .flat();
 
   return (
     <div className="favourite">
       <HomeHeaders title={"Favourites"} />
       <div className="favourite-card">
-        <Card
-          key="0"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="vitals"
-        />
-        <Card
-          key="1"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="bodyMeasurements"
-        />
-        <Card
-          key="2"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="heart"
-        />
-        <Card
-          hey="3"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="sleep"
-        />
-        <Card
-          key="4"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="respiratory"
-        />
-        <Card
-          key="5"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="other"
-        />
-        <Card
-          key="6"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="cycleTracker"
-        />
-        <Card
-          key="7"
-          name={"Heart Rate"}
-          value={72}
-          unit={"bpm"}
-          date={"Mar 9"}
-          type="heart"
-        />
+        {favArr.map((item) => (
+          <CardItem
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            data={item.data}
+            unit={item.unit}
+            selectedUnit={item.selectedUnit}
+            type={item.type}
+            isHome={true}
+          />
+        ))}
       </div>
     </div>
   );

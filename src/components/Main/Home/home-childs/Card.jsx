@@ -26,7 +26,7 @@ function Card({ name, value, unit, date, type }) {
           icon: <MonitorHeartIcon className="card-type__icon" />,
         });
         break;
-      case "bodyMeasurements":
+      case "body-measurements":
         setData({
           icon: <AccessibilityIcon className="card-type__icon" />,
         });
@@ -46,7 +46,7 @@ function Card({ name, value, unit, date, type }) {
           icon: <KingBedIcon className="card-type__icon" />,
         });
         break;
-      case "cycleTracker":
+      case "cycle-tracker":
         setData({
           icon: <DataSaverOffIcon className="card-type__icon" />,
         });

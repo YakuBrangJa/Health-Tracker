@@ -7,10 +7,10 @@ function HomeHeaders({ title }) {
   return (
     <div className="summary-header">
       <h2>{title}</h2>
-      <button className="summary-edit__button">
+      {/* <button className="summary-edit__button">
         <span>Edit</span>
         <ModeEditOutlineRoundedIcon className="icon" />
-      </button>
+      </button> */}
     </div>
   );
 }

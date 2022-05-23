@@ -5,8 +5,9 @@ const initialState = {
     bloodGlucose: {
       id: "other1",
       title: "Blood Glucose",
-      type: "otherData",
+      type: "other-data",
       data: [],
+      favourite: false,
       selectedUnit: "milligramsPerDeciliter",
       unit: {
         milligramsPerDeciliter: {
@@ -38,8 +39,9 @@ const initialState = {
     sexualActivity: {
       id: "other2",
       title: "Sexual Activity",
-      type: "otherData",
+      type: "other-data",
       data: [],
+      favourite: false,
       selectedUnit: "times",
       unit: {
         times: {
@@ -63,8 +65,9 @@ const initialState = {
     bloodAlcoholContent: {
       id: "other3",
       title: "Blood Alchohol Content",
-      type: "otherData",
+      type: "other-data",
       data: [],
+      favourite: false,
       selectedUnit: "percentage",
       unit: {
         percentage: {
@@ -128,12 +131,26 @@ const otherDataSlice = createSlice({
       state.otherData[dataKey].selectedUnit = unit;
     },
 
+    toggleFavourite(state, action) {
+      const { sidebarState } = action.payload;
+      const dataKey = Object.keys(state.otherData).find(
+        (key) =>
+          state.otherData[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.otherData[dataKey].favourite = !state.otherData[dataKey].favourite;
+    },
+
     populateData(state, action) {
       const data = action.payload;
 
       for (let key in data) {
         state.otherData[key].data = !data[key].data ? [] : data[key].data;
         state.otherData[key].selectedUnit = data[key].selectedUnit;
+        state.otherData[key].favourite = data[key].favourite;
       }
     },
 

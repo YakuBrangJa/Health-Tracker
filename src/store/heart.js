@@ -7,6 +7,7 @@ const initialState = {
       title: "Heart Rate",
       type: "heart",
       data: [],
+      favourite: false,
       selectedUnit: "beatsPerMinute",
       unit: {
         beatsPerMinute: {
@@ -34,6 +35,7 @@ const initialState = {
       title: "Blood Pressure",
       type: "heart",
       data: [],
+      favourite: false,
       selectedUnit: "milimeterMercury",
       unit: {
         milimeterMercury: {
@@ -79,6 +81,7 @@ const initialState = {
       title: "Heart Rate Variability",
       type: "heart",
       data: [],
+      favourite: false,
       selectedUnit: "milisecond",
       unit: {
         milisecond: {
@@ -105,6 +108,7 @@ const initialState = {
       title: "Cardio Fitness",
       type: "heart",
       data: [],
+      favourite: false,
       selectedUnit: "maxOxygenVolume",
       unit: {
         maxOxygenVolume: {
@@ -129,6 +133,7 @@ const initialState = {
       title: "Peripheral Perfusion Index",
       type: "heart",
       data: [],
+      favourite: false,
       selectedUnit: "percentage",
       unit: {
         percentage: {
@@ -153,6 +158,7 @@ const initialState = {
       title: "Resting Heart Rate",
       type: "heart",
       data: [],
+      favourite: false,
       selectedUnit: "beatsPerMinute",
       unit: {
         beatsPerMinute: {
@@ -247,12 +253,26 @@ const heartSlice = createSlice({
       state.heart[dataKey].selectedUnit = unit;
     },
 
+    toggleFavourite(state, action) {
+      const { sidebarState } = action.payload;
+      const dataKey = Object.keys(state.heart).find(
+        (key) =>
+          state.heart[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.heart[dataKey].favourite = !state.heart[dataKey].favourite;
+    },
+
     populateData(state, action) {
       const data = action.payload;
 
       for (let key in data) {
         state.heart[key].data = !data[key].data ? [] : data[key].data;
         state.heart[key].selectedUnit = data[key].selectedUnit;
+        state.heart[key].favourite = data[key].favourite;
       }
     },
 

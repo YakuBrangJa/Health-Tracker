@@ -14,7 +14,6 @@ function useDataRequest2() {
   };
 
   const { isLoading, error, sendRequest } = useHttps();
-  console.log(isLoading);
   const fetchData = useCallback(
     (branch, actions) => {
       sendRequest(

@@ -27,6 +27,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#5001E6",
       route: "/",
     },
     {
@@ -39,6 +40,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#d55",
       route: "/vitals",
     },
     // {
@@ -61,10 +63,11 @@ const initialState = {
         <IoIosBody
           className="icon"
           style={{
-            color: "#bf5af2",
+            color: "#b050e0",
           }}
         />
       ),
+      color: "#b050e0",
       route: "/body-measurements",
     },
     {
@@ -77,6 +80,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#fe375f",
       route: "/heart",
     },
     {
@@ -89,6 +93,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#54a1ff",
       route: "/respiratory",
     },
     // {
@@ -107,6 +112,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#e60e9a",
       route: "/menstrual-cycle",
     },
     {
@@ -119,6 +125,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#1e74dc",
       route: "/other-data",
     },
     // {
@@ -140,6 +147,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#1e74dc",
       route: "/other-data",
     },
     {
@@ -152,6 +160,7 @@ const initialState = {
           }}
         />
       ),
+      color: "#1e74dc",
       route: "/settings",
     },
   ],

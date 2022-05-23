@@ -1,11 +1,19 @@
 import React from "react";
 import "./valueContainer.css";
 
-function ValueContainer({ unit, latestData, selectedUnit, isDetailTab }) {
-  if (!selectedUnit || !latestData) return;
+function ValueContainer({
+  unit,
+  latestData,
+  selectedUnit,
+  isDetailTab,
+  isHome,
+}) {
+  if (!selectedUnit) return;
 
-  if (!latestData && isDetailTab) {
-    return <p className="empty-value">No Data</p>;
+  if (!latestData && !isDetailTab && !isHome) return;
+
+  if (!latestData) {
+    return <p className={`empty-value ${isHome && "home-value"}`}>No Data</p>;
   }
 
   return (

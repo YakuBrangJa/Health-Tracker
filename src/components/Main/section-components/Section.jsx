@@ -96,6 +96,7 @@ function Section({
         title: data[dataKey].title,
         selectedUnit: data[dataKey].selectedUnit,
         data: data[dataKey].data,
+        favourite: data[dataKey].favourite,
       },
     });
 
@@ -163,6 +164,7 @@ function Section({
               title={data[dataKey].title}
               data={data[dataKey].data}
               unit={data[dataKey].unit}
+              favourite={data[dataKey].favourite}
               selectedUnit={data[dataKey].selectedUnit}
               // actions={actions}
               actions={title === "Vitals" ? data[dataKey].actions : actions}

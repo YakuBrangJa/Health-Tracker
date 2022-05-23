@@ -7,6 +7,7 @@ const initialState = {
       title: "Blood Oxygen",
       type: "respiratory",
       data: [],
+      favourite: false,
       selectedUnit: "percentage",
       unit: {
         percentage: {
@@ -32,6 +33,7 @@ const initialState = {
       title: "Respiratory Rate",
       type: "respiratory",
       data: [],
+      favourite: false,
       selectedUnit: "breathsPerMinute",
       unit: {
         breathsPerMinute: {
@@ -59,6 +61,7 @@ const initialState = {
       title: "Force Vital Capicity",
       type: "respiratory",
       data: [],
+      favourite: false,
       selectedUnit: "liter",
       unit: {
         liter: {
@@ -84,6 +87,7 @@ const initialState = {
       title: "Peak Expiratory Flow Rate",
       type: "respiratory",
       data: [],
+      favourite: false,
       selectedUnit: "literPerMinute",
       unit: {
         literPerMinute: {
@@ -109,6 +113,7 @@ const initialState = {
       title: "Forced Expiratory Volume",
       type: "respiratory",
       data: [],
+      favourite: false,
       selectedUnit: "liter",
       unit: {
         liter: {
@@ -134,6 +139,7 @@ const initialState = {
       title: "Six-Minute Walk",
       type: "respiratory",
       data: [],
+      favourite: false,
       selectedUnit: "meter",
       unit: {
         meter: {
@@ -201,12 +207,27 @@ const respiratorySlice = createSlice({
       state.respiratory[dataKey].selectedUnit = unit;
     },
 
+    toggleFavourite(state, action) {
+      const { sidebarState } = action.payload;
+      const dataKey = Object.keys(state.respiratory).find(
+        (key) =>
+          state.respiratory[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.respiratory[dataKey].favourite =
+        !state.respiratory[dataKey].favourite;
+    },
+
     populateData(state, action) {
       const data = action.payload;
 
       for (let key in data) {
         state.respiratory[key].data = !data[key].data ? [] : data[key].data;
         state.respiratory[key].selectedUnit = data[key].selectedUnit;
+        state.respiratory[key].favourite = data[key].favourite;
       }
     },
 

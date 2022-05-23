@@ -7,6 +7,7 @@ const initialState = {
       title: "Height",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "foot",
       unit: {
         foot: {
@@ -48,6 +49,7 @@ const initialState = {
       title: "Weight",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "pound",
       unit: {
         pound: {
@@ -79,6 +81,7 @@ const initialState = {
       title: "Body Temperature",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "fahrenheit",
       unit: {
         fahrenheit: {
@@ -111,6 +114,7 @@ const initialState = {
       title: "Body Fat Percentage",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "percentage",
       unit: {
         percentage: {
@@ -136,6 +140,7 @@ const initialState = {
       title: "Body Mass Index",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "bmi",
       unit: {
         bmi: {
@@ -162,6 +167,7 @@ const initialState = {
       title: "Waist Circumference",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "inch",
       unit: {
         inch: {
@@ -195,6 +201,7 @@ const initialState = {
       title: "Lean Body Mass",
       type: "body-measurements",
       data: [],
+      favourite: false,
       selectedUnit: "pound",
       unit: {
         pound: {
@@ -264,6 +271,20 @@ const bodyMeasurementsSlice = createSlice({
       state.bodyMeasurements[dataKey].selectedUnit = unit;
     },
 
+    toggleFavourite(state, action) {
+      const { sidebarState } = action.payload;
+      const dataKey = Object.keys(state.bodyMeasurements).find(
+        (key) =>
+          state.bodyMeasurements[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.bodyMeasurements[dataKey].favourite =
+        !state.bodyMeasurements[dataKey].favourite;
+    },
+
     populateData(state, action) {
       const data = action.payload;
 
@@ -272,6 +293,7 @@ const bodyMeasurementsSlice = createSlice({
           ? []
           : data[key].data;
         state.bodyMeasurements[key].selectedUnit = data[key].selectedUnit;
+        state.bodyMeasurements[key].favourite = data[key].favourite;
       }
     },
 

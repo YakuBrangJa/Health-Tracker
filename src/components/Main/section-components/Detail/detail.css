@@ -44,6 +44,34 @@
 .container-head .back-btn {
   display: none;
 }
+.preferance-control {
+  display: flex;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  position: relative;
+}
+.preferance-control p {
+  position: absolute;
+  width: max-content;
+  background-color: white;
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.3rem;
+  font-size: 0.95rem;
+  color: var(--color-grey2);
+  transform: translate(1.5rem, 1.5rem);
+  box-shadow: 0 0 0.5rem rgba(50, 50, 50, 0.5);
+  z-index: 3;
+  opacity: 0;
+  transition: all 300ms 100ms ease;
+  pointer-events: none;
+}
+.preferance-control:hover p {
+  opacity: 1;
+}
+
+.preferance-control .icon {
+  font-size: 1.3rem;
+}
 
 .container-child {
   display: flex;
@@ -118,7 +146,7 @@
     font-size: 1rem;
   }
 
-  .container-head .preferance-control {
+  .preferance-control {
     display: none;
   }
 

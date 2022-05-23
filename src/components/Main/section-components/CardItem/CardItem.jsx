@@ -1,15 +1,4 @@
-import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
 import KeyboardArrowRightSharpIcon from "@mui/icons-material/KeyboardArrowRightSharp";
-
-// TYPE ICONS
-import AccessibilityIcon from "@mui/icons-material/Accessibility";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
-import KingBedIcon from "@mui/icons-material/KingBed";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
-import MedicationIcon from "@mui/icons-material/Medication";
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,10 +19,12 @@ function CardItem({
   selected,
   actions,
   vitalsActions,
+  isHome,
 }) {
   const dispatch = useDispatch();
   const [latestData, setLatestData] = useState(null);
   const sidebarState = useSelector((state) => state.formState.sidebarState);
+  const typeStyleConfig = useSelector((state) => state.sideBar.browse);
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -67,19 +58,11 @@ function CardItem({
     dispatch(uiStateActions.setCardSelectState(true));
   };
 
-  const typeColor = {
-    vitals: "#d55",
-    symptoms: "#7707B3",
-    medications: "#14b309",
-    "body-measurements": "#bf5af2",
-    heart: "#fe375f",
-    respiratory: "#54a1ff",
-    sleep: "#69B389",
-    "cycle-tracker": "#E60E9A",
-    "other-data": "#0e74dc",
-  };
+  const matchedType = typeStyleConfig.find(
+    (item) => item.route.replace("/", "") === type
+  );
 
-  if (data.length === 0) {
+  if (data.length === 0 && !isHome) {
     return (
       <div
         className={`emptyCardItem ${selected && "active"}`}
@@ -101,20 +84,28 @@ function CardItem({
   } else {
     return (
       <div
-        className={`cardItem ${selected && "active"}`}
+        className={`cardItem ${selected && "active"} ${isHome && "homeCard"}`}
         onClick={onClickHandler}
       >
         <div className="cardItem-left">
-          <span className="cardItem-name">{title}</span>
+          <span
+            className="cardItem-name"
+            // style={{
+            //   color: `${isHome && matchedType.color}`,
+            // }}
+          >
+            {title}
+          </span>
           <ValueContainer
             unit={unit}
             selectedUnit={selectedUnit}
             latestData={latestData}
             isDetailTab={false}
+            isHome={isHome}
           />
         </div>
         <div className="cardItem-right">
-          {/* {dataType.icon} */}
+          {isHome && matchedType.icons}
           <div className={`cardItem-date__container ${selected && "active"}`}>
             <span className="cardItem-date">{formattedDate}</span>
             <KeyboardArrowRightSharpIcon
