@@ -66,6 +66,13 @@
 .addDataForm .form-add {
   color: rgb(69, 125, 223);
 }
+.form-add.submit-disabled {
+  color: var(--color-grey6b);
+}
+.form-add.submit-disabled:hover {
+  color: var(--color-grey6b);
+  cursor: default;
+}
 
 .addDataForm .form-cancel {
   color: rgb(255, 15, 79);

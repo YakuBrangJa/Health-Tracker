@@ -31,21 +31,26 @@ function Section({
   const { sidebarState, dataSubmitted } = useSelector(
     (state) => state.formState
   );
-  const { cardSelectState, isLoading } = useSelector((state) => state.uiState);
-  const [screenWidth, setScreenWidth] = useState(0);
+  const { cardSelectState, isLoading, fromHomeCard, windowWidth } = useSelector(
+    (state) => state.uiState
+  );
 
   useEffect(() => {
-    setScreenWidth(window.innerWidth);
+    dispatch(uiStateActions.updateFromHomeCardState(false));
+    if (fromHomeCard) return;
     dispatch(uiStateActions.setCardSelectState(false));
   }, []);
 
+  console.log(actions);
+  console.log(vitalsActions);
+
   // SETTING ACTIVE ITEM ON LOAD
   useEffect(() => {
-    if (componentState.firstClick || screenWidth < 577) return;
-    if (sidebarState === "/vitals") return;
+    if (sidebarState === "/vitals" || !actions) return;
+    if (componentState.firstClick || windowWidth < 576) return;
     if (itemWithData.length > 0) {
       dispatch(actions.updateDataState(itemWithData[0].id));
-    } else {
+    } else if (itemWithoutData > 0) {
       dispatch(actions.updateDataState(itemWithoutData[0].id));
     }
   }, [
@@ -53,19 +58,19 @@ function Section({
     itemWithoutData,
     componentState,
     actions,
-    screenWidth,
+    windowWidth,
     sidebarState,
   ]);
 
   useEffect(() => {
-    if (componentState.firstClick || screenWidth < 577) return;
-    if (sidebarState !== "/vitals") return;
+    if (sidebarState !== "/vitals" || !vitalsActions) return;
+    if (componentState.firstClick || windowWidth < 576) return;
     if (itemWithData.length > 0) {
       dispatch(vitalsActions.updateDataState(itemWithData[0].id));
       dispatch(
         itemWithData[0].actions.updateVitalsDataState(itemWithData[0].id)
       );
-    } else {
+    } else if (itemWithoutData > 0) {
       dispatch(vitalsActions.updateDataState(itemWithoutData[0].id));
       dispatch(
         itemWithoutData[0].actions.updateVitalsDataState(itemWithoutData[0].id)
@@ -76,8 +81,9 @@ function Section({
     itemWithoutData,
     componentState,
     vitalsActions,
-    screenWidth,
+    windowWidth,
     sidebarState,
+    actions,
   ]);
 
   // SENDING DATA TO FIREBASE

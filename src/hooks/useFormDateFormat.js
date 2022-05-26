@@ -1,6 +1,6 @@
 import React from "react";
 
-function useFormDateFormat() {
+function useFormDateFormat(formOpenState) {
   const [date, setDate] = React.useState();
   const [time, setTime] = React.useState();
 
@@ -18,7 +18,7 @@ function useFormDateFormat() {
 
     setDate(dateFormat);
     setTime(timeFormat);
-  }, []);
+  }, [formOpenState]);
 
   return {
     date,

@@ -6,7 +6,7 @@
   padding-right: 0.5rem;
 }
 
-.container-head2 {
+.container-back {
   display: none;
 }
 
@@ -15,13 +15,15 @@
   font-weight: bold;
   transition: transform 300ms ease;
   transform: scale(0.3);
+  margin-left: 8%;
   /* white-space: nowrap; */
 }
 .container-head.loaded h3 {
   transform: scale(1);
 }
 
-.container-head button {
+.container-head button,
+.container-back button {
   all: unset;
   cursor: pointer;
   display: flex;
@@ -30,7 +32,7 @@
   color: var(--color-primary1);
 }
 .container-head button > .icon {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 .container-head button:hover {
   color: var(--color-primary1b);
@@ -41,15 +43,21 @@
   white-space: nowrap;
 }
 
-.container-head .back-btn {
-  display: none;
-}
 .preferance-control {
   display: flex;
   cursor: pointer;
   margin-left: 0.3rem;
   position: relative;
 }
+
+.preferance-control .icon {
+  font-size: 1.45rem;
+  color: var(--color-primary1);
+}
+.preferance-control .icon:hover {
+  transform: scale(1.04);
+}
+
 .preferance-control p {
   position: absolute;
   width: max-content;
@@ -69,10 +77,6 @@
   opacity: 1;
 }
 
-.preferance-control .icon {
-  font-size: 1.3rem;
-}
-
 .container-child {
   display: flex;
   margin-top: 1rem;
@@ -87,7 +91,7 @@
   gap: 1rem;
   flex: 1;
   flex-shrink: 0;
-  min-height: 20rem;
+  min-height: 10rem;
   /* background-color: var(--color-white3); */
   background-color: var(--color-grey8);
   background-color: var(--color-grey10);
@@ -101,24 +105,41 @@
 }
 
 /* VIEW ALL DATA SECTION */
-.view-all__data {
+.detail-footer {
   flex-shrink: 0;
-  height: 3rem;
-  background-color: var(--color-grey8b);
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--color-grey2);
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: background 100ms ease;
+  align-items: stretch;
+  gap: 0.5rem;
 }
 
-.view-all__data:hover {
+.detail-about,
+.view-allData,
+.mobile-fav {
+  height: 2.8rem;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.3rem;
+  background-color: var(--color-grey8b);
+  transition: background 200ms ease;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-grey1);
+  cursor: pointer;
+}
+
+.mobile-fav {
+  display: none;
+}
+
+.detail-about:hover,
+.view-allData:hover {
   background-color: var(--color-grey7);
+}
+
+.detail-footer .icon {
+  display: none;
 }
 
 @media (max-width: 1024px) {
@@ -129,12 +150,34 @@
 }
 
 @media (max-width: 576px) {
-  .section-chart {
-    padding: 0.2rem 0.5rem 0.5rem 0.2rem;
+  .container-head {
+    margin: 0.8rem 0;
+  }
+
+  .container-head button span {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .container-back button span {
+    font-weight: 600;
+  }
+
+  .container-head h3 {
+    margin-left: 2%;
+    font-size: 1.1rem;
   }
 
   .container-right .container-child {
-    margin-top: 1rem;
+    margin-top: 0.7rem;
+    overflow: visible;
+  }
+
+  .preferance-control {
+    display: none;
+  }
+
+  .container-back {
+    display: block;
   }
 
   .container-head {
@@ -142,15 +185,7 @@
     text-align: center;
   }
 
-  .container-head h3 {
-    font-size: 1rem;
-  }
-
-  .preferance-control {
-    display: none;
-  }
-
-  .container-head .back-btn {
+  .container-back .back-btn {
     display: flex;
     transform: translateX(-0.5rem);
   }
@@ -158,10 +193,59 @@
   .addData-btn .icon {
     display: none;
   }
+
+  .detail-footer {
+    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .detail-footer .icon {
+    display: block;
+  }
+
+  .mobile-fav {
+    display: flex;
+  }
+  .mobile-fav:active {
+    background-color: var(--color-grey7);
+  }
+
+  .mobile-fav .icon {
+    font-size: 1.3rem;
+  }
+
+  .detail-about,
+  .view-allData,
+  .mobile-fav {
+    padding: 0.7rem 1rem;
+    justify-content: space-between;
+    background-color: var(--color-grey10);
+    color: #333;
+    font-weight: normal;
+    border-radius: 0.4rem;
+  }
+
+  .detail-about:active,
+  .view-allData:active,
+  .mobile-fav:active {
+    background-color: var(--color-grey8);
+  }
+
+  .section-chart {
+    background-color: var(--color-white4);
+    padding: 0.2rem 0rem 0.3rem 0rem;
+  }
 }
 
 @media (max-width: 370px) {
   .section-chart {
     padding: 0.2rem 0rem 0.5rem 0rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .section-chart {
+    width: 98%;
   }
 }

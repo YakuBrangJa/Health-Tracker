@@ -5,7 +5,7 @@
 
   font-family: "Montserrat", sans-serif;
   font-family: "Nunito", sans-serif;
-  /* outline: 1px solid violet; */
+  outline: 1px solid violet;
 }
 
 /* *::-webkit-scrollbar {
@@ -41,6 +41,8 @@ html::-webkit-scrollbar-track {
   /*BASIC COLORS */
   --color-black1: #000;
   --color-black2: #222;
+  --color-black3: #333;
+  --color-black4: #444;
 
   --color-grey1: #555;
   --color-grey2: #666;
@@ -62,9 +64,10 @@ html::-webkit-scrollbar-track {
   --color-grey10: #d8d8d8;
   --color-grey11: #ddd;
 
-  --color-white1: #fff;
+  --color-white1: #ffffff;
   --color-white2: #eaeaea;
   --color-white3: #eeeeee;
+  --color-white4: #e7e7e7;
 
   /* COLORS */
   --bg-blue1: rgb(101, 168, 255);
@@ -91,8 +94,19 @@ html::-webkit-scrollbar-track {
   }
 }
 
+/* @media (min-width: 576px) {
+  body {
+    background-color: #eee;
+  }
+} */
 @media (max-width: 350px) {
   html {
-    font-size: 12.5px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 300px) {
+  html {
+    font-size: 13px;
   }
 }

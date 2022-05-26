@@ -31,10 +31,8 @@ function ValueHeader({ data, unit, selectedUnit, actions }) {
   useEffect(() => {
     dispatch(
       formStateActions.setUnitState({
+        ...initialUnit,
         state: initialUnit.name,
-        symbol: initialUnit.symbol,
-        to: initialUnit.to,
-        from: initialUnit.from,
       })
     );
   }, [initialUnit]);

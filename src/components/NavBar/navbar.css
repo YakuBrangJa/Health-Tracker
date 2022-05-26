@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 1.3rem;
-  /* box-shadow: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3); */
+  padding-right: 1.5rem;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
   position: sticky;
   background-color: white;
@@ -22,6 +22,10 @@
   font-weight: bold;
   cursor: pointer;
   display: none;
+}
+
+.item.user .icon {
+  font-size: 1.7rem;
 }
 
 .nav-search {
@@ -101,10 +105,17 @@
 }
 
 @media (max-width: 576px) {
+  .nav-search {
+    background: none;
+  }
   .nav-search input {
     width: 0rem;
   }
   .navbar {
-    padding: 0 0.5rem;
+    padding: 0 0.8rem;
+  }
+
+  .nav-right {
+    gap: 1.5rem;
   }
 } ;

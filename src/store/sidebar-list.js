@@ -102,19 +102,7 @@ const initialState = {
     //   color: "#69b389",
     //   route: "/sleep",
     // },
-    {
-      title: "Menstrual Cycle",
-      icons: (
-        <DataSaverOffIcon
-          className="icon"
-          style={{
-            color: "#e60e9a",
-          }}
-        />
-      ),
-      color: "#e60e9a",
-      route: "/menstrual-cycle",
-    },
+
     {
       title: "Other Data",
       icons: (
@@ -127,6 +115,19 @@ const initialState = {
       ),
       color: "#1e74dc",
       route: "/other-data",
+    },
+    {
+      title: "Menstrual Cycle",
+      icons: (
+        <DataSaverOffIcon
+          className="icon"
+          style={{
+            color: "#e60e9a",
+          }}
+        />
+      ),
+      color: "#e60e9a",
+      route: "/menstrual-cycle",
     },
     // {
     //   title: "Medications",

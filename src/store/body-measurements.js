@@ -15,23 +15,62 @@ const initialState = {
           symbol: "ft",
           to: (value, chart) => {
             if (chart) return parseFloat((value / 30.48).toFixed(1));
-            return `${Math.floor(value / 30.48)}'${Math.round(
-              (value % 30.48) / 2.54
-            )}"`;
+
+            return Math.round((value % 30.48) / 2.54) === 0
+              ? `${Math.floor(value / 30.48)}'`
+              : `${Math.floor(value / 30.48)}'${Math.round(
+                  (value % 30.48) / 2.54
+                )}"`;
           },
           from: (value) => value.foot * 30.48 + value.inch * 2.54,
+          formConfig: [
+            {
+              symbol: "ft",
+              name: "foot",
+              type: "number",
+              min: 1,
+              max: 9,
+              step: "1",
+            },
+            {
+              symbol: "in",
+              name: "inch",
+              type: "select",
+              options: Array.from(Array(12).keys()),
+            },
+          ],
         },
         centimeter: {
           name: "centimeter",
           symbol: "cm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "cm",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 30,
+              max: 305,
+            },
+          ],
         },
         meter: {
           name: "meter",
           symbol: "m",
           to: (value) => parseFloat((value / 100).toFixed(1)),
           from: (value) => value.value * 100,
+          formConfig: [
+            {
+              symbol: "m",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 0.3,
+              max: 3,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -57,12 +96,32 @@ const initialState = {
           symbol: "lbs",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "lb",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 1,
+              max: 1000,
+            },
+          ],
         },
         kilogram: {
           name: "kilogram",
           symbol: "kg",
           to: (value) => parseFloat((value / 2.205).toFixed(1)),
           from: (value) => value.value * 2.205,
+          formConfig: [
+            {
+              symbol: "cm",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 0.5,
+              max: 450,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -89,12 +148,32 @@ const initialState = {
           symbol: "°F",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "°F",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 75,
+              max: 115,
+            },
+          ],
         },
         celcius: {
           name: "celcius",
           symbol: "°C",
           to: (value) => parseFloat(((value - 32) * (5 / 9)).toFixed(1)),
           from: (value) => value.value * (9 / 5) + 32,
+          formConfig: [
+            {
+              symbol: "°C",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 24,
+              max: 44,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -122,6 +201,16 @@ const initialState = {
           symbol: "%",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "%",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 0,
+              max: 75,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -148,6 +237,16 @@ const initialState = {
           symbol: "bmi",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "bmi",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 7,
+              max: 70,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -175,12 +274,32 @@ const initialState = {
           symbol: "in",
           to: (value) => parseFloat((value / 2.54).toFixed(1)),
           from: (value) => value.value * 2.54,
+          formConfig: [
+            {
+              symbol: "in",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 3,
+              max: 120,
+            },
+          ],
         },
         centimeter: {
           name: "centimeter",
           symbol: "cm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "cm",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 8,
+              max: 305,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -209,12 +328,32 @@ const initialState = {
           symbol: "lbs",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "lbs",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 30,
+              max: 300,
+            },
+          ],
         },
         kilogram: {
           name: "kilogram",
           symbol: "kg",
           to: (value) => parseFloat((value / 2.205).toFixed(1)),
           from: (value) => value.value * 2.205,
+          formConfig: [
+            {
+              symbol: "kg",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 13,
+              max: 135,
+            },
+          ],
         },
       },
       chartConfig: {

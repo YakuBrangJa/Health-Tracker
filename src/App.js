@@ -31,12 +31,12 @@ import { otherDataActions } from "./store/other-data";
 
 function App() {
   const dispatch = useDispatch();
-
   const location = useLocation();
+  const { firstRun, windowWidth, cardSelectState } = useSelector(
+    (state) => state.uiState
+  );
 
-  const firstRun = useSelector((state) => state.uiState.firstRun);
-
-  // FETCHING
+  // FETCHING DATA
   const { isLoading, error, fetchData } = useDataRequest2();
 
   useEffect(() => {
@@ -51,14 +51,21 @@ function App() {
     dispatch(uiStateActions.updateLoadingDataState(isLoading));
   }, [isLoading]);
 
+  // READING ACTIVE SIDEBAR
   useEffect(() => {
     dispatch(formStateActions.setSidebarState(location.pathname));
   }, [location]);
+
+  // READING DEVICE WIDTH
+  useEffect(() => {
+    dispatch(uiStateActions.setWindowWidth(window.innerWidth));
+  }, []);
 
   return (
     <div className="app">
       <Sidebar />
       <main className="app-container">
+        {/* {cardSelectState && windowWidth < 576 ? "" : <NavBar />} */}
         <NavBar />
         <Routes>
           <Route path="/">
@@ -70,7 +77,7 @@ function App() {
             <Route path="heart" element={<Heart />} />
             <Route path="respiratory" element={<Respiratory />} />
             <Route path="sleep" element={<Sleep />} />
-            <Route path="cycle-tracker" element={<MenstrualCycle />} />
+            <Route path="menstrual-cycle" element={<MenstrualCycle />} />
             <Route path="other-data" element={<OtherData />} />
           </Route>
         </Routes>

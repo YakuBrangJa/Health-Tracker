@@ -10,7 +10,7 @@ function Home() {
     <SectionContainer title={"Home"}>
       <div className="home-container">
         <Favourites />
-        <Highlights />
+        {/* <Highlights /> */}
       </div>
     </SectionContainer>
   );

@@ -1,14 +1,13 @@
-import PushPinIcon from "@mui/icons-material/PushPin";
-import PushPinOutlinedIcon from "@mui/icons-material/PushPinOutlined";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import KeyboardArrowRightSharpIcon from "@mui/icons-material/KeyboardArrowRightSharp";
 import { MdArrowBackIosNew } from "react-icons/md";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
 import React, { useEffect, useState } from "react";
 import "./detail.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import AddDataForm from "./Form/AddDataForm";
 import DateNav from "./DateNav";
@@ -29,9 +28,11 @@ function Detail({
   chartConfig,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formOpen, setFormOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const sidebarState = useSelector((state) => state.formState.sidebarState);
+  const { backToHome } = useSelector((state) => state.uiState);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -40,6 +41,10 @@ function Detail({
   const goBackHandler = () => {
     dispatch(uiStateActions.setCardSelectState(false));
     dispatch(actions.updateDataState(null));
+    if (backToHome) {
+      navigate(-1);
+      dispatch(uiStateActions.updateBackToHomeState(false));
+    }
   };
 
   const toggleFavHandler = () => {
@@ -55,25 +60,24 @@ function Detail({
   const formToggleHandler = () => setFormOpen(!formOpen);
   const formCloseHandler = () => setFormOpen(false);
 
-  console.log(favourite);
   return (
     <>
-      {/* <div className={`container-head2`}>
-      </div> */}
       <div className={`container-head ${isLoaded && "loaded"}`}>
         {/* <PushPinIcon /> */}
         <div className="preferance-control" onClick={toggleFavHandler}>
           {favourite ? (
-            <FaHeart className="icon" />
+            <FaStar className="icon" />
           ) : (
-            <FaRegHeart className="icon" />
+            <FaRegStar className="icon" />
           )}
           {favourite ? <p>Remove from favourite</p> : <p>Add to favourite</p>}
         </div>
-        <button className="back-btn" onClick={goBackHandler}>
-          <MdArrowBackIosNew className="icon" />
-          <span>Back</span>
-        </button>
+        <div className={`container-back`}>
+          <button className="back-btn" onClick={goBackHandler}>
+            <MdArrowBackIosNew className="icon" />
+            <span>Back</span>
+          </button>
+        </div>
 
         <h3>{title}</h3>
         <div className="form-button">
@@ -106,9 +110,27 @@ function Detail({
             formOpen={formToggleHandler}
           />
         </div>
-        <div className="view-all__data">
-          <span>View all data</span>
-          <KeyboardArrowRightSharpIcon />
+        <div className="detail-footer">
+          <div className="mobile-fav" onClick={toggleFavHandler}>
+            {favourite ? (
+              <span>Remove from favourite</span>
+            ) : (
+              <span>Add to favourite</span>
+            )}
+            {favourite ? (
+              <FaStar className="icon" />
+            ) : (
+              <FaRegStar className="icon" />
+            )}
+          </div>
+          <div className="detail-about">
+            <span>About {title.toLowerCase()}</span>
+            <KeyboardArrowRightSharpIcon className="icon" />
+          </div>
+          <div className="view-allData">
+            <span>View all data</span>
+            <KeyboardArrowRightSharpIcon className="icon" />
+          </div>
         </div>
       </div>
     </>

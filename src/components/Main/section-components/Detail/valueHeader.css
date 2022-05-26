@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: flex-end;
   padding: 0 1rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .value-control {
@@ -30,9 +30,19 @@
 
 @media (max-width: 576px) {
   .value-header {
+    margin-top: 1rem;
     padding: 0 0.5rem;
     flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 0.8rem;
+    align-items: stretch;
+    /* gap: 1rem; */
+  }
+
+  .value-control {
+    margin-bottom: 0.8rem;
+  }
+
+  .value-header .unit {
+    padding: 0;
+    background-color: var(--color-grey10);
   }
 }

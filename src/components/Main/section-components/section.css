@@ -25,6 +25,7 @@
 .container-left {
   flex: 1;
   min-width: 21rem;
+  padding-left: 0.5rem;
 }
 
 .container-right {
@@ -38,7 +39,6 @@
   display: flex;
   height: 100%;
   overflow-y: scroll;
-  gap: 0.5rem;
   padding-right: 0.4rem;
   flex-direction: column;
 }
@@ -46,6 +46,9 @@
 .container-left .container-child {
   gap: 1.2rem;
   padding-bottom: 2rem;
+  margin-top: 0;
+  padding-top: 0.5rem;
+  padding-left: 0.4rem;
 }
 
 .container-right .container-child {
@@ -65,10 +68,12 @@
   gap: 0.5rem;
 }
 
-.summary > p {
-  text-align: center;
-  color: var(--color-grey4);
-  font-weight: 600;
+.summary > h3,
+.noData > h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-grey2);
+  /* font-weight: 600; */
 }
 
 /* SCROLL */
@@ -132,24 +137,28 @@
     height: auto;
     position: relative;
     gap: 0;
+    /* height: 100%; */
+    /* max-height: auto; */
+    height: auto;
   }
 
   .container-left,
   .container-right {
     border-radius: 0;
+    height: auto;
+    min-height: auto;
+    max-height: auto;
   }
   .container-right {
+    background-color: var(--color-white4);
     display: none;
     background-color: none;
-    padding: 0 0.9rem;
-    gap: 1rem;
-    margin-top: 1rem;
+    padding: 0 0.7rem 3rem 0.9rem;
+    height: 100%;
   }
   .container-left {
-    margin-top: 0.5rem;
-    padding: 0.9rem 0.9rem 3rem 0.9rem;
-    height: auto;
-    background-color: none;
+    background-color: var(--color-white4);
+    padding: 1rem 0.9rem 3rem 1rem;
   }
 
   .container-right.selected {
@@ -165,11 +174,18 @@
     margin: 0;
     height: auto;
     min-height: auto;
+    max-height: auto;
     overflow-y: auto;
   }
 
   .container-left .container-child {
     gap: 1.3rem;
+  }
+  .container-right .container-child {
+    height: auto;
+    flex-shrink: 0;
+    /* overflow-y: visible; */
+    max-height: auto;
   }
 
   .section-container .summary > div,

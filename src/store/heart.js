@@ -15,6 +15,16 @@ const initialState = {
           symbol: "bpm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "bpm",
+              name: "value",
+              type: "number",
+              min: 30,
+              max: 350,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -55,6 +65,24 @@ const initialState = {
               diastolic: parseFloat(value.diastolic),
             };
           },
+          formConfig: [
+            {
+              symbol: "systolic",
+              name: "systolic",
+              type: "number",
+              min: 40,
+              max: 300,
+              step: "1",
+            },
+            {
+              symbol: "diastolic",
+              name: "diastolic",
+              type: "number",
+              min: 30,
+              max: 200,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -89,6 +117,16 @@ const initialState = {
           symbol: "ms",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "ms",
+              name: "value",
+              type: "number",
+              min: 5,
+              max: 350,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -116,6 +154,16 @@ const initialState = {
           symbol: `VO2max`,
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "VO2max",
+              name: "value",
+              type: "number",
+              min: 1,
+              max: 100,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -141,6 +189,16 @@ const initialState = {
           symbol: "%",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "%",
+              name: "value",
+              type: "number",
+              min: 0,
+              max: 25,
+              step: "0.01",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -166,6 +224,16 @@ const initialState = {
           symbol: "bpm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "bpm",
+              name: "value",
+              type: "number",
+              min: 10,
+              max: 300,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -193,6 +261,16 @@ const initialState = {
           symbol: "bpm",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "bpm",
+              name: "value",
+              type: "number",
+              min: 30,
+              max: 400,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {

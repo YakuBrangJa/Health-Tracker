@@ -2,14 +2,11 @@
 
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
-import { FaLungs } from "react-icons/fa";
-import { IoIosBody } from "react-icons/io";
-
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./sidebar.css";
 
-import uiState, { uiStateActions } from "../../store/ui-state";
+import { uiStateActions } from "../../store/ui-state";
 import { useSelector, useDispatch } from "react-redux";
 
 function Sidebar() {
@@ -19,6 +16,10 @@ function Sidebar() {
 
   const sideBarHander = () => {
     dispatch(uiStateActions.setSideBarOpenState(!sidebarOpen));
+  };
+  const sideBarClose = () => {
+    dispatch(uiStateActions.setSideBarOpenState(false));
+    dispatch(uiStateActions.setCardSelectState(false));
   };
 
   const selectedList = ({ isActive }) => {
@@ -41,7 +42,7 @@ function Sidebar() {
         <ul className="sidebar-mid">
           <p className="title">OVERVIEW</p>
           {sidebarList.overview.map((list) => (
-            <li key={list.route} onClick={sideBarHander}>
+            <li key={list.route} onClick={sideBarClose}>
               <NavLink to={list.route} style={selectedList}>
                 {list.icons}
                 <span>{list.title}</span>
@@ -51,7 +52,7 @@ function Sidebar() {
 
           <p className="title">BROWSE</p>
           {sidebarList.browse.map((list) => (
-            <li key={list.route} onClick={sideBarHander}>
+            <li key={list.route} onClick={sideBarClose}>
               <NavLink to={list.route} style={selectedList}>
                 {list.icons}
                 <span>{list.title}</span>
@@ -60,9 +61,9 @@ function Sidebar() {
           ))}
         </ul>
         <ul className="sidebar-bottom">
-          <p className="title">USER</p>
+          {/* <p className="title">USER</p> */}
           {sidebarList.user.map((list) => (
-            <li key={list.route} onClick={sideBarHander}>
+            <li key={list.route} onClick={sideBarClose}>
               <NavLink to={list.route} style={selectedList}>
                 {list.icons}
                 <span>{list.title}</span>

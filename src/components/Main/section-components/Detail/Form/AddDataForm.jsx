@@ -10,49 +10,74 @@ import "./addDataForm.css";
 
 function AddDataForm({ formClose, formOpenState, actions }) {
   const [formData, setFormData] = useState({});
-  const [formDate, setFormDate] = useState();
-  const [formTime, setFormTime] = useState();
-  const [inputIsValid, setInputIsValid] = useState(true);
+  const [formDate, setFormDate] = useState("");
+  const [formTime, setFormTime] = useState("");
+  const [formValue, setFormValue] = useState({});
+  const [inputIsEmpty, setInputIsEmpty] = useState(true);
+
   const dispatch = useDispatch();
   const { sidebarState, unitState } = useSelector((state) => state.formState);
-
-  // const targetData = sidebarState
-  //   .split("-")
-  //   .reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1))
-  //   .replace("/", "");
-
-  // const dataBranch = useSelector((state) => state[targetData][targetData]);
-  // const dataState = useSelector(
-  //   (state) => state[targetData].componentState.dataState
-  // );
-
-  const onChangeHandler = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-    });
-    // if (formData.value.length > 0) {
-    //   setInputIsValid(true);
-    // }
-    // if (formData.value.length === 0) {
-    //   setInputIsValid(false);
-    // }
-  };
-
-  const { date, time } = useFormDateFormat();
+  const { date, time } = useFormDateFormat(formOpenState);
 
   useEffect(() => {
     setFormDate(date);
     setFormTime(time);
+
+    if (!unitState.formConfig) return;
+
+    setFormValue(
+      unitState.formConfig.reduce((a, b) => {
+        if (!a[b.name]) a[b.name] = null;
+        if (b.type === "number") a[b.name] = "";
+        if (b.type === "select") a[b.name] = b.options[0];
+        return a;
+      }, {})
+    );
+
     setFormData({
       date: date,
       time: time,
+      ...unitState.formConfig.reduce((a, b) => {
+        if (!a[b.name]) a[b.name] = null;
+        if (b.type === "number") a[b.name] = "";
+        if (b.type === "select") a[b.name] = b.options[0];
+        return a;
+      }, {}),
     });
-  }, [date]);
+    setInputIsEmpty(true);
+  }, [date, time, formOpenState]);
+
+  const onChangeHandler = (e) => {
+    if (e.target.name === "date") setFormDate(e.target.value);
+    if (e.target.name === "time") setFormTime(e.target.value);
+
+    unitState.formConfig.forEach((unit) => {
+      if (e.target.name === unit.name) {
+        setFormValue({
+          ...formValue,
+          [e.target.name]: e.target.value.trim(),
+        });
+      }
+    });
+
+    console.log(formData);
+    console.log(formValue);
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+
+    if (e.target.value.trim() !== "") {
+      setInputIsEmpty(false);
+    }
+    if (e.target.value.trim() === "") {
+      setInputIsEmpty(true);
+    }
+  };
 
   const addDataHandler = (event) => {
     event.preventDefault();
-    console.log(formData);
 
     dispatch(
       actions.addData({
@@ -63,7 +88,16 @@ function AddDataForm({ formClose, formOpenState, actions }) {
     );
 
     dispatch(formStateActions.setDataSubmitted(true));
-
+    setFormDate(date);
+    setFormTime(time);
+    setFormValue(
+      unitState.formConfig.reduce((a, b) => {
+        if (!a[b.name]) a[b.name] = null;
+        a[b.name] = "";
+        return a;
+      }, {})
+    );
+    setInputIsEmpty(true);
     formClose();
   };
 
@@ -78,8 +112,8 @@ function AddDataForm({ formClose, formOpenState, actions }) {
         </button>
         <button
           type="submit"
-          className={`form-add`}
-          disabled={!inputIsValid ? true : false}
+          className={`form-add ${inputIsEmpty && "submit-disabled"}`}
+          disabled={inputIsEmpty ? true : false}
         >
           Add
         </button>
@@ -90,7 +124,7 @@ function AddDataForm({ formClose, formOpenState, actions }) {
           <input
             type={"date"}
             name="date"
-            defaultValue={formDate}
+            value={formDate ? formDate : ""}
             onChange={onChangeHandler}
           />
         </li>
@@ -99,11 +133,16 @@ function AddDataForm({ formClose, formOpenState, actions }) {
           <input
             type={"time"}
             name="time"
-            defaultValue={formTime}
+            value={formTime ? formTime : ""}
             onChange={onChangeHandler}
           />
         </li>
-        <ValueInput onChangeHandler={onChangeHandler} unitState={unitState} />
+        <ValueInput
+          onChangeHandler={onChangeHandler}
+          unitState={unitState}
+          formValue={formValue}
+          formOpenState={formOpenState}
+        />
         {/* {valueInput} */}
       </ul>
     </form>

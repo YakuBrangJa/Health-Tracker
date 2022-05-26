@@ -22,7 +22,10 @@ function Favourites() {
     .map((item) =>
       Object.values(item).filter((item) => item.favourite === true)
     )
-    .flat();
+    .flat()
+    .sort((a, b) => a.title.localeCompare(b.title));
+
+  const navigateHandler = () => console.log("fav");
 
   return (
     <div className="favourite">

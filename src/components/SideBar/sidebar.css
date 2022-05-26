@@ -1,10 +1,8 @@
 .sidebar {
   flex-basis: 14rem;
-  /* border-right: 1px solid var(--color-grey6); */
   height: 100vh;
   position: sticky;
   top: 0;
-  /* overflow-y: overlay; */
   background-color: var(--color-grey10);
 }
 
@@ -37,7 +35,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* box-shadow: 0rem 0.1rem 0.1rem rgba(0, 0, 0, 0.3); */
+  /* border-bottom: 1px solid #aaa5; */
+  box-shadow: 0px 1px 1px 0px rgba(100, 100, 100, 0.25);
 }
 
 .sidebar-mid {
@@ -47,8 +46,8 @@
 }
 .sidebar-bottom {
   flex-basis: 1;
-  padding: 0 0 1rem 0;
-  /* border-top: 1px solid var(--color-grey6); */
+  padding: 0.3rem 0 0.5rem 0;
+  border-top: 1px solid rgba(100, 100, 100, 0.25);
 }
 
 .sidebar-logo {
@@ -56,6 +55,7 @@
 }
 .sidebar-close {
   display: none;
+  position: relative;
 }
 .sidebar-close .icon {
   font-size: 1.4rem;
@@ -63,12 +63,17 @@
   color: var(--color-grey5);
 }
 .sidebar-close .icon:first-child {
-  transform: translateX(1rem);
+  transform: translateX(-0.25rem);
+  position: absolute;
 }
+.sidebar-close .icon:last-child {
+  transform: translateX(0.25rem);
+}
+
 .sidebar-close:hover .icon {
   color: var(--color-grey3);
 }
-ul .title {
+.sidebar ul .title {
   font-size: 0.9rem;
   font-weight: bold;
   color: var(--color-grey4);
@@ -102,7 +107,6 @@ ul .title {
 
 .sidebar ul li a span {
   font-size: 0.9rem;
-  /* color: var(--color-grey2); */
   font-weight: 650;
 }
 
@@ -175,5 +179,40 @@ ul .title {
 @media (max-width: 767px) {
   .sidebar.collapse {
     transform: translateX(-3.3rem);
+  }
+
+  .sidebar.collapse ul li:hover a span {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar {
+    width: 17rem;
+  }
+
+  .sidebar ul li a {
+    color: var(--color-black4);
+    height: 2.5rem;
+  }
+
+  .sidebar ul li a .icon {
+    font-size: 1.5rem;
+  }
+
+  .sidebar ul li a span {
+    font-size: 1rem;
+    font-weight: 650;
+  }
+
+  .sidebar ul .title {
+    font-size: 1rem;
+    color: var(--color-grey2);
+  }
+}
+
+@media (max-height: 600px) {
+  .sidebar-bottom {
+    padding: 0.2rem 0 0.3rem 0;
   }
 }

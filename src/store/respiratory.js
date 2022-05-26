@@ -15,6 +15,16 @@ const initialState = {
           symbol: "%",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "%",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 50,
+              max: 100,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -41,6 +51,16 @@ const initialState = {
           symbol: "BrPM",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "BrPM",
+              name: "value",
+              type: "number",
+              step: "0.1",
+              min: 1,
+              max: 60,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -69,6 +89,16 @@ const initialState = {
           symbol: "L",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "L",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 0,
+              max: 8,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -95,6 +125,16 @@ const initialState = {
           symbol: "L/m",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "L/m",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 50,
+              max: 1000,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -108,7 +148,7 @@ const initialState = {
       },
     },
 
-    forcedExpiratoryVolme: {
+    forcedExpiratoryVolume: {
       id: "respi5",
       title: "Forced Expiratory Volume",
       type: "respiratory",
@@ -121,6 +161,16 @@ const initialState = {
           symbol: "L",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "L",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 0,
+              max: 10,
+            },
+          ],
         },
       },
       chartConfig: {
@@ -147,6 +197,16 @@ const initialState = {
           symbol: "m",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "m",
+              name: "value",
+              type: "number",
+              step: "0.01",
+              min: 0,
+              max: 3000,
+            },
+          ],
         },
       },
       chartConfig: {

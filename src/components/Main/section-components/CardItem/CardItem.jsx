@@ -1,13 +1,16 @@
 import KeyboardArrowRightSharpIcon from "@mui/icons-material/KeyboardArrowRightSharp";
+import { IoIosArrowForward } from "react-icons/io";
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import "./cardItem.css";
-import { uiStateActions } from "../../../../store/ui-state";
+import uiState, { uiStateActions } from "../../../../store/ui-state";
 
 import ValueContainer from "../ValueContainer";
-
 import useDateTimeFormatter from "../../../../hooks/useDateTimeFormatter";
+import useActionSelector from "../../../../hooks/useActionSelector";
 
 function CardItem({
   id,
@@ -22,9 +25,15 @@ function CardItem({
   isHome,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [latestData, setLatestData] = useState(null);
   const sidebarState = useSelector((state) => state.formState.sidebarState);
-  const typeStyleConfig = useSelector((state) => state.sideBar.browse);
+  const typeStyle = useSelector((state) => state.sideBar.browse);
+  const windowWidth = useSelector((state) => state.uiState.windowWidth);
+
+  const matchedType = typeStyle.find(
+    (item) => item.route.replace("/", "") === type
+  );
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -44,7 +53,19 @@ function CardItem({
     format(latestData.date, latestData.time);
   }, [latestData, format]);
 
+  const { action } = useActionSelector(matchedType.route);
+
   const onClickHandler = () => {
+    if (isHome) {
+      navigate(matchedType.route);
+      dispatch(action.updateDataState(id));
+      dispatch(action.updateFirstClick(true));
+      dispatch(uiStateActions.setCardSelectState(true));
+      dispatch(uiStateActions.updateFromHomeCardState(true));
+      dispatch(uiStateActions.updateBackToHomeState(true));
+      return;
+    }
+
     if (sidebarState !== "/vitals") {
       dispatch(actions.updateDataState(id));
       dispatch(actions.updateFirstClick(true));
@@ -55,12 +76,16 @@ function CardItem({
       dispatch(vitalsActions.updateDataState(id));
       dispatch(vitalsActions.updateFirstClick(true));
     }
+
     dispatch(uiStateActions.setCardSelectState(true));
   };
 
-  const matchedType = typeStyleConfig.find(
-    (item) => item.route.replace("/", "") === type
-  );
+  // CARD TEXT STYLE
+  const cardTextStyle = (e) => {
+    return {
+      color: `${!isHome ? matchedType.color : ""}`,
+    };
+  };
 
   if (data.length === 0 && !isHome) {
     return (
@@ -69,14 +94,19 @@ function CardItem({
         onClick={onClickHandler}
       >
         <div className="emptyCardItem-top">
-          <span className="cardItem-name">{title}</span>
+          <span
+            className="cardItem-name"
+            style={{
+              color: `${windowWidth < 577 && !isHome ? matchedType.color : ""}`,
+            }}
+          >
+            {title}
+          </span>
           <div
             className={`emptyCardItem-add__container ${selected && "active"}`}
           >
             <span className="emptyCardItem-add">Add data</span>
-            <KeyboardArrowRightSharpIcon
-              className={`cardItem-forward__icon `}
-            />
+            <IoIosArrowForward className={`cardItem-forward__icon `} />
           </div>
         </div>
       </div>
@@ -87,15 +117,21 @@ function CardItem({
         className={`cardItem ${selected && "active"} ${isHome && "homeCard"}`}
         onClick={onClickHandler}
       >
-        <div className="cardItem-left">
+        <div className="cardItem-top">
           <span
             className="cardItem-name"
-            // style={{
-            //   color: `${isHome && matchedType.color}`,
-            // }}
+            style={{
+              color: `${windowWidth < 577 && !isHome ? matchedType.color : ""}`,
+            }}
           >
             {title}
           </span>
+          <div className={`cardItem-date__container ${selected && "active"}`}>
+            <span className="cardItem-date">{formattedDate}</span>
+            <KeyboardArrowRightSharpIcon className="icon" />
+          </div>
+        </div>
+        <div className="cardItem-bottom">
           <ValueContainer
             unit={unit}
             selectedUnit={selectedUnit}
@@ -103,15 +139,7 @@ function CardItem({
             isDetailTab={false}
             isHome={isHome}
           />
-        </div>
-        <div className="cardItem-right">
           {isHome && matchedType.icons}
-          <div className={`cardItem-date__container ${selected && "active"}`}>
-            <span className="cardItem-date">{formattedDate}</span>
-            <KeyboardArrowRightSharpIcon
-              className={`cardItem-forward__icon `}
-            />
-          </div>
         </div>
       </div>
     );

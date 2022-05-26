@@ -15,12 +15,32 @@ const initialState = {
           symbol: "mg/dL",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "mg/dL",
+              name: "value",
+              type: "number",
+              min: 30,
+              max: 1000,
+              step: "1",
+            },
+          ],
         },
         millimolesPerLitre: {
           name: "millimolesPerLitre",
           symbol: "mmol/L",
           to: (value) => parseFloat((value / 18).toFixed(1)),
           from: (value) => value.value * 18,
+          formConfig: [
+            {
+              symbol: "mmol/L",
+              name: "value",
+              type: "number",
+              min: 2,
+              max: 56,
+              step: "0.01",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -49,6 +69,16 @@ const initialState = {
           symbol: "times",
           to: (value) => parseFloat(value.toFixed(0)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "times",
+              name: "value",
+              type: "number",
+              min: 1,
+              max: 10,
+              step: "1",
+            },
+          ],
         },
       },
       chartConfig: {
@@ -75,6 +105,16 @@ const initialState = {
           symbol: "%",
           to: (value) => parseFloat(value.toFixed(1)),
           from: (value) => parseFloat(value.value),
+          formConfig: [
+            {
+              symbol: "%",
+              name: "value",
+              type: "number",
+              min: 0,
+              max: 1,
+              step: "0.01",
+            },
+          ],
         },
       },
       chartConfig: {
