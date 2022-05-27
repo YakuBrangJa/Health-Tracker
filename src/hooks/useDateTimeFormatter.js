@@ -8,8 +8,10 @@ function useDateTimeFormatter() {
     const latestDate = new Date(`${date}T${time}`);
     const timeGap = new Date().getTime() - latestDate.getTime();
     const dayGap = timeGap / 1000 / 60 / 60 / 24;
+    const curYearStart = new Date(new Date().getFullYear(), "0", "1");
 
     let formattedNewDate;
+
     if (dayGap < 1) {
       formattedNewDate = new Intl.DateTimeFormat("en-US", {
         hour: "numeric",
@@ -25,6 +27,10 @@ function useDateTimeFormatter() {
         month: "short",
         day: "numeric",
       }).format(latestDate);
+    } else if (latestDate.getTime() - curYearStart.getTime() < 0) {
+      formattedNewDate = new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+      });
     }
 
     setFormattedDate(formattedNewDate);

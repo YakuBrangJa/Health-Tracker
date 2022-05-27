@@ -16,6 +16,7 @@ function useActionSelector(route) {
   };
 
   const targetData =
+    route &&
     route
       .split("-")
       .reduce((a, b) => a + b.charAt(0).toUpperCase() + b.slice(1))

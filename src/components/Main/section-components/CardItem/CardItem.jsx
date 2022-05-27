@@ -76,8 +76,8 @@ function CardItem({
       dispatch(vitalsActions.updateDataState(id));
       dispatch(vitalsActions.updateFirstClick(true));
     }
-
     dispatch(uiStateActions.setCardSelectState(true));
+    dispatch(uiStateActions.setShowTableState(false));
   };
 
   // CARD TEXT STYLE

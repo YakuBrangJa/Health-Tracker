@@ -4,10 +4,11 @@
   align-items: center;
   gap: 0.5rem;
   padding-right: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .container-back {
-  display: none;
+  display: block;
 }
 
 .container-head h3 {
@@ -15,22 +16,11 @@
   font-weight: bold;
   transition: transform 300ms ease;
   transform: scale(0.3);
-  margin-left: 8%;
-  /* white-space: nowrap; */
 }
 .container-head.loaded h3 {
   transform: scale(1);
 }
 
-.container-head button,
-.container-back button {
-  all: unset;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  color: var(--color-primary1);
-}
 .container-head button > .icon {
   font-size: 1.3rem;
 }
@@ -41,13 +31,21 @@
 .container-head .form-button {
   position: relative;
   white-space: nowrap;
+  flex-basis: 6rem;
+}
+.form-button .addData-btn {
+  margin-left: auto;
+}
+
+.dataTable-back {
+  flex-basis: 6rem;
 }
 
 .preferance-control {
   display: flex;
   cursor: pointer;
-  margin-left: 0.3rem;
   position: relative;
+  flex-basis: 6rem;
 }
 
 .preferance-control .icon {
@@ -55,7 +53,7 @@
   color: var(--color-primary1);
 }
 .preferance-control .icon:hover {
-  transform: scale(1.04);
+  color: var(--color-primary1b);
 }
 
 .preferance-control p {
@@ -79,7 +77,6 @@
 
 .container-child {
   display: flex;
-  margin-top: 1rem;
 }
 
 /* CHART */
@@ -108,7 +105,14 @@
 .detail-footer {
   flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: stretch;
+  gap: 0.5rem;
+}
+
+.detail-info {
+  display: flex;
+  justify-content: space-evenly;
   gap: 0.5rem;
 }
 
@@ -128,8 +132,7 @@
   color: var(--color-grey1);
   cursor: pointer;
 }
-
-.mobile-fav {
+.footer-fav {
   display: none;
 }
 
@@ -144,26 +147,29 @@
 
 @media (max-width: 1024px) {
   .section-chart {
-    min-height: 20rem;
-    max-height: 24rem;
+    min-height: 22.5rem;
+    max-height: 26rem;
   }
 }
 
 @media (max-width: 576px) {
   .container-head {
-    margin: 0.8rem 0;
+    padding: 0.6rem 0.7rem;
+    background-color: var(--color-white3);
+    margin-bottom: 0.8rem;
   }
 
-  .container-head button span {
-    font-size: 1rem;
-    font-weight: 600;
+  .date-navigation {
+    padding: 0 0.7rem;
   }
-  .container-back button span {
+
+  .addData-btn span {
+    font-size: 1.05rem;
     font-weight: 600;
   }
 
   .container-head h3 {
-    margin-left: 2%;
+    margin-left: 1%;
     font-size: 1.1rem;
   }
 
@@ -176,18 +182,8 @@
     display: none;
   }
 
-  .container-back {
-    display: block;
-  }
-
-  .container-head {
-    padding: 0;
-    text-align: center;
-  }
-
-  .container-back .back-btn {
-    display: flex;
-    transform: translateX(-0.5rem);
+  .dataTable-back {
+    display: none;
   }
 
   .addData-btn .icon {
@@ -195,24 +191,15 @@
   }
 
   .detail-footer {
-    margin-top: 1rem;
+    padding: 1.5rem 0.7rem 3rem 0.7rem;
     flex-direction: column;
-    gap: 0.7rem;
+    background-color: var(--color-white3);
+    gap: 1rem;
   }
 
   .detail-footer .icon {
     display: block;
-  }
-
-  .mobile-fav {
-    display: flex;
-  }
-  .mobile-fav:active {
-    background-color: var(--color-grey7);
-  }
-
-  .mobile-fav .icon {
-    font-size: 1.3rem;
+    color: var(--color-grey5);
   }
 
   .detail-about,
@@ -220,21 +207,57 @@
   .mobile-fav {
     padding: 0.7rem 1rem;
     justify-content: space-between;
-    background-color: var(--color-grey10);
+    background-color: var(--color-white1);
     color: #333;
     font-weight: normal;
-    border-radius: 0.4rem;
   }
 
-  .detail-about:active,
-  .view-allData:active,
-  .mobile-fav:active {
-    background-color: var(--color-grey8);
+  .detail-info {
+    flex-direction: column;
+    gap: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .detail-about,
+  .view-allData {
+    border-radius: 0;
+  }
+
+  .view-allData {
+    border-bottom: 1px solid var(--color-grey9);
+  }
+  .footer-fav {
+    display: block;
+  }
+  .mobile-fav {
+    display: flex;
+    border-radius: 0.4rem;
+  }
+  .footer-fav p {
+    font-size: 0.9rem;
+    color: var(--color-grey3);
+    margin: 0.3rem 0rem 0 1.2rem;
+  }
+  .mobile-fav:active,
+  .detail-info .detail-about:active,
+  .detail-info .view-allData:active {
+    background-color: var(--color-white4);
+  }
+
+  .detail-about:hover,
+  .view-allData:hover {
+    background-color: var(--color-white1);
+  }
+
+  .mobile-fav .icon {
+    font-size: 1.3rem;
+    color: var(--color-grey1);
   }
 
   .section-chart {
-    background-color: var(--color-white4);
-    padding: 0.2rem 0rem 0.3rem 0rem;
+    background-color: var(--color-white1);
+    padding: 0.5rem 0.8rem 0.5rem 0.5rem;
   }
 }
 

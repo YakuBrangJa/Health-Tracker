@@ -1,0 +1,12 @@
+.loading-card {
+  background: var(--color-grey8b);
+  height: 5.8rem;
+  border-radius: 0.7rem;
+  width: 100%;
+}
+
+.loading-card.isHome {
+  height: 6rem;
+  border-radius: 0.5rem;
+  background: var(--color-grey10);
+}

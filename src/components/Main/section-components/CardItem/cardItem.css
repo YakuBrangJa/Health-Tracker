@@ -14,13 +14,17 @@
 .cardItem {
   height: 5.6rem;
   justify-content: space-between;
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 1rem;
 }
 
 .cardItem:hover,
 .emptyCardItem:hover {
   /* background-color: var(--color-grey7); */
   border-color: var(--color-grey5);
+}
+.cardItem:active,
+.emptyCardItem:active {
+  background-color: var(--color-white3);
 }
 
 .cardItem-date__container {
@@ -34,7 +38,6 @@
 
 .cardItem.active,
 .emptyCardItem.active {
-  transform: scale(1.015);
   background-color: var(--color-grey7);
   border: 0.1rem solid var(--color-grey6b);
 }
@@ -48,7 +51,7 @@
   display: flex;
   /* flex-direction: column; */
   justify-content: space-between;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   /* gap: 0.8rem; */
 }
 
@@ -56,6 +59,7 @@
   font-size: 0.9rem;
   font-weight: 700;
   line-height: 1rem;
+  align-self: center;
 }
 
 .cardItem-bottom {
@@ -72,7 +76,7 @@
 .cardItem-top .cardItem-date__container {
   display: flex;
   align-items: center;
-
+  align-self: flex-start;
   transition: all 150ms ease;
 }
 

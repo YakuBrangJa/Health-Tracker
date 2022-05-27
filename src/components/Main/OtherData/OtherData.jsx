@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import useDataRequest from "../../../hooks/useDataRequest";
+
 import Section from "../section-components/Section";
 import { otherDataActions } from "../../../store/other-data";
 
@@ -10,13 +10,7 @@ function OtherData() {
     (state) => state.otherData
   );
 
-  // FETCHING
-  // const { isLoading, error, fetchData } = useDataRequest(otherDataActions);
-
-  // useEffect(() => {
-  //   if (!componentState.firstRun) return;
-  //   fetchData("other-data");
-  // }, [fetchData, componentState.firstRun]);
+  
 
   return (
     <Section

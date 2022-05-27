@@ -47,7 +47,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Blood Glocose",
-          borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -155,6 +154,7 @@ const otherDataSlice = createSlice({
         date: formData.date,
         time: formData.time,
         value: transformedValue,
+        id: Math.floor(Math.random() * Date.now()),
       });
     },
 

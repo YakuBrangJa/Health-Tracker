@@ -1,9 +1,6 @@
 import "./sectionLoading.css";
-import SectionContainer from "./SectionContainer";
-
-function LoadingChild({ delay }) {
-  return <div className={`loading-child loading-animation ${delay}`}></div>;
-}
+import SectionContainer from "../SectionContainer";
+import LoadingCard from "./LoadingCard";
 
 function SectionLoading(props) {
   return (
@@ -11,11 +8,13 @@ function SectionLoading(props) {
       <div className="section-loading">
         <div className="loading-left">
           <h3 className="loading-animation"></h3>
-          <LoadingChild delay="delay1" />
-          <LoadingChild delay="delay2" />
-          <LoadingChild delay="delay3" />
-          <LoadingChild delay="delay4" />
-          <LoadingChild delay="delay1" />
+          <div className="child-container">
+            <LoadingCard delay="delay1" />
+            <LoadingCard delay="delay2" />
+            <LoadingCard delay="delay3" />
+            <LoadingCard delay="delay4" />
+            <LoadingCard delay="delay1" />
+          </div>
         </div>
         <div className="loading-right">
           <div className="loading-right__head">

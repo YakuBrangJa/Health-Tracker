@@ -42,13 +42,17 @@
 
 @media (max-width: 576px) {
   .main-section {
-    min-height: calc(100% - var(--navbar-height));
+    min-height: calc(100vh - var(--navbar-height));
     /* height: auto; */
     /* max-height: auto; */
-    max-height: calc(100% - var(--navbar-height));
+    max-height: calc(100vh - var(--navbar-height));
     background-color: var(--color-white4);
     position: relative;
     overflow: scroll;
+  }
+
+  .main-section.selected {
+    background-color: var(--color-white3);
   }
 
   .main-header {

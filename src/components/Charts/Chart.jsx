@@ -3,7 +3,7 @@ import { Bar, Line } from "react-chartjs-2";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useSelector } from "react-redux";
 
-import "./barChart.css";
+import "./Chart.css";
 
 import useChartDataFormat from "../../hooks/useChartDataFormat";
 import useDateTree from "../../hooks/useDateTree";
@@ -50,6 +50,7 @@ function Chart({ data, formOpen, chartConfig }) {
   const { year, month, day, day14, week } = useSelector(
     (state) => state.activeData.activeDate
   );
+  const windowWidth = useSelector((state) => state.uiState.windowWidth);
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -114,11 +115,11 @@ function Chart({ data, formOpen, chartConfig }) {
         spanGaps: true,
         segment: {
           borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132)"),
-          borderDash: (ctx) => skipped(ctx, [6, 4]),
+          borderDash: (ctx) => skipped(ctx, [4, 3]),
         },
-        borderWidth: 2.5,
+        borderWidth: windowWidth < 576 ? 2 : 2.5,
         pointRadius: 2.5,
-        hoverRadius: 5,
+        hoverRadius: windowWidth < 576 ? 3.5 : 5,
       },
     },
   };

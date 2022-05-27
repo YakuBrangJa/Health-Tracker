@@ -67,7 +67,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Breaths Per Minute",
-          borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -213,7 +212,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Six-Minute Walk",
-          borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -250,6 +248,7 @@ const respiratorySlice = createSlice({
         date: formData.date,
         time: formData.time,
         value: transformedValue,
+        id: Math.floor(Math.random() * Date.now()),
       });
     },
 

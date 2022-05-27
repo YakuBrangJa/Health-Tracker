@@ -5,11 +5,11 @@
 
   font-family: "Montserrat", sans-serif;
   font-family: "Nunito", sans-serif;
-  outline: 1px solid violet;
+  /* outline: 1px solid violet; */
 }
 
-/* *::-webkit-scrollbar {
-  width: 0.4rem;
+*::-webkit-scrollbar {
+  width: 0.3rem;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -17,7 +17,7 @@
 }
 *::-webkit-scrollbar-track {
   background-color: #ccc;
-} */
+}
 
 a {
   all: unset;

@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   windowWidth: 0,
-  sidebarOpen: false,
-  cardSelectState: false,
   isLoading: false,
+  sidebarOpen: false,
   firstRun: true,
+  cardSelectState: false,
+  showTableState: false,
   fromHomeCard: false,
   backToHome: false,
 };
@@ -22,6 +23,9 @@ const uiStateSlice = createSlice({
     },
     setCardSelectState(state, action) {
       state.cardSelectState = action.payload;
+    },
+    setShowTableState(state, action) {
+      state.showTableState = action.payload;
     },
     updateLoadingDataState(state, action) {
       state.isLoading = action.payload;

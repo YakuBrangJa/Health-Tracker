@@ -1,9 +1,9 @@
 import "./section.css";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import SectionContainer from "./SectionContainer";
-import SectionLoading from "./SectionLoading";
+import SectionLoading from "./SectionLoading/SectionLoading";
 import CardItem from "./CardItem/CardItem";
 import Detail from "./Detail/Detail";
 
@@ -41,8 +41,8 @@ function Section({
     dispatch(uiStateActions.setCardSelectState(false));
   }, []);
 
-  console.log(actions);
-  console.log(vitalsActions);
+  // const scrollRef = useRef(null);
+  // const executeScroll = () => (scrollRef.current.scrollTop = 0);
 
   // SETTING ACTIVE ITEM ON LOAD
   useEffect(() => {
@@ -50,7 +50,7 @@ function Section({
     if (componentState.firstClick || windowWidth < 576) return;
     if (itemWithData.length > 0) {
       dispatch(actions.updateDataState(itemWithData[0].id));
-    } else if (itemWithoutData > 0) {
+    } else if (itemWithoutData.length > 0) {
       dispatch(actions.updateDataState(itemWithoutData[0].id));
     }
   }, [
@@ -70,7 +70,7 @@ function Section({
       dispatch(
         itemWithData[0].actions.updateVitalsDataState(itemWithData[0].id)
       );
-    } else if (itemWithoutData > 0) {
+    } else if (itemWithoutData.length > 0) {
       dispatch(vitalsActions.updateDataState(itemWithoutData[0].id));
       dispatch(
         itemWithoutData[0].actions.updateVitalsDataState(itemWithoutData[0].id)
@@ -93,7 +93,7 @@ function Section({
     if (!dataSubmitted) return;
 
     sendRequest({
-      url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker${
+      url: `https://clone-demo-c5cc6-default-rtdb.firebaseio.com/health-tracker${
         sidebarState === "/vitals" ? data[dataKey].route : sidebarState
       }/${dataKey}.json`,
       method: "PUT",
@@ -116,50 +116,52 @@ function Section({
       <div className="section-container">
         <div className={`container-left ${cardSelectState && "selected"}`}>
           <div className="container-child">
-            <div className="summary">
-              {itemWithData.length > 0 && <h3>Summary</h3>}
-              <div>
-                {itemWithData.map((value) => {
-                  return (
-                    <CardItem
-                      key={value.id}
-                      id={value.id}
-                      title={value.title}
-                      data={value.data}
-                      unit={value.unit}
-                      selectedUnit={value.selectedUnit}
-                      type={value.type}
-                      selected={dataState === value.id}
-                      // actions={actions}
-                      actions={title === "Vitals" ? value.actions : actions}
-                      vitalsActions={vitalsActions}
-                    />
-                  );
-                })}
+            {itemWithData.length > 0 && (
+              <div className="summary">
+                <h3>Summary</h3>
+                <div>
+                  {itemWithData.map((value) => {
+                    return (
+                      <CardItem
+                        key={value.id}
+                        id={value.id}
+                        title={value.title}
+                        data={value.data}
+                        unit={value.unit}
+                        selectedUnit={value.selectedUnit}
+                        type={value.type}
+                        selected={dataState === value.id}
+                        actions={title === "Vitals" ? value.actions : actions}
+                        vitalsActions={vitalsActions}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-            <div className="noData">
-              {itemWithoutData.length > 0 && <h3>No Data</h3>}
-              <div>
-                {itemWithoutData.map((value) => {
-                  return (
-                    <CardItem
-                      key={value.id}
-                      id={value.id}
-                      title={value.title}
-                      data={value.data}
-                      unit={value.unit}
-                      selectedUnit={value.selectedUnit}
-                      type={value.type}
-                      selected={dataState === value.id}
-                      // actions={actions}
-                      actions={title === "Vitals" ? value.actions : actions}
-                      vitalsActions={vitalsActions}
-                    />
-                  );
-                })}
+            )}
+            {itemWithoutData.length > 0 && (
+              <div className="noData">
+                <h3>No Data</h3>
+                <div>
+                  {itemWithoutData.map((value) => {
+                    return (
+                      <CardItem
+                        key={value.id}
+                        id={value.id}
+                        title={value.title}
+                        data={value.data}
+                        unit={value.unit}
+                        selectedUnit={value.selectedUnit}
+                        type={value.type}
+                        selected={dataState === value.id}
+                        actions={title === "Vitals" ? value.actions : actions}
+                        vitalsActions={vitalsActions}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div className={`container-right ${cardSelectState && "selected"}`}>

@@ -13,12 +13,14 @@ function useDataRequest2() {
     };
   };
 
+  // https://clone-demo-c5cc6-default-rtdb.firebaseio.com/
+
   const { isLoading, error, sendRequest } = useHttps();
   const fetchData = useCallback(
     (branch, actions) => {
       sendRequest(
         {
-          url: `https://health-tracker-69c66-default-rtdb.firebaseio.com/health-tracker/${branch}/.json`,
+          url: `https://clone-demo-c5cc6-default-rtdb.firebaseio.com/health-tracker/${branch}/.json`,
         },
         applyActions(actions)
       );

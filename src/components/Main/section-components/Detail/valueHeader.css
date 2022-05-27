@@ -30,11 +30,12 @@
 
 @media (max-width: 576px) {
   .value-header {
-    margin-top: 1rem;
-    padding: 0 0.5rem;
+    /* margin-top: 1rem; */
+    /* padding: 0 0.5rem; */
+    margin: 0;
+    padding: 1rem 1.5rem 0.7rem 1.5rem;
     flex-direction: column-reverse;
     align-items: stretch;
-    /* gap: 1rem; */
   }
 
   .value-control {

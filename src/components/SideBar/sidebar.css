@@ -35,7 +35,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* border-bottom: 1px solid #aaa5; */
   box-shadow: 0px 1px 1px 0px rgba(100, 100, 100, 0.25);
 }
 
@@ -152,13 +151,19 @@
     padding: 0.2rem 0.5rem;
     color: var(--color-white3);
     display: none;
+    opacity: 0;
+    transition: all 200ms ease;
   }
 
-  /* .sidebar:hover ul li a span {
-    display: none;
-  } */
-  .sidebar ul li:hover a span {
+  .sidebar:hover ul li a span {
     display: block;
+  }
+  .sidebar ul li:hover a span {
+    opacity: 1;
+  }
+
+  .sidebar.collapse ul li:hover a span {
+    display: none;
   }
 
   .sidebar.collapse .sidebar-close {
@@ -207,7 +212,7 @@
 
   .sidebar ul .title {
     font-size: 1rem;
-    color: var(--color-grey2);
+    color: var(--color-grey3);
   }
 }
 

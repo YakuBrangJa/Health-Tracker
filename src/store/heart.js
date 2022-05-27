@@ -31,7 +31,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Heart Rate",
-          borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -240,7 +239,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Resting Heart Rate",
-          borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -277,7 +275,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Walking Heart Rate",
-          borderWidth: 2.5,
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132, 0.5)",
           pointBackgroundColor: "rgba(255, 99, 132, 1)",
@@ -315,6 +312,7 @@ const heartSlice = createSlice({
         date: formData.date,
         time: formData.time,
         value: transformedValue,
+        id: Math.floor(Math.random() * Date.now()),
       });
     },
 

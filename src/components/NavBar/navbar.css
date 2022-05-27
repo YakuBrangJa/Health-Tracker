@@ -17,6 +17,25 @@
   align-items: center;
   gap: 1rem;
 }
+
+.chart-back {
+  display: none;
+  font-size: 1.07rem;
+  transform: translateX(-0.5rem);
+}
+.chart-back .icon {
+  font-size: 1.4rem;
+}
+
+.text-btn button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--color-primary1);
+}
+
 .nav-left .icon {
   font-size: 1.6rem;
   font-weight: bold;
@@ -113,6 +132,13 @@
   }
   .navbar {
     padding: 0 0.8rem;
+  }
+
+  .navbar.show-backBtn .chart-back {
+    display: block;
+  }
+  .navbar.show-backBtn .nav-left {
+    display: none;
   }
 
   .nav-right {

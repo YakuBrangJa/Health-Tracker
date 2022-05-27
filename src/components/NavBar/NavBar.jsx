@@ -12,26 +12,58 @@ import SearchIcon from "@mui/icons-material/Search";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { BsPersonCircle } from "react-icons/bs";
 import { IoMdMenu } from "react-icons/io";
+import { MdArrowBackIosNew } from "react-icons/md";
 
 import { uiStateActions } from "../../store/ui-state";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import useActionSelector from "../../hooks/useActionSelector";
 
 function NavBar() {
   const sidebarOpen = useSelector((state) => state.uiState.sidebarOpen);
+  const { cardSelectState, backToHome, showTableState } = useSelector(
+    (state) => state.uiState
+  );
+  const sidebarState = useSelector((state) => state.formState.sidebarState);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { action } = useActionSelector(sidebarState);
 
   const openSidebarHandler = () => {
     dispatch(uiStateActions.setSideBarOpenState(!sidebarOpen));
   };
 
+  const goBackHandler = () => {
+    if (showTableState) {
+      dispatch(uiStateActions.setShowTableState(false));
+      return;
+    }
+
+    dispatch(uiStateActions.setCardSelectState(false));
+    dispatch(action.updateDataState(null));
+    if (backToHome) {
+      navigate(-1);
+      dispatch(uiStateActions.updateBackToHomeState(false));
+    }
+  };
+
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${cardSelectState && "show-backBtn"}`}>
       <div className="nav-left">
         <IoMdMenu className="icon" onClick={openSidebarHandler} />
         <div className="nav-search">
           <input type="search" placeholder="Search..." />
           <SearchIcon className="nav-search-icon" />
         </div>
+      </div>
+
+      <div className={`chart-back text-btn`}>
+        <button className="back-btn" onClick={goBackHandler}>
+          <MdArrowBackIosNew className="icon" />
+          <span>Back</span>
+        </button>
       </div>
 
       <div className="nav-right">

@@ -182,7 +182,6 @@ const initialState = {
           label: "Body Temperature",
           borderColor: "rgb(255, 99, 132)",
           backgroundColor: "rgba(255, 99, 132)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -253,7 +252,6 @@ const initialState = {
         type: "line",
         config: {
           label: "BMI",
-          borderWidth: 1,
           borderColor: "rgba(53, 162, 235, 0.8)",
           backgroundColor: "rgba(53, 162, 235, 0.4)",
         },
@@ -360,7 +358,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Lean Body Mass",
-          borderWidth: 0,
           backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
@@ -394,6 +391,7 @@ const bodyMeasurementsSlice = createSlice({
         date: formData.date,
         time: formData.time,
         value: transformedValue,
+        id: Math.floor(Math.random() * Date.now()),
       });
     },
 
