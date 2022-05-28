@@ -2,13 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   windowWidth: 0,
-  isLoading: false,
+  isLoading: true,
   sidebarOpen: false,
   firstRun: true,
   cardSelectState: false,
   showTableState: false,
   fromHomeCard: false,
   backToHome: false,
+  darkTheme: false,
 };
 
 const uiStateSlice = createSlice({
@@ -38,6 +39,9 @@ const uiStateSlice = createSlice({
     },
     updateBackToHomeState(state, action) {
       state.backToHome = action.payload;
+    },
+    setDarkTheme(state, action) {
+      state.darkTheme = !state.darkTheme;
     },
   },
 });

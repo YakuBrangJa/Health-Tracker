@@ -395,6 +395,21 @@ const bodyMeasurementsSlice = createSlice({
       });
     },
 
+    removeData(state, action) {
+      const { id, sidebarState } = action.payload;
+      const dataKey = Object.keys(state.bodyMeasurements).find(
+        (key) =>
+          state.bodyMeasurements[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.bodyMeasurements[dataKey].data = state.bodyMeasurements[
+        dataKey
+      ].data.filter((item) => item.id !== id);
+    },
+
     changeUnit(state, action) {
       const { unit, sidebarState } = action.payload;
       const dataKey = Object.keys(state.bodyMeasurements).find(

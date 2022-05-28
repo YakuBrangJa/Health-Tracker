@@ -106,7 +106,7 @@ function CardItem({
             className={`emptyCardItem-add__container ${selected && "active"}`}
           >
             <span className="emptyCardItem-add">Add data</span>
-            <IoIosArrowForward className={`cardItem-forward__icon `} />
+            <IoIosArrowForward className={`icon`} />
           </div>
         </div>
       </div>
@@ -128,7 +128,7 @@ function CardItem({
           </span>
           <div className={`cardItem-date__container ${selected && "active"}`}>
             <span className="cardItem-date">{formattedDate}</span>
-            <KeyboardArrowRightSharpIcon className="icon" />
+            <IoIosArrowForward className="icon" />
           </div>
         </div>
         <div className="cardItem-bottom">

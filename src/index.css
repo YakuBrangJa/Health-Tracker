@@ -6,6 +6,7 @@
   font-family: "Montserrat", sans-serif;
   font-family: "Nunito", sans-serif;
   /* outline: 1px solid violet; */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *::-webkit-scrollbar {
@@ -29,6 +30,9 @@ ul li {
 
 html::-webkit-scrollbar {
   width: 0.8vw;
+}
+button {
+  all: unset;
 }
 
 html::-webkit-scrollbar-thumb {
@@ -65,8 +69,9 @@ html::-webkit-scrollbar-track {
   --color-grey11: #ddd;
 
   --color-white1: #ffffff;
+  --color-white1b: #f8f8f8;
   --color-white2: #eaeaea;
-  --color-white3: #eeeeee;
+  --color-white3: #efefef;
   --color-white4: #e7e7e7;
 
   /* COLORS */
@@ -79,6 +84,19 @@ html::-webkit-scrollbar-track {
   /* LAYOUTS */
 
   --navbar-height: 3.3rem;
+
+  /* DARKMODE */
+  --color-dark1: #161b22;
+  --color-dark2: #0d1117;
+  --color-dark2b: #0f1417;
+  --color-dark3: #1f252f;
+  --color-dark4: #010409;
+  --color-dark4b: #050809;
+  --color-dark5: #21262d;
+  --color-dark6: #1b1f24;
+  --color-dark7: #384048;
+  --color-dark8: #2f363d;
+  --border-dark: #30363d;
 }
 
 /* RESPONSIVE */

@@ -10,7 +10,7 @@ import { uiStateActions } from "../../store/ui-state";
 import { useSelector, useDispatch } from "react-redux";
 
 function Sidebar() {
-  const sidebarOpen = useSelector((state) => state.uiState.sidebarOpen);
+  const { sidebarOpen, darkTheme } = useSelector((state) => state.uiState);
   const sidebarList = useSelector((state) => state.sideBar);
   const dispatch = useDispatch();
 
@@ -24,7 +24,8 @@ function Sidebar() {
 
   const selectedList = ({ isActive }) => {
     return {
-      backgroundColor: isActive ? "#eee" : "",
+      backgroundColor: isActive && !darkTheme ? "#eee" : "",
+      backgroundColor: isActive && darkTheme ? "#1f252f" : "",
       color: isActive ? "#457ddfee" : "",
     };
   };

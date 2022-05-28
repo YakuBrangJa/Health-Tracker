@@ -4,11 +4,17 @@
   flex-direction: column;
   align-items: stretch;
   background: var(--color-white3);
-  border: 0.1rem solid var(--color-grey7);
+  border: 1px solid var(--color-grey7);
   border-radius: 0.5rem;
   flex-shrink: 0;
   cursor: pointer;
   transition: all 100ms ease;
+}
+
+.app.dark-theme .cardItem,
+.app.dark-theme .emptyCardItem {
+  background-color: var(--color-dark1);
+  border-color: var(--border-dark);
 }
 
 .cardItem {
@@ -61,6 +67,9 @@
   line-height: 1rem;
   align-self: center;
 }
+.app.dark-theme .cardItem-name {
+  color: var(--color-grey8b);
+}
 
 .cardItem-bottom {
   display: flex;
@@ -80,14 +89,15 @@
   transition: all 150ms ease;
 }
 
-.cardItem-top .cardItem-date {
+.cardItem-date__container,
+.emptyCardItem-add__container {
   font-size: 0.8rem;
-  font-size: 0.8rem;
+  color: var(--color-black4);
 }
-.cardItem-top .icon {
-  font-size: 1.3rem;
-  /* font-size: 2rem; */
-  color: var(--color-grey3);
+
+.app.dark-theme .cardItem-date__container,
+.app.dark-theme .emptyCardItem-add__container {
+  color: var(--color-grey5);
 }
 
 /* EMPTY CARD ITEM */

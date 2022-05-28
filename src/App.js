@@ -32,7 +32,7 @@ import { otherDataActions } from "./store/other-data";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { firstRun, windowWidth, cardSelectState } = useSelector(
+  const { firstRun, windowWidth, cardSelectState, darkTheme } = useSelector(
     (state) => state.uiState
   );
 
@@ -62,7 +62,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className={`app ${darkTheme && "dark-theme"}`}>
       <Sidebar />
       <main className="app-container">
         {/* {cardSelectState && windowWidth < 576 ? "" : <NavBar />} */}

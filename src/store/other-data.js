@@ -158,6 +158,21 @@ const otherDataSlice = createSlice({
       });
     },
 
+    removeData(state, action) {
+      const { id, sidebarState } = action.payload;
+      const dataKey = Object.keys(state.otherData).find(
+        (key) =>
+          state.otherData[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.otherData[dataKey].data = state.otherData[dataKey].data.filter(
+        (item) => item.id !== id
+      );
+    },
+
     changeUnit(state, action) {
       const { unit, sidebarState } = action.payload;
       const dataKey = Object.keys(state.otherData).find(

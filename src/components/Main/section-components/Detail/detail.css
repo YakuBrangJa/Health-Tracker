@@ -17,6 +17,9 @@
   transition: transform 300ms ease;
   transform: scale(0.3);
 }
+.app.dark-theme .container-head h3 {
+  color: var(--color-grey9);
+}
 .container-head.loaded h3 {
   transform: scale(1);
 }
@@ -71,7 +74,7 @@
   transition: all 300ms 100ms ease;
   pointer-events: none;
 }
-.preferance-control:hover p {
+.preferance-control .icon:hover ~ p {
   opacity: 1;
 }
 
@@ -95,13 +98,16 @@
   padding: 0.2rem 1rem 0.5rem 0.5rem;
   position: relative;
 }
+.app.dark-theme .section-chart {
+  background-color: var(--color-dark2);
+}
 
 .chart-wrapper {
   height: 100%;
   width: 100%;
 }
 
-/* VIEW ALL DATA SECTION */
+/* DETAIL FOOTER SECTION */
 .detail-footer {
   flex-shrink: 0;
   display: flex;
@@ -132,6 +138,13 @@
   color: var(--color-grey1);
   cursor: pointer;
 }
+.app.dark-theme .detail-about,
+.app.dark-theme .view-allData,
+.app.dark-theme .mobile-fav {
+  background-color: var(--color-dark3);
+  color: var(--color-grey8b);
+}
+
 .footer-fav {
   display: none;
 }
@@ -139,6 +152,11 @@
 .detail-about:hover,
 .view-allData:hover {
   background-color: var(--color-grey7);
+}
+
+.app.dark-theme .detail-about:hover,
+.app.dark-theme .view-allData:hover {
+  background-color: var(--color-dark8);
 }
 
 .detail-footer .icon {
@@ -155,7 +173,6 @@
 @media (max-width: 576px) {
   .container-head {
     padding: 0.6rem 0.7rem;
-    background-color: var(--color-white3);
     margin-bottom: 0.8rem;
   }
 
@@ -193,7 +210,6 @@
   .detail-footer {
     padding: 1.5rem 0.7rem 3rem 0.7rem;
     flex-direction: column;
-    background-color: var(--color-white3);
     gap: 1rem;
   }
 
@@ -227,6 +243,9 @@
   .view-allData {
     border-bottom: 1px solid var(--color-grey9);
   }
+  .app.dark-theme .view-allData {
+    border-bottom: 1px solid var(--border-dark);
+  }
   .footer-fav {
     display: block;
   }
@@ -258,6 +277,10 @@
   .section-chart {
     background-color: var(--color-white1);
     padding: 0.5rem 0.8rem 0.5rem 0.5rem;
+  }
+
+  .app.dark-theme .section-chart {
+    background-color: var(--color-dark4);
   }
 }
 

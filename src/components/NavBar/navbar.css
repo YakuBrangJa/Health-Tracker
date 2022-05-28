@@ -12,6 +12,10 @@
   z-index: 2;
 }
 
+.app.dark-theme .navbar {
+  background-color: var(--color-dark1);
+}
+
 .nav-left {
   display: flex;
   align-items: center;
@@ -54,6 +58,10 @@
   background-color: var(--color-grey10);
   border-radius: 0.3rem;
 }
+.app.dark-theme .nav-search {
+  background-color: var(--color-dark2);
+}
+
 .nav-search-icon {
   color: var(--color-grey5);
 }
@@ -70,6 +78,10 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+}
+
+.theme-toggle {
+  cursor: pointer;
 }
 
 .navbar .item {
@@ -121,6 +133,10 @@
   .nav-left .icon {
     display: block;
   }
+
+  /* .menu-btn:active {
+    background-color: green;
+  } */
 }
 
 @media (max-width: 576px) {

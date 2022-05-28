@@ -15,14 +15,21 @@
   height: 2rem;
   line-height: 2rem;
 }
+.app.dark-theme .cardItem-value {
+  color: var(--color-grey11);
+}
+
 .cardItem-value.detail-value {
-  font-size: 2.3rem;
+  font-size: 2.5rem;
 }
 
 .cardItem-unit {
   font-weight: 600;
   font-size: 1rem;
   color: var(--color-grey3);
+}
+.app.dark-theme .cardItem-unit {
+  color: var(--color-grey5);
 }
 
 .foot-unit {

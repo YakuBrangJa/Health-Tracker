@@ -252,6 +252,21 @@ const respiratorySlice = createSlice({
       });
     },
 
+    removeData(state, action) {
+      const { id, sidebarState } = action.payload;
+      const dataKey = Object.keys(state.respiratory).find(
+        (key) =>
+          state.respiratory[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.respiratory[dataKey].data = state.respiratory[dataKey].data.filter(
+        (item) => item.id !== id
+      );
+    },
+
     changeUnit(state, action) {
       const { unit, sidebarState } = action.payload;
 

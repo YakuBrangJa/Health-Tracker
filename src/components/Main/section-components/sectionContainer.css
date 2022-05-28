@@ -6,6 +6,10 @@
   background-color: var(--color-white);
 }
 
+.app.dark-theme .main-section {
+  background-color: var(--color-dark4b);
+}
+
 .main-header {
   display: flex;
   margin-top: 0.5rem;

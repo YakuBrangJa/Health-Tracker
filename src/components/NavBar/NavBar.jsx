@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 import useActionSelector from "../../hooks/useActionSelector";
 
 function NavBar() {
-  const sidebarOpen = useSelector((state) => state.uiState.sidebarOpen);
+  const { sidebarOpen, darkTheme } = useSelector((state) => state.uiState);
   const { cardSelectState, backToHome, showTableState } = useSelector(
     (state) => state.uiState
   );
@@ -30,6 +30,10 @@ function NavBar() {
   const dispatch = useDispatch();
 
   const { action } = useActionSelector(sidebarState);
+
+  const themeChangeHandler = () => {
+    dispatch(uiStateActions.setDarkTheme());
+  };
 
   const openSidebarHandler = () => {
     dispatch(uiStateActions.setSideBarOpenState(!sidebarOpen));
@@ -53,6 +57,7 @@ function NavBar() {
     <nav className={`navbar ${cardSelectState && "show-backBtn"}`}>
       <div className="nav-left">
         <IoMdMenu className="icon" onClick={openSidebarHandler} />
+
         <div className="nav-search">
           <input type="search" placeholder="Search..." />
           <SearchIcon className="nav-search-icon" />
@@ -67,9 +72,9 @@ function NavBar() {
       </div>
 
       <div className="nav-right">
-        <div className="item">
-          <DarkModeIcon className="icon" />
-          {/* <LightModeOutlinedIcon /> */}
+        <div className="item theme-toggle" onClick={themeChangeHandler}>
+          {!darkTheme && <DarkModeIcon className="icon" />}
+          {darkTheme && <LightModeOutlinedIcon className="icon" />}
         </div>
         {/* <div className="item">
           <NotificationsIcon />

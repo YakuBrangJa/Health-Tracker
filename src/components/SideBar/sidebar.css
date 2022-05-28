@@ -6,6 +6,10 @@
   background-color: var(--color-grey10);
 }
 
+.app.dark-theme .sidebar {
+  background-color: var(--color-dark2);
+}
+
 .sidebar-wrapper {
   display: flex;
   flex-direction: column;
@@ -92,16 +96,23 @@
   height: 2.3rem;
   cursor: pointer;
   color: var(--color-grey2);
-  background-color: var(--color-grey10);
   transition: all 200ms ease;
 }
+
+.app.dark-theme .sidebar ul li a {
+  color: var(--color-grey9);
+}
+
 .sidebar ul li a:hover {
   background: var(--color-grey8b);
+}
+.app.dark-theme .sidebar ul li a:hover {
+  background: var(--color-black2);
+  background: var(--color-dark1);
 }
 
 .sidebar ul li a .icon {
   font-size: 1.3rem;
-  color: var(--color-grey3);
 }
 
 .sidebar ul li a span {

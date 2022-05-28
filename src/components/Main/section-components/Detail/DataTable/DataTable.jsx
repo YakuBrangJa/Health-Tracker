@@ -1,11 +1,17 @@
 import { MdArrowForwardIos } from "react-icons/md";
 
 import "./dataTable.css";
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+// import CSSTransi
+import { formStateActions } from "../../../../../store/form-state";
 
-function DataTable({ data }) {
+function DataTable({ data, actions, sidebarState }) {
+  const dispatch = useDispatch();
   const [selectedItem, setSelectedItem] = useState(null);
+  // const [deletingItem, setDeletingItem] = useState({ state: false, id: null });
+  const [deletingItem, setDeletingItem] = useState(null);
+  const [disableTransition, setDisableTransition] = useState(false);
 
   const unitState = useSelector((state) => state.formState.unitState);
 
@@ -28,6 +34,28 @@ function DataTable({ data }) {
 
   const selectedHandler = (id) =>
     setSelectedItem(id === selectedItem ? null : id);
+  console.log(deletingItem);
+
+  const deleteItemHandler = (id) => {
+    setDeletingItem(id);
+
+    const delayAddData = setTimeout(() => {
+      dispatch(actions.removeData({ id, sidebarState }));
+      dispatch(formStateActions.setDataSubmitted(true));
+    }, 260);
+
+    const delayTransition = setTimeout(() => {
+      setDisableTransition(true);
+    }, 250);
+  };
+
+  useEffect(() => {
+    const clearTransiDisable = setTimeout(() => {
+      setDisableTransition(false);
+    }, 250);
+
+    return () => clearTimeout(clearTransiDisable);
+  }, [disableTransition]);
 
   return (
     <div className={`container-table`}>
@@ -38,7 +66,12 @@ function DataTable({ data }) {
       <ul className="table-body">
         {sortedData.map((item, i) => {
           return (
-            <li key={i} className={`${selectedItem === item.id && "selected"}`}>
+            <li
+              key={i}
+              className={`${selectedItem === item.id && "selected"} ${
+                deletingItem === item.id && "deleting"
+              } ${disableTransition && "transition-disabled"}`}
+            >
               <div
                 className="data-span"
                 onClick={() => selectedHandler(item.id)}
@@ -51,7 +84,12 @@ function DataTable({ data }) {
                   <MdArrowForwardIos className="icon" />
                 </div>
               </div>
-              <span className="delete-span">Delete</span>
+              <span
+                className="delete-span"
+                onClick={() => deleteItemHandler(item.id)}
+              >
+                Delete
+              </span>
             </li>
           );
         })}

@@ -61,11 +61,11 @@ function Detail({
     <>
       <div className={`container-head ${isLoaded && "loaded"}`}>
         {!showTableState && (
-          <div className="preferance-control" onClick={toggleFavHandler}>
+          <div className="preferance-control">
             {favourite ? (
-              <FaStar className="icon" />
+              <FaStar className="icon" onClick={toggleFavHandler} />
             ) : (
-              <FaRegStar className="icon" />
+              <FaRegStar className="icon" onClick={toggleFavHandler} />
             )}
             {favourite ? <p>Remove from favourite</p> : <p>Add to favourite</p>}
           </div>
@@ -139,7 +139,9 @@ function Detail({
           </div>
         </div>
       )}
-      {showTableState && <DataTable data={data} />}
+      {showTableState && (
+        <DataTable data={data} actions={actions} sidebarState={sidebarState} />
+      )}
     </>
   );
 }

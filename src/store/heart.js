@@ -316,6 +316,21 @@ const heartSlice = createSlice({
       });
     },
 
+    removeData(state, action) {
+      const { id, sidebarState } = action.payload;
+      const dataKey = Object.keys(state.heart).find(
+        (key) =>
+          state.heart[key].id ===
+          (sidebarState === "/vitals"
+            ? state.componentState.vitalsDataState
+            : state.componentState.dataState)
+      );
+
+      state.heart[dataKey].data = state.heart[dataKey].data.filter(
+        (item) => item.id !== id
+      );
+    },
+
     changeUnit(state, action) {
       const { unit, sidebarState } = action.payload;
       const dataKey = Object.keys(state.heart).find(

@@ -24,6 +24,12 @@
   background-color: var(--color-grey8);
   transition: all 200ms ease;
 }
+.app.dark-theme .value-header .unit {
+  background-color: var(--color-dark1);
+  border: 1px solid var(--border-dark);
+  color: var(--color-grey6b);
+}
+
 .value-header .unit:hover {
   background-color: var(--color-grey7b);
 }
@@ -45,5 +51,11 @@
   .value-header .unit {
     padding: 0;
     background-color: var(--color-grey10);
+  }
+
+  .app.dark-theme .value-header .unit {
+    background-color: var(--color-dark1);
+    border: 0.5px solid var(--border-dark);
+    color: var(--color-grey6b);
   }
 }

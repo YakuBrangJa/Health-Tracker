@@ -32,7 +32,7 @@
 
 .table-body li {
   overflow-x: hidden;
-  transition: all 200ms ease;
+  transition: all 250ms ease-in-out;
   display: flex;
   height: 2.8rem;
   position: relative;
@@ -51,7 +51,7 @@
   align-items: center;
   flex: 1;
   padding: 0 1.3rem 0 1.6rem;
-  transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out, background 50ms;
 }
 .date-span {
   display: flex;
@@ -80,7 +80,8 @@
   height: 100%;
   background-color: rgb(249, 75, 75);
   color: var(--color-white3);
-  transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out, color 0ms ease;
+
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
@@ -89,6 +90,10 @@
   background-color: rgb(255, 92, 92);
 }
 
+/* SELECT TRANSITION */
+.table-body li.selected {
+  transition: all 250ms ease-in-out;
+}
 .table-body li.selected .data-span {
   transform: translateX(-7.3rem);
   padding: 0 1rem 0 1.6rem;
@@ -99,6 +104,27 @@
 .table-body li.selected .date-span .icon {
   opacity: 0;
 }
+
+/* DELETE TRANSITION */
+.table-body li.selected.deleting {
+  height: 0;
+}
+.table-body li.selected.deleting .data-span {
+  transform: translateX(-40rem);
+}
+.table-body li.selected.deleting .delete-span {
+  color: transparent;
+  transform: scaleX(8);
+  transform-origin: right;
+}
+
+.table-body li.transition-disabled,
+.table-body li.transition-disabled .data-span,
+.table-body li.transition-disabled .delete-span {
+  transition: unset;
+}
+
+/* SCROLL BAR STYLE */
 
 .container-table *::-webkit-scrollbar {
   width: 0.35rem;
@@ -166,5 +192,11 @@
   }
   .table-body .delete-span:active {
     background-color: rgb(177, 46, 46);
+  }
+
+  .table-body li.transition-disabled,
+  .table-body li.transition-disabled .data-span,
+  .table-body li.transition-disabled .delete-span {
+    transition: unset;
   }
 }
