@@ -1,0 +1,41 @@
+.appLoader2 {
+  height: 100vh;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.appLoader2 h1 {
+  color: #333;
+  font-family: sans-serif;
+  font-size: 7rem;
+  -webkit-text-stroke: 1px #329d52;
+  text-transform: uppercase;
+  font-weight: 800;
+  position: relative;
+}
+
+.appLoader2 h1::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  color: #329d52;
+  -webkit-text-stroke: 1px #329d52;
+  /* border-right: 2px solid #329d52; */ /*for text coursor*/
+  overflow: hidden;
+  animation: animate 2s ease-out infinite;
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+  }
+  85%,
+  100% {
+    width: 100%;
+  }
+}

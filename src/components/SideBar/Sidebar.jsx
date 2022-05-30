@@ -24,8 +24,8 @@ function Sidebar() {
 
   const selectedList = ({ isActive }) => {
     return {
-      backgroundColor: isActive && !darkTheme ? "#eee" : "",
-      backgroundColor: isActive && darkTheme ? "#1f252f" : "",
+      backgroundColor: isActive && (!darkTheme ? "#eee" : "#1f252f"),
+      // backgroundColor: isActive && darkTheme ? "#1f252f" : "",
       color: isActive ? "#457ddfee" : "",
     };
   };
@@ -35,10 +35,10 @@ function Sidebar() {
       <div className="sidebar-wrapper">
         <div className="sidebar-header">
           <div className="sidebar-logo">LOGO</div>
-          <div className="sidebar-close" onClick={sideBarHander}>
+          <button className="sidebar-close" onClick={sideBarHander}>
             <ArrowBackIosNewOutlinedIcon className="icon" />
             <ArrowBackIosNewOutlinedIcon className="icon" />
-          </div>
+          </button>
         </div>
         <ul className="sidebar-mid">
           <p className="title">OVERVIEW</p>

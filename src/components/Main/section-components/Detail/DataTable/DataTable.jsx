@@ -8,16 +8,22 @@ import { formStateActions } from "../../../../../store/form-state";
 
 function DataTable({ data, actions, sidebarState }) {
   const dispatch = useDispatch();
+  const [sortedData, setSortedData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-  // const [deletingItem, setDeletingItem] = useState({ state: false, id: null });
+
   const [deletingItem, setDeletingItem] = useState(null);
   const [disableTransition, setDisableTransition] = useState(false);
 
   const unitState = useSelector((state) => state.formState.unitState);
 
-  const sortedData = [...data].sort(
-    (a, b) => new Date(`${b.date}T${b.time}`) - new Date(`${a.date}T${a.time}`)
-  );
+  useEffect(() => {
+    setSortedData(
+      [...data].sort(
+        (a, b) =>
+          new Date(`${b.date}T${b.time}`) - new Date(`${a.date}T${a.time}`)
+      )
+    );
+  }, [data]);
 
   const formatDate = (date, time) => {
     const fullDate = new Date(`${date}T${time}`);
@@ -34,7 +40,6 @@ function DataTable({ data, actions, sidebarState }) {
 
   const selectedHandler = (id) =>
     setSelectedItem(id === selectedItem ? null : id);
-  console.log(deletingItem);
 
   const deleteItemHandler = (id) => {
     setDeletingItem(id);
@@ -56,6 +61,13 @@ function DataTable({ data, actions, sidebarState }) {
 
     return () => clearTimeout(clearTransiDisable);
   }, [disableTransition]);
+
+  if (data.length === 0)
+    return (
+      <div className="container-table">
+        <p className="emptyTable">No Data</p>
+      </div>
+    );
 
   return (
     <div className={`container-table`}>

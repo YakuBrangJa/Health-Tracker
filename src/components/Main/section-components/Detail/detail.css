@@ -27,28 +27,25 @@
 .container-head button > .icon {
   font-size: 1.3rem;
 }
-.container-head button:hover {
-  color: var(--color-primary1b);
-}
 
 .container-head .form-button {
   position: relative;
   white-space: nowrap;
-  flex-basis: 6rem;
+  flex-basis: 5rem;
 }
 .form-button .addData-btn {
   margin-left: auto;
 }
 
 .dataTable-back {
-  flex-basis: 6rem;
+  flex-basis: 5rem;
 }
 
 .preferance-control {
   display: flex;
   cursor: pointer;
   position: relative;
-  flex-basis: 6rem;
+  flex-basis: 5rem;
 }
 
 .preferance-control .icon {
@@ -56,6 +53,9 @@
   color: var(--color-primary1);
 }
 .preferance-control .icon:hover {
+  color: var(--color-primary1c);
+}
+.app.dark-theme .preferance-control .icon:hover {
   color: var(--color-primary1b);
 }
 
@@ -273,10 +273,13 @@
     font-size: 1.3rem;
     color: var(--color-grey1);
   }
+  .mobile-fav.fav .icon {
+    color: var(--color-primary1);
+  }
 
   .section-chart {
     background-color: var(--color-white1);
-    padding: 0.5rem 0.8rem 0.5rem 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   }
 
   .app.dark-theme .section-chart {

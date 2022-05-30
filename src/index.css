@@ -2,11 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   font-family: "Montserrat", sans-serif;
   font-family: "Nunito", sans-serif;
   /* outline: 1px solid violet; */
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 *::-webkit-scrollbar {
@@ -70,6 +70,7 @@ html::-webkit-scrollbar-track {
 
   --color-white1: #ffffff;
   --color-white1b: #f8f8f8;
+  --color-white1c: #f4f4f4;
   --color-white2: #eaeaea;
   --color-white3: #efefef;
   --color-white4: #e7e7e7;
@@ -80,23 +81,29 @@ html::-webkit-scrollbar-track {
   --bg-blue3: rgb(150, 183, 255);
 
   --color-primary1: #457ddf;
-  --color-primary1b: rgba(69, 125, 223, 0.785);
+  --color-primary1b: rgba(58, 108, 194, 0.85);
+  --color-primary1c: rgb(100, 156, 253);
   /* LAYOUTS */
 
   --navbar-height: 3.3rem;
 
   /* DARKMODE */
   --color-dark1: #161b22;
+  --color-dark1b: #191f25;
   --color-dark2: #0d1117;
   --color-dark2b: #0f1417;
   --color-dark3: #1f252f;
   --color-dark4: #010409;
   --color-dark4b: #050809;
   --color-dark5: #21262d;
+  --color-dark5b: #282e36;
   --color-dark6: #1b1f24;
   --color-dark7: #384048;
+  --color-dark7b: #414a53;
   --color-dark8: #2f363d;
+
   --border-dark: #30363d;
+  --border-dark2: #3a4149;
 }
 
 /* RESPONSIVE */

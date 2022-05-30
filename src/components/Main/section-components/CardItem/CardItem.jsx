@@ -97,7 +97,11 @@ function CardItem({
           <span
             className="cardItem-name"
             style={{
-              color: `${windowWidth < 577 && !isHome ? matchedType.color : ""}`,
+              color: `${
+                (windowWidth < 577 && !isHome) || selected
+                  ? matchedType.color
+                  : ""
+              }`,
             }}
           >
             {title}
@@ -121,7 +125,11 @@ function CardItem({
           <span
             className="cardItem-name"
             style={{
-              color: `${windowWidth < 577 && !isHome ? matchedType.color : ""}`,
+              color: `${
+                (windowWidth < 577 && !isHome) || selected
+                  ? matchedType.color
+                  : ""
+              }`,
             }}
           >
             {title}

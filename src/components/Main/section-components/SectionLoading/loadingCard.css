@@ -1,12 +1,22 @@
 .loading-card {
-  background: var(--color-grey8b);
+  background-color: var(--color-grey8b);
   height: 5.8rem;
   border-radius: 0.7rem;
   width: 100%;
+}
+.app.dark-theme .loading-card {
+  background-color: var(--color-dark3);
 }
 
 .loading-card.isHome {
   height: 6rem;
   border-radius: 0.5rem;
   background: var(--color-grey10);
+}
+
+.loading-animation {
+  animation: loading 2s linear infinite;
+}
+.app.dark-theme .loading-animation {
+  animation: loadingDark 2s linear infinite;
 }

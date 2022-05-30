@@ -9,6 +9,9 @@
   font-weight: 700;
   color: var(--color-grey2);
 }
+.app.dark-theme .summary-header h2 {
+  color: var(--color-grey5);
+}
 
 .summary-header .summary-edit__button {
   all: unset;

@@ -215,7 +215,7 @@ function useChartDataFormat() {
         const filledChart1 = weekArr.map(({ dayItem, monthItem, weekItem }) => {
           if (!prevWeekGroup)
             return {
-              x: [weekItem, monthItem + " " + dayItem],
+              x: [weekItem, monthItem + dayItem],
               y: null,
             };
 
@@ -226,12 +226,12 @@ function useChartDataFormat() {
               Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
             );
             return {
-              x: [weekItem, monthItem + " " + dayItem],
+              x: [weekItem, monthItem + dayItem],
               y: unitState.to(weekDayData, true),
             };
           } else {
             return {
-              x: [weekItem, monthItem + " " + dayItem],
+              x: [weekItem, monthItem + dayItem],
               y: null,
             };
           }
@@ -246,12 +246,12 @@ function useChartDataFormat() {
                 Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
               );
               return {
-                x: [weekItem, monthItem + " " + dayItem],
+                x: [weekItem, monthItem + dayItem],
                 y: unitState.to(weekDayData, true),
               };
             } else {
               return {
-                x: [weekItem, monthItem + " " + dayItem],
+                x: [weekItem, monthItem + dayItem],
                 y: null,
               };
             }

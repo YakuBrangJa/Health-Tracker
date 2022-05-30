@@ -50,7 +50,7 @@ function Chart({ data, formOpen, chartConfig }) {
   const { year, month, day, day14, week } = useSelector(
     (state) => state.activeData.activeDate
   );
-  const windowWidth = useSelector((state) => state.uiState.windowWidth);
+  const { windowWidth, darkTheme } = useSelector((state) => state.uiState);
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -64,11 +64,19 @@ function Chart({ data, formOpen, chartConfig }) {
     scales: {
       x: {
         stacked: true,
+        grid: {
+          color: darkTheme ? "#4445" : "#4443",
+          tickWidth: 0,
+        },
       },
       y: {
         stacked: false,
         beginAtZero: chartConfig.multiValue,
         grace: 1,
+        grid: {
+          color: darkTheme ? "#4445" : "#4443",
+          tickWidth: 0,
+        },
       },
       // xAxes: [
       //   {

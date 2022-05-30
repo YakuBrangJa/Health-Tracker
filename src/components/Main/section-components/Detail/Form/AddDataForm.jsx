@@ -107,12 +107,16 @@ function AddDataForm({ formClose, formOpenState, actions }) {
       className={`addDataForm ${formOpenState && "open"}`}
     >
       <div className="form-controls">
-        <button onClick={formClose} type="button" className="form-cancel">
+        <button
+          onClick={formClose}
+          type="button"
+          className="form-cancel text-btn"
+        >
           Cancle
         </button>
         <button
           type="submit"
-          className={`form-add ${inputIsEmpty && "submit-disabled"}`}
+          className={`form-add text-btn ${inputIsEmpty && "submit-disabled"}`}
           disabled={inputIsEmpty ? true : false}
         >
           Add

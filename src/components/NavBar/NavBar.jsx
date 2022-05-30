@@ -56,7 +56,9 @@ function NavBar() {
   return (
     <nav className={`navbar ${cardSelectState && "show-backBtn"}`}>
       <div className="nav-left">
-        <IoMdMenu className="icon" onClick={openSidebarHandler} />
+        <button className="menu-btn" onClick={openSidebarHandler}>
+          <IoMdMenu className=" icon" />
+        </button>
 
         <div className="nav-search">
           <input type="search" placeholder="Search..." />
@@ -64,12 +66,10 @@ function NavBar() {
         </div>
       </div>
 
-      <div className={`chart-back text-btn`}>
-        <button className="back-btn" onClick={goBackHandler}>
-          <MdArrowBackIosNew className="icon" />
-          <span>Back</span>
-        </button>
-      </div>
+      <button className="text-btn nav-backBtn" onClick={goBackHandler}>
+        <MdArrowBackIosNew className="icon" />
+        <span>Back</span>
+      </button>
 
       <div className="nav-right">
         <div className="item theme-toggle" onClick={themeChangeHandler}>

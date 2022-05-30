@@ -71,8 +71,8 @@ function Detail({
           </div>
         )}
         {showTableState && (
-          <div className={`dataTable-back text-btn`}>
-            <button className="back-btn" onClick={closeTableHandler}>
+          <div className={`dataTable-back `}>
+            <button className="back-btn text-btn" onClick={closeTableHandler}>
               <MdArrowBackIosNew className="icon" />
               <span>Back</span>
             </button>
@@ -80,8 +80,8 @@ function Detail({
         )}
 
         <h3>{title}</h3>
-        <div className="form-button text-btn">
-          <button className="addData-btn" onClick={formToggleHandler}>
+        <div className="form-button ">
+          <button className="text-btn addData-btn" onClick={formToggleHandler}>
             <span>Add Data</span>
             <AddRoundedIcon className="icon" />
           </button>
@@ -112,7 +112,10 @@ function Detail({
           </div>
           <div className="detail-footer">
             <div className="footer-fav">
-              <div className="mobile-fav" onClick={toggleFavHandler}>
+              <div
+                className={`mobile-fav ${favourite && "fav"}`}
+                onClick={toggleFavHandler}
+              >
                 {favourite ? (
                   <span>Remove from favourite</span>
                 ) : (

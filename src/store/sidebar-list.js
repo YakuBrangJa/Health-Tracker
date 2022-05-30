@@ -28,7 +28,7 @@ const initialState = {
         />
       ),
       color: "#5001E6",
-      route: "/",
+      route: "/home",
     },
     {
       title: "Vitals",

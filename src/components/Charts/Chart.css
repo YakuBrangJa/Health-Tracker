@@ -11,6 +11,14 @@
   display: flex;
   align-items: center;
 }
+.app.dark-theme .empty-chart__button {
+  background-color: var(--color-dark5b);
+  color: var(--color-dark1);
+}
+.app.dark-theme .empty-chart__button:hover {
+  background-color: var(--color-dark7);
+}
+
 .empty-chart__button:hover {
   cursor: pointer;
   background-color: var(--bg-blue2);

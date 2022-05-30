@@ -2,7 +2,6 @@ import "./favourites.css";
 
 import HomeHeaders from "./home-childs/HomeHeaders";
 import CardItem from "../section-components/CardItem/CardItem";
-import LoadingCard from "../section-components/SectionLoading/LoadingCard";
 
 import { useSelector } from "react-redux";
 
@@ -30,24 +29,18 @@ function Favourites() {
     <div className="favourite">
       <HomeHeaders title={"Favourites"} />
       <div className="favourite-card">
-        {!isLoading &&
-          favArr.map((item) => (
-            <CardItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              data={item.data}
-              unit={item.unit}
-              selectedUnit={item.selectedUnit}
-              type={item.type}
-              isHome={true}
-            />
-          ))}
-
-        {isLoading &&
-          Array.from(Array(8).keys()).map((item, i) => (
-            <LoadingCard key={i} isHome={true} />
-          ))}
+        {favArr.map((item) => (
+          <CardItem
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            data={item.data}
+            unit={item.unit}
+            selectedUnit={item.selectedUnit}
+            type={item.type}
+            isHome={true}
+          />
+        ))}
       </div>
     </div>
   );
