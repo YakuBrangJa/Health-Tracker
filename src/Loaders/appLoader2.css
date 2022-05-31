@@ -6,24 +6,25 @@
   justify-content: center;
   align-items: center;
 }
-body.dark-theme .appLoader2 {
-  background-color: var(--color-dark4);
-}
+/* body.dark-mode .appLoader2 {
+  background-color: #010409;
+} */
 
 .loader {
   position: relative;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
-  grid-gap: 2px;
-  width: 100px;
-  height: 100px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  width: 6rem;
+  height: 6rem;
 }
 .loader > div {
   position: relative;
   width: 100%;
   height: 100%;
-  background: tomato;
-  transform: scale(0);
+  /* background: tomato; */
+  background: #457ddf;
+  transform: scale(1);
   transform-origin: center center;
   animation: loader 1500ms infinite linear;
 }
@@ -46,15 +47,15 @@ body.dark-theme .appLoader2 {
 
 @keyframes loader {
   0% {
-    transform: scale(0);
-  }
-  40% {
     transform: scale(1);
   }
-  80% {
+  20% {
+    transform: scale(0);
+  }
+  60% {
     transform: scale(1);
   }
   100% {
-    transform: scale(0);
+    transform: scale(1);
   }
 }

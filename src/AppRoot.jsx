@@ -2,10 +2,9 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import useLocalStorage from "./hooks/useLocalStorage";
+import useDarkMode from "./hooks/useDarkMode";
 import { uiStateActions } from "./store/ui-state";
 
-import AppLoader from "./Loaders/AppLoader";
 import AppLoader2 from "./Loaders/AppLoader2";
 
 const App = lazy(() => import("./App"));
@@ -13,15 +12,11 @@ const App = lazy(() => import("./App"));
 function AppRoot() {
   const dispatch = useDispatch();
   const darkTheme = useSelector((state) => state.uiState.darkTheme);
-  const [localTheme, setLocalTheme] = useLocalStorage("dark-theme", darkTheme);
 
+  const [theme, setTheme] = useDarkMode(darkTheme);
   useEffect(() => {
-    dispatch(uiStateActions.setDarkTheme(localTheme));
-  }, [localTheme]);
-
-  useEffect(() => {
-    setLocalTheme(darkTheme);
-  }, [darkTheme]);
+    dispatch(uiStateActions.setDarkTheme(theme));
+  }, [theme]);
 
   return (
     <Suspense fallback={<AppLoader2 />}>

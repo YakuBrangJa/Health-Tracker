@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./appLoader2.module.css";
+import "./appLoader2.css";
 
 function AppLoader2() {
   return (
-    <div className={`${styles.appLoader2}`}>
-      <div className={styles.loader}>
+    <div className="appLoader2">
+      <div className="loader">
         <div></div>
         <div></div>
         <div></div>

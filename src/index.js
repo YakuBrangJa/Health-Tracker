@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
-import React, { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import store from "./store/store-index";
