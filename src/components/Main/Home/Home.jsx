@@ -7,12 +7,13 @@ import Favourites from "./Favourites";
 import AppLoader from "../../../Loaders/AppLoader";
 
 function Home() {
-  const isLoading = useSelector((state) => state.uiState.isLoading);
+  const { isLoading, darkTheme } = useSelector((state) => state.uiState);
+  const [testLoading, setTestLoading] = React.useState(true);
 
   return (
     <SectionContainer title={"Home"}>
       {isLoading ? (
-        <AppLoader />
+        <AppLoader darkTheme={darkTheme} />
       ) : (
         <div className="home-container">
           <Favourites />

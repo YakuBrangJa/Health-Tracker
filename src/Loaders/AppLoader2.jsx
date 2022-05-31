@@ -3,8 +3,18 @@ import styles from "./appLoader2.module.css";
 
 function AppLoader2() {
   return (
-    <div className={styles.appLoader2}>
-      <h1 data-text="Loading...">Loading...</h1>
+    <div className={`${styles.appLoader2}`}>
+      <div className={styles.loader}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
   );
 }

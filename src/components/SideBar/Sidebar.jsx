@@ -25,7 +25,6 @@ function Sidebar() {
   const selectedList = ({ isActive }) => {
     return {
       backgroundColor: isActive && (!darkTheme ? "#eee" : "#1f252f"),
-      // backgroundColor: isActive && darkTheme ? "#1f252f" : "",
       color: isActive ? "#457ddfee" : "",
     };
   };

@@ -1,9 +1,7 @@
 :root {
-  --bg1: #dddddd;
-}
-
-.app.dark-theme :root {
-  --bg1: #222;
+  --bg1: #ffffff;
+  --cirlce-a: rgb(97, 141, 224);
+  --cirlce-b: rgb(30, 103, 238);
 }
 
 .appLoader {
@@ -16,29 +14,43 @@
   align-items: center;
 }
 
-.circle1 {
-  width: 110px;
-  height: 110px;
+.circle1,
+.circle2,
+.circle3 {
   background: conic-gradient(
-    rgb(194, 84, 166) 0deg,
-    rgb(194, 84, 166) 140deg,
-    transparent 140deg,
+    var(--cirlce-b) 0deg,
+    var(--cirlce-b) 130deg,
+    transparent 120deg,
     transparent 360deg
   );
   border-radius: 50%;
   display: grid;
   place-items: center;
   position: relative;
-  animation: rotate1 1.3s linear infinite;
 }
-.circle1::before {
+
+.circle1::before,
+.circle2::before,
+.circle3::before {
   content: "";
   position: absolute;
-  inset: 4px; /* similar as => width: 100px; height: 100px; */
+  inset: 2px;
   background: var(--bg1);
   border-radius: 50%;
 }
 
+.appLoader.dark-theme,
+.appLoader.dark-theme .circle1::before,
+.appLoader.dark-theme .circle2::before,
+.appLoader.dark-theme .circle3::before {
+  background-color: var(--color-dark4);
+}
+
+.circle1 {
+  width: 84px;
+  height: 84px;
+  animation: rotate1 1.3s linear infinite;
+}
 @keyframes rotate1 {
   100% {
     transform: rotate(360deg);
@@ -46,52 +58,20 @@
 }
 
 .circle2 {
-  width: 90px;
-  height: 90px;
-  background: conic-gradient(
-    rgb(214, 214, 26) 0deg,
-    rgb(214, 214, 26) 150deg,
-    transparent 150deg,
-    transparent 360deg
-  );
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  position: relative;
+  width: 72px;
+  height: 72px;
   animation: rotate2 0.6s linear infinite;
 }
-.circle2::before {
-  content: "";
-  position: absolute;
-  inset: 4px; /* similar as => width: 100px; height: 100px; */
-  background: var(--bg1);
-  border-radius: 50%;
-}
-
 @keyframes rotate2 {
   100% {
     transform: rotate(-360deg);
   }
 }
+
 .circle3 {
-  width: 70px;
-  height: 70px;
-  background: conic-gradient(
-    rgb(30, 103, 238) 0deg,
-    rgb(30, 103, 238) 150deg,
-    transparent 150deg,
-    transparent 360deg
-  );
-  border-radius: 50%;
-  position: relative;
+  width: 60px;
+  height: 60px;
   animation: rotate3 0.45s linear infinite;
-}
-.circle3::before {
-  content: "";
-  position: absolute;
-  inset: 4px; /* similar as => width: 100px; height: 100px; */
-  background: var(--bg1);
-  border-radius: 50%;
 }
 @keyframes rotate3 {
   100% {
@@ -99,9 +79,11 @@
   }
 }
 
-.appLoader,
-.circle1::before,
-.circle2::before,
-.circle3::before {
-  background-color: var(--color-dark4);
+@media (max-width: 576px) {
+  .appLoader,
+  .circle1::before,
+  .circle2::before,
+  .circle3::before {
+    background-color: var(--color-white4);
+  }
 }

@@ -9,7 +9,7 @@ const initialState = {
   showTableState: false,
   fromHomeCard: false,
   backToHome: false,
-  darkTheme: true,
+  darkTheme: false,
 };
 
 const uiStateSlice = createSlice({
@@ -41,7 +41,7 @@ const uiStateSlice = createSlice({
       state.backToHome = action.payload;
     },
     setDarkTheme(state, action) {
-      state.darkTheme = !state.darkTheme;
+      state.darkTheme = action.payload;
     },
   },
 });

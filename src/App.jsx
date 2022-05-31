@@ -31,26 +31,10 @@ import { respiratoryActions } from "./store/respiratory";
 import { bodyMeasurementsActions } from "./store/body-measurements";
 import { otherDataActions } from "./store/other-data";
 
-// const Home = lazy(() => import("./components/Main/Home/Home"));
-// const Vitals = lazy(() => import("./components/Main/Vitals/Vitals"));
-// const BodyMeasurements = lazy(() =>
-//   import("./components/Main/BodyMeasurements/BodyMeasurements")
-// );
-// const Heart = lazy(() => import("./components/Main/Heart/Heart"));
-// const Respiratory = lazy(() =>
-//   import("./components/Main/Respiratory/Respiratory")
-// );
-// const OtherData = lazy(() => import("./components/Main/OtherData/OtherData"));
-// const MenstrualCycle = lazy(() =>
-//   import("./components/Main/MenstrualCycle/MenstrualCycle")
-// );
-
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { firstRun, windowWidth, cardSelectState, darkTheme } = useSelector(
-    (state) => state.uiState
-  );
+  const { firstRun, darkTheme } = useSelector((state) => state.uiState);
 
   // FETCHING DATA
   const { isLoading, error, fetchData } = useDataRequest2();
@@ -83,7 +67,6 @@ function App() {
       <main className="app-container">
         <NavBar />
         <Routes>
-          {/* <Route path="/"> */}
           <Route path="home" element={<Home />} />
           <Route path="vitals" element={<Vitals />} />
           <Route path="body-measurements" element={<BodyMeasurements />} />
@@ -94,10 +77,9 @@ function App() {
           {/* <Route path="symptoms" element={<Symptoms />} /> */}
           {/* <Route path="medications" element={<Medications />} /> */}
           {/* <Route path="sleep" element={<Sleep />} /> */}
-          <Route path="not-found" element={<h1>Page Not Found</h1>} />
+
           <Route path="/" element={<Navigate to="/home" replace />} />
           <Route path="*" element={<Navigate to="/not-found" replace />} />
-          {/* </Route> */}
         </Routes>
       </main>
     </div>

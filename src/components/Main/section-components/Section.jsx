@@ -109,6 +109,7 @@ function Section({
     dispatch(formStateActions.setDataSubmitted(false));
   }, [data, dataKey, sendRequest, sidebarState]);
 
+  // const [testLoading, setTestLoading] = useState(true);
   if (isLoading) return <SectionLoading title={title}></SectionLoading>;
 
   return (

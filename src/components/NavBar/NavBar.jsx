@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./navbar.css";
 
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
@@ -32,7 +32,7 @@ function NavBar() {
   const { action } = useActionSelector(sidebarState);
 
   const themeChangeHandler = () => {
-    dispatch(uiStateActions.setDarkTheme());
+    dispatch(uiStateActions.setDarkTheme(!darkTheme));
   };
 
   const openSidebarHandler = () => {
