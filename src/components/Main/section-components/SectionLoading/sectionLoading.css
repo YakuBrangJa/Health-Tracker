@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
 }
-.app.dark-theme .loading-left,
-.app.dark-theme .loading-right {
+body.dark-mode .loading-left,
+body.dark-mode .loading-right {
   background-color: var(--color-dark2);
 }
 
@@ -48,14 +48,14 @@
 .loading-unit__control .date {
   background-color: var(--color-grey8b);
 }
-.app.dark-theme .loading-left h3,
-.app.dark-theme .loading-right__head h3,
-.app.dark-theme .loading-right__head .icon,
-.app.dark-theme .loading-right__head span,
-.app.dark-theme .loading-date__nav,
-.app.dark-theme .loading-graph,
-.app.dark-theme .loading-unit__control .value,
-.app.dark-theme .loading-unit__control .date {
+body.dark-mode .loading-left h3,
+body.dark-mode .loading-right__head h3,
+body.dark-mode .loading-right__head .icon,
+body.dark-mode .loading-right__head span,
+body.dark-mode .loading-date__nav,
+body.dark-mode .loading-graph,
+body.dark-mode .loading-unit__control .value,
+body.dark-mode .loading-unit__control .date {
   background-color: var(--color-dark3);
 }
 
@@ -131,7 +131,7 @@
 .loading-animation {
   animation: loading 2s linear infinite;
 }
-.app.dark-theme .loading-animation {
+body.dark-mode .loading-animation {
   animation: loadingDark 2s linear infinite;
 }
 
@@ -148,16 +148,16 @@
   animation-delay: 1.15s;
 }
 
-.app.dark-theme .delay1 {
+body.dark-mode .delay1 {
   animation-delay: 0.3s;
 }
-.app.dark-theme .delay2 {
+body.dark-mode .delay2 {
   animation-delay: 0.5s;
 }
-.app.dark-theme .delay3 {
+body.dark-mode .delay3 {
   animation-delay: 0.8s;
 }
-.app.dark-theme .delay4 {
+body.dark-mode .delay4 {
   animation-delay: 1.15s;
 }
 
@@ -243,7 +243,7 @@
     min-height: auto;
     overflow: hidden;
   }
-  .app.dark-theme .loading-left {
+  body.dark-mode .loading-left {
     background-color: unset;
   }
 

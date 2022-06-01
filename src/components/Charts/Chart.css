@@ -11,11 +11,11 @@
   display: flex;
   align-items: center;
 }
-.app.dark-theme .empty-chart__button {
+body.dark-mode .empty-chart__button {
   background-color: var(--color-dark5b);
   color: var(--color-dark1);
 }
-.app.dark-theme .empty-chart__button:hover {
+body.dark-mode .empty-chart__button:hover {
   background-color: var(--color-dark7);
 }
 

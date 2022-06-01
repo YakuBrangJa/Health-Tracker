@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import SectionContainer from "../section-components/SectionContainer";
 import Favourites from "./Favourites";
-import AppLoader from "../../../Loaders/AppLoader";
+import AppLoader from "../../Loaders/AppLoader";
 
 function Home() {
   const { isLoading, darkTheme } = useSelector((state) => state.uiState);

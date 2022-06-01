@@ -1,18 +1,25 @@
-//  ICONS
-
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+// import ReactDOM from "react-dom";
 import { NavLink } from "react-router-dom";
 import "./sidebar.css";
 
+import Backdrop from "../Modals/Backdrop";
+
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { uiStateActions } from "../../store/ui-state";
 import { useSelector, useDispatch } from "react-redux";
 
 function Sidebar() {
-  const { sidebarOpen, darkTheme } = useSelector((state) => state.uiState);
+  const { sidebarOpen, darkTheme, windowWidth } = useSelector(
+    (state) => state.uiState
+  );
   const sidebarList = useSelector((state) => state.sideBar);
   const dispatch = useDispatch();
+  const sidebarRef = useRef();
+
+  const [finishedCollapse, setFinishedCollapse] = useState(true);
 
   const sideBarHander = () => {
     dispatch(uiStateActions.setSideBarOpenState(!sidebarOpen));
@@ -20,6 +27,11 @@ function Sidebar() {
   const sideBarClose = () => {
     dispatch(uiStateActions.setSideBarOpenState(false));
     dispatch(uiStateActions.setCardSelectState(false));
+    dispatch(uiStateActions.setShowTableState(false));
+    setFinishedCollapse(false);
+    setTimeout(() => {
+      setFinishedCollapse(true);
+    }, 300);
   };
 
   const selectedList = ({ isActive }) => {
@@ -29,8 +41,19 @@ function Sidebar() {
     };
   };
 
+  useOnClickOutside(
+    sidebarRef,
+    () => dispatch(uiStateActions.setSideBarOpenState(false)),
+    sidebarOpen
+  );
+
   return (
-    <section className={`sidebar ${!sidebarOpen && "collapse"}`}>
+    <section
+      className={`sidebar ${!sidebarOpen && "collapse"}  ${
+        finishedCollapse && "finished-collapse"
+      }`}
+      ref={sidebarRef}
+    >
       <div className="sidebar-wrapper">
         <div className="sidebar-header">
           <div className="sidebar-logo">LOGO</div>
@@ -72,6 +95,7 @@ function Sidebar() {
           ))}
         </ul>
       </div>
+      {windowWidth < 576 && sidebarOpen && <Backdrop />}
     </section>
   );
 }

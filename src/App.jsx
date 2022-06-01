@@ -23,6 +23,7 @@ import OtherData from "./components/Main/OtherData/OtherData";
 // LAZY LOADINGS
 
 import useDataRequest2 from "./hooks/useDataReuquest2";
+import useDarkMode from "./hooks/useDarkMode";
 import { formStateActions } from "./store/form-state";
 import { uiStateActions } from "./store/ui-state";
 
@@ -35,6 +36,12 @@ function App() {
   const dispatch = useDispatch();
   const location = useLocation();
   const { firstRun, darkTheme } = useSelector((state) => state.uiState);
+
+  // SETTING DARK MODE
+  const [theme, setTheme] = useDarkMode(darkTheme);
+  useEffect(() => {
+    dispatch(uiStateActions.setDarkTheme(theme));
+  }, [theme]);
 
   // FETCHING DATA
   const { isLoading, error, fetchData } = useDataRequest2();
@@ -62,7 +69,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`app ${darkTheme && "dark-theme"}`}>
+    <div className={`app `}>
       <Sidebar />
       <main className="app-container">
         <NavBar />

@@ -9,7 +9,7 @@
   font-weight: 700;
   color: var(--color-grey2);
 }
-.app.dark-theme .summary-header h2 {
+body.dark-mode .summary-header h2 {
   color: var(--color-grey5);
 }
 

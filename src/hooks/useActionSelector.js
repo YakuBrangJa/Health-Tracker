@@ -4,6 +4,7 @@ import { bodyMeasurementsActions } from "../store/body-measurements";
 import { heartActions } from "../store/heart";
 import { respiratoryActions } from "../store/respiratory";
 import { otherDataActions } from "../store/other-data";
+import { vitalsActions } from "../store/vitals";
 
 function useActionSelector(route) {
   const [action, setAction] = React.useState();
@@ -13,6 +14,7 @@ function useActionSelector(route) {
     heartActions,
     respiratoryActions,
     otherDataActions,
+    vitalsActions,
   };
 
   const targetData =

@@ -4,15 +4,15 @@
   flex-direction: column;
   align-items: stretch;
   background: var(--color-white3);
-  border: 1px solid var(--color-grey7);
+  border: 1px solid var(--color-grey6);
   border-radius: 0.5rem;
   flex-shrink: 0;
   cursor: pointer;
   transition: all 100ms ease;
 }
 
-.app.dark-theme .cardItem,
-.app.dark-theme .emptyCardItem {
+body.dark-mode .cardItem,
+body.dark-mode .emptyCardItem {
   background-color: var(--color-dark1);
   border-color: var(--border-dark);
 }
@@ -37,8 +37,8 @@
   border: 1px solid var(--color-grey3);
 }
 
-.app.dark-theme .cardItem.active,
-.app.dark-theme .emptyCardItem.active {
+body.dark-mode .cardItem.active,
+body.dark-mode .emptyCardItem.active {
   border: 1px solid var(--color-grey4);
 }
 
@@ -61,7 +61,7 @@
   line-height: 1rem;
   align-self: center;
 }
-.app.dark-theme .cardItem-name {
+body.dark-mode .cardItem-name {
   color: var(--color-grey8b);
 }
 
@@ -89,8 +89,8 @@
   color: var(--color-black4);
 }
 
-.app.dark-theme .cardItem-date__container,
-.app.dark-theme .emptyCardItem-add__container {
+body.dark-mode .cardItem-date__container,
+body.dark-mode .emptyCardItem-add__container {
   color: var(--color-grey5);
 }
 
@@ -121,8 +121,9 @@
 .cardItem.homeCard {
   height: 6rem;
   background: var(--color-white1);
-  border-color: var(--color-grey5);
   transition: background 200ms ease;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  transition: border 150ms ease;
 }
 .cardItem.homeCard .cardItem-date__container {
   transform: translateX(0.5rem);
@@ -130,15 +131,16 @@
 }
 
 .cardItem.homeCard:hover {
-  background-color: var(--color-grey11);
-  border-color: var(--color-black3);
+  background-color: var(--color-white2);
+  border-color: var(--color-grey5);
 }
-.app.dark-theme .cardItem.homeCard:hover {
+body.dark-mode .cardItem.homeCard:hover {
   background-color: var(--color-dark2);
   border-color: var(--color-black3);
 }
 .cardItem.homeCard:active {
-  transform: scale(0.98);
+  transform: scale(0.99);
+  box-shadow: none;
 }
 
 .cardItem.homeCard:hover .cardItem-date__container {
@@ -149,28 +151,35 @@
   .cardItem,
   .emptyCardItem {
     background-color: var(--color-white1);
-    border: 0px solid var(--color-grey7);
+    border: 1px solid var(--color-white1);
   }
   .cardItem.homeCard {
-    border: 1px solid var(--color-grey5);
+    border-color: var(--color-grey7);
   }
 }
 
 @media (max-width: 576px) {
   .cardItem {
     height: 5.8rem;
+    border: 0px solid var(--color-grey4);
   }
   .cardItem-name {
     font-size: 0.95rem;
+    border-width: 0;
   }
 
   .emptyCardItem {
     padding: 0.8rem 1rem;
+    border-width: 0;
   }
 
   .cardItem.active,
   .emptyCardItem.active {
     background-color: var(--color-white1);
+    border-width: 0;
+  }
+  body.dark-mode .cardItem.active,
+  body.dark-mode .emptyCardItem.active {
     border-width: 0;
   }
   .cardItem:active,
@@ -179,23 +188,24 @@
   }
 
   .cardItem.homeCard {
-    border: 0px solid var(--color-grey3);
+    border: 0px solid var(--color-grey8);
     transition: background 100ms ease;
+    box-shadow: none;
   }
   .cardItem.homeCard:hover {
     background-color: var(--color-white1);
   }
 
-  .app.dark-theme .cardItem.homeCard:hover {
+  body.dark-mode .cardItem.homeCard:hover {
     background-color: var(--color-dark1);
   }
   .cardItem.homeCard:active {
     transform: scale(1);
     background-color: var(--color-white1c);
   }
-  .app.dark-theme .cardItem:active,
-  .app.dark-theme .emptyCardItem:active,
-  .app.dark-theme .cardItem.homeCard:active {
+  body.dark-mode .cardItem:active,
+  body.dark-mode .emptyCardItem:active,
+  body.dark-mode .cardItem.homeCard:active {
     background-color: var(--color-dark5);
   }
 }

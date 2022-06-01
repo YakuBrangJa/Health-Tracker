@@ -4,7 +4,7 @@
   border-radius: 0.7rem;
   width: 100%;
 }
-.app.dark-theme .loading-card {
+body.dark-mode .loading-card {
   background-color: var(--color-dark3);
 }
 
@@ -17,6 +17,6 @@
 .loading-animation {
   animation: loading 2s linear infinite;
 }
-.app.dark-theme .loading-animation {
+body.dark-mode .loading-animation {
   animation: loadingDark 2s linear infinite;
 }

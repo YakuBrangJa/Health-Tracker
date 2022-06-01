@@ -17,7 +17,7 @@
   transition: all 200ms ease;
   cursor: pointer;
 }
-.app.dark-theme .date-control select {
+body.dark-mode .date-control select {
   background-color: var(--color-dark5);
   border-color: var(--border-dark);
   color: var(--color-grey8);
@@ -26,7 +26,7 @@
 .date-control select:hover {
   background-color: var(--color-grey7);
 }
-.app.dark-theme .date-control select:hover {
+body.dark-mode .date-control select:hover {
   background-color: var(--color-dark1);
 }
 

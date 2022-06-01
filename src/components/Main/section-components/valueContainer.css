@@ -15,7 +15,7 @@
   height: 2rem;
   line-height: 2rem;
 }
-.app.dark-theme .cardItem-value {
+body.dark-mode .cardItem-value {
   color: var(--color-grey11);
 }
 
@@ -28,7 +28,7 @@
   font-size: 1rem;
   color: var(--color-grey3);
 }
-.app.dark-theme .cardItem-unit {
+body.dark-mode .cardItem-unit {
   color: var(--color-grey5);
 }
 

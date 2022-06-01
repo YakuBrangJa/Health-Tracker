@@ -8,7 +8,7 @@
   padding-top: 0.5rem;
 }
 
-.app.dark-theme .main-section {
+body.dark-mode .main-section {
   background-color: var(--color-dark4b);
 }
 
@@ -26,7 +26,7 @@
   font-size: 1.4rem;
   color: var(--color-grey1);
 }
-.app.dark-theme .main-header > h1 {
+body.dark-mode .main-header > h1 {
   color: var(--color-white3);
 }
 
@@ -36,14 +36,14 @@
 .main-section::-webkit-scrollbar-thumb {
   background-color: var(--color-grey4);
 }
-.app.dark-theme .main-section::-webkit-scrollbar-thumb {
+body.dark-mode .main-section::-webkit-scrollbar-thumb {
   background-color: var(--color-grey2);
 }
 
 .main-section::-webkit-scrollbar-track {
   background-color: var(--color-white1);
 }
-.app.dark-theme .main-section::-webkit-scrollbar-track {
+body.dark-mode .main-section::-webkit-scrollbar-track {
   background-color: var(--color-dark4);
 }
 
@@ -80,7 +80,7 @@
   .main-section.selected {
     background-color: var(--color-white3);
   }
-  .app.dark-theme .main-section.selected {
+  body.dark-mode .main-section.selected {
     background-color: var(--color-dark2);
   }
 

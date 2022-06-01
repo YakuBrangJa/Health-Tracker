@@ -15,7 +15,7 @@
   color: var(--color-grey5);
   margin: auto 0;
 }
-.app.dark-theme .emptyTable {
+body.dark-mode .emptyTable {
   color: var(--color-grey2);
 }
 
@@ -28,7 +28,7 @@
   align-items: center;
   padding: 0 1.5rem;
 }
-.app.dark-theme .table-head {
+body.dark-mode .table-head {
   background-color: var(--color-dark8);
 }
 
@@ -36,7 +36,7 @@
   font-weight: 650;
   color: var(--color-black4);
 }
-.app.dark-theme .table-head span {
+body.dark-mode .table-head span {
   color: var(--color-grey8);
 }
 .table-body {
@@ -46,7 +46,7 @@
   border-bottom-left-radius: 0.35rem;
   border-bottom-right-radius: 0.35rem;
 }
-.app.dark-theme .table-body {
+body.dark-mode .table-body {
   background-color: var(--color-dark1);
 }
 
@@ -60,14 +60,14 @@
 .table-body .data-span:hover {
   background-color: var(--color-grey11);
 }
-.app.dark-theme .table-body .data-span:hover {
+body.dark-mode .table-body .data-span:hover {
   background-color: var(--color-dark5);
 }
 
 .table-body li:not(:last-child) {
   border-bottom: 1px solid var(--color-grey8);
 }
-.app.dark-theme .table-body li:not(:last-child) {
+body.dark-mode .table-body li:not(:last-child) {
   border-bottom: 1px solid var(--border-dark);
 }
 
@@ -87,7 +87,7 @@
 .data-span .value {
   font-weight: 500;
 }
-.app.dark-theme .data-span .value {
+body.dark-mode .data-span .value {
   color: var(--color-white4);
 }
 
@@ -95,14 +95,14 @@
   color: var(--color-grey2);
   font-weight: 500;
 }
-.app.dark-theme .date-span .date {
+body.dark-mode .date-span .date {
   color: var(--color-grey5);
 }
 .date-span .icon {
   font-size: 0.9rem;
   color: var(--color-grey5);
 }
-.app.dark-theme .date-span .icon {
+body.dark-mode .date-span .icon {
   color: var(--color-grey2);
 }
 
@@ -126,10 +126,10 @@
 .table-body .delete-span:hover {
   background-color: rgb(255, 92, 92);
 }
-.app.dark-theme .table-body .delete-span {
+body.dark-mode .table-body .delete-span {
   background-color: #ad2c2c;
 }
-.app.dark-theme .table-body .delete-span:hover {
+body.dark-mode .table-body .delete-span:hover {
   background-color: #b72f2f;
 }
 
@@ -177,7 +177,7 @@
 .table-body::-webkit-scrollbar-thumb {
   background-color: #9999;
 }
-.app.dark-theme .table-body::-webkit-scrollbar-thumb {
+body.dark-mode .table-body::-webkit-scrollbar-thumb {
   background-color: var(--color-grey1);
 }
 .table-body::-webkit-scrollbar-thumb:hover {
@@ -220,19 +220,19 @@
   .table-body li .data-span:hover {
     background-color: var(--color-white1);
   }
-  .app.dark-theme .table-body li .data-span:hover {
+  body.dark-mode .table-body li .data-span:hover {
     background-color: var(--color-dark1);
   }
   .table-body li .data-span:active {
     background-color: var(--color-white4);
   }
-  .app.dark-theme .table-body li .data-span:active {
+  body.dark-mode .table-body li .data-span:active {
     background-color: var(--color-dark3);
   }
   .table-body li:not(:last-child) {
     border-bottom: 0.1px solid var(--color-grey10);
   }
-  .app.dark-theme .table-body li:not(:last-child) {
+  body.dark-mode .table-body li:not(:last-child) {
     border-bottom: 0.1px solid var(--border-dark);
   }
   .table-body li .data-span {
@@ -253,7 +253,7 @@
     padding: 0 0.5rem 0 1.4rem;
     background-color: var(--color-white1c);
   }
-  .app.dark-theme .table-body li.selected .data-span {
+  body.dark-mode .table-body li.selected .data-span {
     background-color: var(--color-dark5);
   }
   .table-body .delete-span:hover {
@@ -262,10 +262,10 @@
   .table-body .delete-span:active {
     background-color: rgb(177, 46, 46);
   }
-  .app.dark-theme .table-body .delete-span:hover {
+  body.dark-mode .table-body .delete-span:hover {
     background-color: #9a2626;
   }
-  .app.dark-theme .table-body .delete-span:active {
+  body.dark-mode .table-body .delete-span:active {
     background-color: #ab2b2b;
   }
 

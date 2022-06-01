@@ -1,0 +1,15 @@
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(50, 50, 50, 0.3);
+  /* z-index: -1; */
+}
+
+@media (max-width: 1210px) {
+  .backdrop {
+    z-index: 1;
+  }
+}

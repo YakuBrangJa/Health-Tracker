@@ -25,7 +25,7 @@
   border: 1px solid var(--color-grey6);
   transition: all 200ms ease;
 }
-.app.dark-theme .value-header .unit {
+body.dark-mode .value-header .unit {
   background-color: var(--color-dark1);
   border: 1px solid var(--border-dark);
   color: var(--color-grey8);
@@ -34,7 +34,7 @@
 .value-header .unit:hover {
   background-color: var(--color-grey7b);
 }
-.app.dark-theme .value-header .unit:hover {
+body.dark-mode .value-header .unit:hover {
   background-color: var(--color-dark5b);
 }
 
@@ -55,7 +55,7 @@
     background-color: var(--color-grey10);
   }
 
-  .app.dark-theme .value-header .unit {
+  body.dark-mode .value-header .unit {
     background-color: var(--color-dark1);
     border: 0.5px solid var(--border-dark);
     color: var(--color-grey6b);

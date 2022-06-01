@@ -24,7 +24,7 @@
   padding: 0.8rem;
   background-color: var(--color-grey11);
 }
-.app.dark-theme .form-controls {
+body.dark-mode .form-controls {
   background-color: var(--color-dark3);
 }
 
@@ -50,7 +50,7 @@
   padding: 0 0.9rem;
   background: var(--color-white1);
 }
-.app.dark-theme .addDataForm ul {
+body.dark-mode .addDataForm ul {
   background-color: var(--color-dark5b);
 }
 
@@ -66,7 +66,7 @@
 .addDataForm ul li:not(:last-child) {
   border-bottom: 1px solid var(--color-grey7);
 }
-.app.dark-theme .addDataForm ul li {
+body.dark-mode .addDataForm ul li {
   border-bottom-color: var(--border-dark2);
   color: var(--color-grey7);
 }
@@ -81,7 +81,7 @@
   padding-right: 0.3rem;
   background-color: var(--color-white1);
 }
-.app.dark-theme .addDataForm ul li input {
+body.dark-mode .addDataForm ul li input {
   background-color: var(--color-dark5b);
   color: var(--color-grey8);
 }
@@ -101,5 +101,15 @@
   }
   .addDataForm .form-cancel:hover {
     color: var(--color-grey2);
+  }
+
+  .addDataForm {
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, 0%) scale(0);
+    transform-origin: center;
+  }
+  .addDataForm.open {
+    transform: translate(-50%, 0%) scale(1);
   }
 }

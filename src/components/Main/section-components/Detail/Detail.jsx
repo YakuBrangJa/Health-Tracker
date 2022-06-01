@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import "./detail.css";
 import { useDispatch, useSelector } from "react-redux";
+import useOnClickOutside from "../../../../hooks/useOnClickOutside";
 
 import AddDataForm from "./Form/AddDataForm";
 import DateNav from "./DateNav";
@@ -47,7 +48,7 @@ function Detail({
     dispatch(formStateActions.setDataSubmitted(true));
   };
 
-  const formToggleHandler = () => setFormOpen(!formOpen);
+  const formOpenHandler = () => setFormOpen(true);
   const formCloseHandler = () => setFormOpen(false);
 
   const showTableHandler = () => {
@@ -81,13 +82,13 @@ function Detail({
 
         <h3>{title}</h3>
         <div className="form-button ">
-          <button className="text-btn addData-btn" onClick={formToggleHandler}>
+          <button className="text-btn addData-btn" onClick={formOpenHandler}>
             <span>Add Data</span>
             <AddRoundedIcon className="icon" />
           </button>
           <AddDataForm
             formOpenState={formOpen}
-            formClose={formCloseHandler}
+            formCloseHandler={formCloseHandler}
             actions={actions}
           />
         </div>
@@ -107,7 +108,7 @@ function Detail({
               data={data}
               chartConfig={chartConfig}
               className="chart"
-              formOpen={formToggleHandler}
+              formOpen={formOpenHandler}
             />
           </div>
           <div className="detail-footer">

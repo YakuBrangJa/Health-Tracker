@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useFormDateFormat from "../../../../../hooks/useFormDateFormat";
+import useOnClickOutside from "../../../../../hooks/useOnClickOutside";
 
 import ValueInput from "./ValueInput";
 import { formStateActions } from "../../../../../store/form-state";
 
 import "./addDataForm.css";
 
-function AddDataForm({ formClose, formOpenState, actions }) {
+function AddDataForm({ formCloseHandler, formOpenState, actions }) {
   const [formData, setFormData] = useState({});
   const [formDate, setFormDate] = useState("");
   const [formTime, setFormTime] = useState("");
@@ -16,9 +17,14 @@ function AddDataForm({ formClose, formOpenState, actions }) {
   const [inputIsEmpty, setInputIsEmpty] = useState(true);
 
   const dispatch = useDispatch();
+  const formRef = useRef();
   const { sidebarState, unitState } = useSelector((state) => state.formState);
   const { date, time } = useFormDateFormat(formOpenState);
 
+  // CLOSE FORM ON CLICKED OUTSIDE
+  useOnClickOutside(formRef, formCloseHandler, formOpenState);
+
+  // SETTING INITIAL FORM VALUES
   useEffect(() => {
     setFormDate(date);
     setFormTime(time);
@@ -47,6 +53,7 @@ function AddDataForm({ formClose, formOpenState, actions }) {
     setInputIsEmpty(true);
   }, [date, time, formOpenState]);
 
+  // LISTENING TO FORM VALUE CHANGES
   const onChangeHandler = (e) => {
     if (e.target.name === "date") setFormDate(e.target.value);
     if (e.target.name === "time") setFormTime(e.target.value);
@@ -76,6 +83,7 @@ function AddDataForm({ formClose, formOpenState, actions }) {
     }
   };
 
+  // SUBMIT HANDLER FUNCTION
   const addDataHandler = (event) => {
     event.preventDefault();
 
@@ -98,17 +106,18 @@ function AddDataForm({ formClose, formOpenState, actions }) {
       }, {})
     );
     setInputIsEmpty(true);
-    formClose();
+    formCloseHandler();
   };
 
   return (
     <form
       onSubmit={addDataHandler}
       className={`addDataForm ${formOpenState && "open"}`}
+      ref={formRef}
     >
       <div className="form-controls">
         <button
-          onClick={formClose}
+          onClick={formCloseHandler}
           type="button"
           className="form-cancel text-btn"
         >

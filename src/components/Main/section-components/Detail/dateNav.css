@@ -9,7 +9,7 @@
   padding: 0.3rem 0.1rem;
 }
 
-.app.dark-theme .date-navigation ul {
+body.dark-mode .date-navigation ul {
   background-color: var(--color-dark6);
 }
 .date-navigation ul li {
@@ -20,7 +20,7 @@
   border-right: 2px solid var(--color-grey6b);
 }
 
-.app.dark-theme .date-navigation ul li:not(:nth-child(5)) {
+body.dark-mode .date-navigation ul li:not(:nth-child(5)) {
   border-right: 2px solid var(--border-dark);
 }
 
@@ -35,7 +35,7 @@
   font-weight: 600;
   color: var(--color-black2);
 }
-.app.dark-theme .date-navigation ul li > span {
+body.dark-mode .date-navigation ul li > span {
   color: var(--color-grey7);
 }
 
@@ -54,7 +54,7 @@
   box-shadow: 0px 0px 0.4rem 0.2rem rgba(50, 50, 50, 0.3);
   transition: transform 300ms ease;
 }
-.app.dark-theme .navigator {
+body.dark-mode .navigator {
   background-color: var(--color-dark7b);
 }
 
