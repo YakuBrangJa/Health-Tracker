@@ -14,9 +14,10 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5px;
-  width: 6rem;
-  height: 6rem;
+  grid-gap: 0.25rem;
+  width: 6.2rem;
+  height: 6.2rem;
+  padding: 0.2rem;
 }
 .loader > div {
   position: relative;

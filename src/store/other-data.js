@@ -44,12 +44,9 @@ const initialState = {
         },
       },
       chartConfig: {
-        type: "line",
+        type: "bar",
         config: {
           label: "Blood Glocose",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -84,8 +81,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Sexual Activity",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -120,8 +115,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Blood Alchohol Content",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },

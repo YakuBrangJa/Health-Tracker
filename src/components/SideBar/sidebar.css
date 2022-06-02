@@ -185,12 +185,13 @@ body.dark-mode .sidebar ul li a:hover {
   }
 
   .sidebar-header {
-    justify-content: stretch;
     padding: 0 0.5rem 0 1.2rem;
+    position: relative;
   }
 
   .sidebar-close {
-    margin-left: auto;
+    position: absolute;
+    right: 0.3rem;
   }
 
   .sidebar.collapse .sidebar-close {
@@ -203,8 +204,15 @@ body.dark-mode .sidebar ul li a:hover {
     transition: all 200ms ease;
   }
 
+  .sidebar-logo {
+    opacity: 1;
+    transition: opacity 400ms ease;
+    white-space: nowrap;
+  }
+
   .sidebar.collapse .sidebar-logo {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 

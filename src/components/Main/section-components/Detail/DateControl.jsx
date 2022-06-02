@@ -102,14 +102,19 @@ function DateControl({ data }) {
           yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
         };
       }
-    ).filter((item) => item.yearItem === year);
+    );
 
-    setFourteenDayArray(dayArr);
+    const dayArrFiltered = dayArr.filter((item) => item.yearItem === year);
+    const fixedDayArr =
+      dayArrFiltered.length === 0 ? [dayArr.slice(-1).pop()] : dayArrFiltered;
+
+    setFourteenDayArray(fixedDayArr);
   }, [earliestData, latestData, dateTree, year, month]);
 
   // WEEK
   useEffect(() => {
     if (!earliestData || !latestData || !dateTree || !year || !month) return;
+
     const totalInterval = (
       (new Date(latestData.date).getTime() -
         new Date(earliestData.date).getTime()) /
@@ -119,25 +124,31 @@ function DateControl({ data }) {
     const dayArr = Array.from(
       { length: totalInterval == 0 ? 1 : totalInterval },
       (_, i) => {
-        const day14 = new Date(
+        const weekDays = new Date(
           nextSunday(latestData.date) - (i + 1) * 60000 * 60 * 24 * 7
         );
 
         return {
-          dayItem: day14.getDate(),
-          monthItem: day14.toLocaleString("en-US", { month: "short" }),
-          yearItem: day14.toLocaleString("en-US", { year: "numeric" }),
+          dayItem: weekDays.getDate(),
+          monthItem: weekDays.toLocaleString("en-US", { month: "short" }),
+          yearItem: weekDays.toLocaleString("en-US", { year: "numeric" }),
         };
       }
-    ).filter((item) => item.yearItem === year && item.monthItem === month);
+    );
+    const dayArrFiltered = dayArr.filter(
+      (item) => item.yearItem === year && item.monthItem === month
+    );
+    const fixedDayArr =
+      dayArrFiltered.length === 0 ? [dayArr.slice(-1).pop()] : dayArrFiltered;
 
-    setWeekArray(dayArr);
+    setWeekArray(fixedDayArr);
   }, [earliestData, latestData, dateTree, year, month]);
 
   // DAY
   useEffect(() => {
     if (!dateTree || !year || !month) return;
-    setDayArray(Object.keys(dateTree[year][month]));
+    const arr = dateTree[year][month] ? Object.keys(dateTree[year][month]) : [];
+    setDayArray(arr);
   }, [dateTree, year, month]);
 
   // DISPATCH STATE
@@ -162,6 +173,9 @@ function DateControl({ data }) {
   useEffect(() => {
     dispatch(activeDataActions.setActiveWeek(JSON.stringify(weekArray[0])));
   }, [weekArray, activeDataActions]);
+
+  // console.log(day14);
+  // console.log(week !== undefined ? JSON.parse(week) : "no week");
 
   if (yearArray.length === 0 || !dateTree) return <div></div>;
 

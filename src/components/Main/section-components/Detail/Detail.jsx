@@ -21,6 +21,7 @@ function Detail({
   id,
   title,
   data,
+  type,
   unit,
   selectedUnit,
   favourite,
@@ -106,8 +107,8 @@ function Detail({
             <Chart
               id={id}
               data={data}
+              type={type}
               chartConfig={chartConfig}
-              className="chart"
               formOpen={formOpenHandler}
             />
           </div>

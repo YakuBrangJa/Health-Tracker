@@ -175,7 +175,7 @@ function Section({
               unit={data[dataKey].unit}
               favourite={data[dataKey].favourite}
               selectedUnit={data[dataKey].selectedUnit}
-              // actions={actions}
+              type={data[dataKey].type}
               actions={title === "Vitals" ? data[dataKey].actions : actions}
               chartConfig={data[dataKey].chartConfig}
             />

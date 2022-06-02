@@ -78,7 +78,7 @@ const initialState = {
         config: {
           label: "Height",
           borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
+          // backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -129,7 +129,7 @@ const initialState = {
         config: {
           label: "Weight",
           borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
+          // backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -180,8 +180,8 @@ const initialState = {
         type: "line",
         config: {
           label: "Body Temperature",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132)",
+          // borderColor: "rgb(255, 99, 132)",
+          // backgroundColor: "rgba(255, 99, 132)",
         },
         multiValue: false,
       },
@@ -217,7 +217,7 @@ const initialState = {
         config: {
           label: "Body Fat Percentage",
           borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
+          // backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -252,8 +252,8 @@ const initialState = {
         type: "line",
         config: {
           label: "BMI",
-          borderColor: "rgba(53, 162, 235, 0.8)",
-          backgroundColor: "rgba(53, 162, 235, 0.4)",
+          // borderColor: "rgba(53, 162, 235, 0.8)",
+          // backgroundColor: "rgba(53, 162, 235, 0.4)",
         },
         multiValue: false,
       },
@@ -305,9 +305,9 @@ const initialState = {
 
         config: {
           label: "Body Temperature",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
+          // borderColor: "rgb(255, 99, 132)",
+          // backgroundColor: "rgba(255, 99, 132)",
+          // pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -358,7 +358,7 @@ const initialState = {
         type: "line",
         config: {
           label: "Lean Body Mass",
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
+          // backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },

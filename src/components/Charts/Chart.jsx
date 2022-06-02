@@ -34,7 +34,7 @@ ChartJS.register(
 const skipped = (ctx, value) =>
   ctx.p0.skip || ctx.p1.skip ? value : undefined;
 
-function Chart({ data, formOpen, chartConfig }) {
+function Chart({ data, formOpen, type, chartConfig }) {
   const [valueData, setValueData] = React.useState({
     datasets: [
       {
@@ -50,6 +50,12 @@ function Chart({ data, formOpen, chartConfig }) {
   const { year, month, day, day14, week } = useSelector(
     (state) => state.activeData.activeDate
   );
+  const typeStyleConfig = useSelector((state) => state.sideBar.browse);
+
+  const matchedType = typeStyleConfig.find(
+    (item) => item.route.replace("/", "") === type
+  );
+
   const { windowWidth, darkTheme } = useSelector((state) => state.uiState);
 
   useEffect(() => {
@@ -120,6 +126,9 @@ function Chart({ data, formOpen, chartConfig }) {
     },
     datasets: {
       line: {
+        borderColor: matchedType.color,
+        backgroundColor: matchedType.color,
+        pointBackgroundColor: matchedType.color,
         spanGaps: true,
         segment: {
           borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132)"),
@@ -128,6 +137,9 @@ function Chart({ data, formOpen, chartConfig }) {
         borderWidth: windowWidth < 576 ? 2 : 2.5,
         pointRadius: 2.5,
         hoverRadius: windowWidth < 576 ? 3.5 : 5,
+      },
+      bar: {
+        backgroundColor: matchedType.color + "aa",
       },
     },
   };

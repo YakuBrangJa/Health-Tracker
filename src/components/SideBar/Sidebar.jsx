@@ -56,7 +56,7 @@ function Sidebar() {
     >
       <div className="sidebar-wrapper">
         <div className="sidebar-header">
-          <div className="sidebar-logo">LOGO</div>
+          <div className="sidebar-logo">Health Tracker</div>
           <button className="sidebar-close" onClick={sideBarHander}>
             <ArrowBackIosNewOutlinedIcon className="icon" />
             <ArrowBackIosNewOutlinedIcon className="icon" />

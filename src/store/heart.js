@@ -31,9 +31,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Heart Rate",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -90,14 +87,12 @@ const initialState = {
           {
             label: "Diastolic",
             path: "diastolic",
-            borderWidth: 0,
-            backgroundColor: "rgba(53, 162, 235, 0.7)",
+            backgroundColor: "rgba(48, 145, 209, 0.7)",
           },
           {
             label: "Systolic",
             path: "systolic",
-            borderWidth: 0,
-            backgroundColor: "rgba(255, 99, 132, 0.8)",
+            backgroundColor: "rgba(254, 55, 95, 0.7)",
           },
         ],
         multiValue: true,
@@ -132,10 +127,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Heart Rate",
-          borderWidth: 2.5,
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -169,8 +160,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Cardio Fitness",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -204,8 +193,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Peripheral Perfusion Index",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -239,9 +226,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Resting Heart Rate",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -275,9 +259,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Walking Heart Rate",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },

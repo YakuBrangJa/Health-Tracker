@@ -31,8 +31,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Blood Oxygen",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -67,9 +65,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Breaths Per Minute",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },
@@ -104,8 +99,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Force Vital Capicity",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -140,8 +133,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Peak Expiratory Flow Rate",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -176,8 +167,6 @@ const initialState = {
         type: "bar",
         config: {
           label: "Forced Expiratory Volume, 1sec",
-          borderWidth: 0,
-          backgroundColor: "rgba(53, 162, 235, 0.7)",
         },
         multiValue: false,
       },
@@ -212,9 +201,6 @@ const initialState = {
         type: "line",
         config: {
           label: "Six-Minute Walk",
-          borderColor: "rgb(255, 99, 132)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          pointBackgroundColor: "rgba(255, 99, 132, 1)",
         },
         multiValue: false,
       },

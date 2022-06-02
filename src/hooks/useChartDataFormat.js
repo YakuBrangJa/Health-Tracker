@@ -81,6 +81,12 @@ function useChartDataFormat() {
         const monthGroup = dateTree[year][month];
 
         const filledChart = dayArr.map((dayItem) => {
+          if (!monthGroup)
+            return {
+              x: dayItem,
+              y: null,
+            };
+
           const matchedDay = monthGroup[dayItem];
 
           if (matchedDay) {
@@ -127,12 +133,14 @@ function useChartDataFormat() {
           dayArr.findIndex((item) => item.monthItem === day14Parsed.monthItem)
         );
 
+        // const dayArr2 = [];
+
         // console.log(dayArr, dayArr2);
 
-        const filledChart1 = dayArr.map(({ dayItem, monthItem }) => {
+        const filledChart1 = dayArr.map(({ dayItem, monthItem }, i) => {
           if (!prevMonthGroup)
             return {
-              x: dayItem === dayArr[0].dayItem ? [dayItem, monthItem] : dayItem,
+              x: i === 0 ? [dayItem, monthItem] : dayItem,
               y: null,
             };
 
@@ -143,18 +151,23 @@ function useChartDataFormat() {
               Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
             );
             return {
-              x: dayItem === dayArr[0].dayItem ? [dayItem, monthItem] : dayItem,
+              x: i === 0 ? [dayItem, monthItem] : dayItem,
               y: unitState.to(dayData, true),
             };
           } else {
             return {
-              x: dayItem === dayArr[0].dayItem ? [dayItem, monthItem] : dayItem,
+              x: i === 0 ? [dayItem, monthItem] : dayItem,
               y: null,
             };
           }
         });
 
-        const filledChart2 = dayArr2.map(({ dayItem, monthItem }) => {
+        const filledChart2 = dayArr2.map(({ dayItem, monthItem }, i) => {
+          if (!monthGroup)
+            return {
+              x: i === 0 ? [dayItem, monthItem] : dayItem,
+              y: null,
+            };
           const matchedDay = monthGroup[dayItem];
 
           if (matchedDay) {
@@ -162,14 +175,12 @@ function useChartDataFormat() {
               Object.values(matchedDay.hour).map((hr) => reduceToAvg(hr))
             );
             return {
-              x:
-                dayItem === dayArr2[0].dayItem ? [dayItem, monthItem] : dayItem,
+              x: i === 0 ? [dayItem, monthItem] : dayItem,
               y: unitState.to(dayData, true),
             };
           } else {
             return {
-              x:
-                dayItem === dayArr2[0].dayItem ? [dayItem, monthItem] : dayItem,
+              x: i === 0 ? [dayItem, monthItem] : dayItem,
               y: null,
             };
           }
@@ -204,12 +215,16 @@ function useChartDataFormat() {
           };
         });
 
-        const weekGroup = dateTree[weekParsed.yearItem][weekParsed.monthItem];
+        const weekGroup =
+          dateTree[weekParsed.yearItem][weekArr.slice(-1).pop().monthItem];
+
         const prevWeekGroup =
           dateTree[weekParsed.yearItem][weekArr[0].monthItem];
 
         const weekArr2 = weekArr.splice(
-          weekArr.findIndex((item) => item.monthItem === weekParsed.monthItem)
+          weekArr.findIndex(
+            (item) => item.monthItem === weekArr.slice(-1).pop().monthItem
+          )
         );
 
         const filledChart1 = weekArr.map(({ dayItem, monthItem, weekItem }) => {
@@ -239,6 +254,12 @@ function useChartDataFormat() {
 
         const filledChart2 = weekArr2.map(
           ({ dayItem, monthItem, weekItem }) => {
+            if (!weekGroup)
+              return {
+                x: [weekItem, monthItem + dayItem],
+                y: null,
+              };
+
             const matchedDay = weekGroup[dayItem];
 
             if (matchedDay) {

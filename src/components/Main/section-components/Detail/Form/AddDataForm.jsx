@@ -67,9 +67,6 @@ function AddDataForm({ formCloseHandler, formOpenState, actions }) {
       }
     });
 
-    console.log(formData);
-    console.log(formValue);
-
     setFormData({
       ...formData,
       [e.target.name]: e.target.value.trim(),

@@ -109,11 +109,11 @@ const initialState = {
         <AddCircleIcon
           className="icon"
           style={{
-            color: "#1e74dc",
+            color: "#35c759",
           }}
         />
       ),
-      color: "#1e74dc",
+      color: "#35c759",
       route: "/other-data",
     },
     {
