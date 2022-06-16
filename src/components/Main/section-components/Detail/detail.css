@@ -99,6 +99,12 @@ body.dark-mode .preferance-control .icon:hover {
   padding: 0.2rem 1rem 0.5rem 0.5rem;
   position: relative;
 }
+
+.section-chart canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 body.dark-mode .section-chart {
   background-color: var(--color-dark2);
 }

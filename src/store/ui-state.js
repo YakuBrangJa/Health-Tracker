@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   windowWidth: 0,
-  isLoading: true,
+  isLoading: false,
   sidebarOpen: false,
   firstRun: true,
   cardSelectState: false,
   showTableState: false,
   fromHomeCard: false,
   backToHome: false,
-  darkTheme: false,
+  darkTheme: null,
 };
 
 const uiStateSlice = createSlice({

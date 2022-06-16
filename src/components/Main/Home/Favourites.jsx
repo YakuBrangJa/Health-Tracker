@@ -28,20 +28,26 @@ function Favourites() {
   return (
     <div className="favourite">
       <HomeHeaders title={"Favourites"} />
-      <div className="favourite-card">
-        {favArr.map((item) => (
-          <CardItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            data={item.data}
-            unit={item.unit}
-            selectedUnit={item.selectedUnit}
-            type={item.type}
-            isHome={true}
-          />
-        ))}
-      </div>
+      {favArr.length !== 0 ? (
+        <div className="favourite-card">
+          {favArr.map((item) => (
+            <CardItem
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              data={item.data}
+              unit={item.unit}
+              selectedUnit={item.selectedUnit}
+              type={item.type}
+              isHome={true}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="empty-favourite">
+          <p>No Favourite</p>
+        </div>
+      )}
     </div>
   );
 }

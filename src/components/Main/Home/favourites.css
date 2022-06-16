@@ -2,14 +2,27 @@
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  /* flex: 1; */
-  /* flex-basis: 100%; */
+  flex: 1;
 }
 
 .favourite-card {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  /* flex: 1; */
+}
+
+.empty-favourite {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-favourite p {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-grey6);
 }
 
 @media (max-width: 1260px) {
@@ -40,5 +53,9 @@
   .favourite-card {
     grid-template-columns: 1fr;
     gap: 0.6rem;
+  }
+
+  .empty-favourite p {
+    font-size: 1.7rem;
   }
 }

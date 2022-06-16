@@ -92,16 +92,15 @@ function CardItem({
       <div
         className={`emptyCardItem ${selected && "active"}`}
         onClick={onClickHandler}
+        style={{
+          borderLeftColor: `${!isHome && selected ? matchedType.color : ""}`,
+        }}
       >
         <div className="emptyCardItem-top">
           <span
             className="cardItem-name"
             style={{
-              color: `${
-                (windowWidth < 577 && !isHome) || selected
-                  ? matchedType.color
-                  : ""
-              }`,
+              color: `${windowWidth < 577 && !isHome ? matchedType.color : ""}`,
             }}
           >
             {title}
@@ -120,16 +119,15 @@ function CardItem({
       <div
         className={`cardItem ${selected && "active"} ${isHome && "homeCard"}`}
         onClick={onClickHandler}
+        style={{
+          borderLeftColor: `${!isHome && selected ? matchedType.color : ""}`,
+        }}
       >
         <div className="cardItem-top">
           <span
             className="cardItem-name"
             style={{
-              color: `${
-                (windowWidth < 577 && !isHome) || selected
-                  ? matchedType.color
-                  : ""
-              }`,
+              color: `${windowWidth < 577 && !isHome ? matchedType.color : ""}`,
             }}
           >
             {title}

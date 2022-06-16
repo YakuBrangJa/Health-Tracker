@@ -31,10 +31,10 @@ button.text-btn {
   transition: color 200ms ease;
   color: var(--color-primary1);
 }
-button.text-btn:hover > * {
-  color: var(--color-primary1c);
+button.text-btn:hover * {
+  color: var(--color-primary1b);
 }
-body.dark-mode button.text-btn:hover > * {
+body.dark-mode button.text-btn:hover * {
   color: var(--color-primary1b);
 }
 
@@ -67,6 +67,10 @@ body.dark-mode button.menu-btn:hover .icon {
   display: none;
 }
 
+.item.user {
+  padding: 0 0 0 1.5rem;
+}
+
 .item.user .icon {
   font-size: 1.7rem;
 }
@@ -97,21 +101,36 @@ body.dark-mode .nav-search {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 
-.theme-toggle {
+.theme-toggle > div {
+  display: flex;
+  align-items: center;
+  padding: 0rem 1rem;
   cursor: pointer;
+  gap: 0.4rem;
+  border-right: 0.5px solid #bbbbbb;
+  color: var(--color-grey5);
+}
+.theme-toggle > div span {
+  font-size: 0.95rem;
+}
+
+.item.theme-toggle > div .icon {
+  font-size: 1.2rem;
+}
+.theme-toggle > div .icon.dark {
+  transform: translateY(-0.1rem);
 }
 
 .navbar .item {
   display: flex;
   align-items: center;
-  position: relative;
 }
 
-.navbar .item > svg {
-  font-size: 1.5rem;
+.navbar .item svg {
+  font-size: 1.3rem;
   color: var(--color-grey5);
 }
 .navbar .item > img {
@@ -122,7 +141,7 @@ body.dark-mode .nav-search {
   overflow: hidden;
   object-fit: cover;
 }
-.navbar .item > span {
+.navbar .item.notification > span {
   position: absolute;
   width: 1.1rem;
   height: 1.1rem;
@@ -190,7 +209,14 @@ body.dark-mode .nav-search {
     color: var(--color-grey1);
   }
 
-  .nav-right {
-    gap: 1.5rem;
+  .theme-toggle > div > span {
+    display: none;
+  }
+  .item.theme-toggle > div > .icon {
+    font-size: 1.4rem;
+  }
+
+  .item.user {
+    padding: 0 0 0 1.3rem;
   }
 } ;

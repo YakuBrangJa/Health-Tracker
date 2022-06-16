@@ -104,10 +104,14 @@ html::-webkit-scrollbar-track {
 
   --border-dark: #30363d;
   --border-dark2: #3a4149;
+
+  /* SHAD0W */
+  --card-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
 }
 
 /* RESPONSIVE */
-@media (min-width: 1710px) {
+/* @media (min-width: 1710px) {
   html {
     font-size: 17px;
   }
@@ -117,7 +121,7 @@ html::-webkit-scrollbar-track {
   html {
     font-size: 20px;
   }
-}
+} */
 
 /* @media (min-width: 576px) {
   body {

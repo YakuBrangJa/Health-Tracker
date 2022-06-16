@@ -87,10 +87,10 @@ function Sidebar() {
           {/* <p className="title">USER</p> */}
           {sidebarList.user.map((list) => (
             <li key={list.route} onClick={sideBarClose}>
-              <NavLink to={list.route} style={selectedList}>
+              <a>
                 {list.icons}
                 <span>{list.title}</span>
-              </NavLink>
+              </a>
             </li>
           ))}
         </ul>

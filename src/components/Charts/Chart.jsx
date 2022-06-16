@@ -71,6 +71,7 @@ function Chart({ data, formOpen, type, chartConfig }) {
       x: {
         stacked: true,
         grid: {
+          display: true,
           color: darkTheme ? "#4445" : "#4443",
           tickWidth: 0,
         },
@@ -80,6 +81,7 @@ function Chart({ data, formOpen, type, chartConfig }) {
         beginAtZero: chartConfig.multiValue,
         grace: 1,
         grid: {
+          display: true,
           color: darkTheme ? "#4445" : "#4443",
           tickWidth: 0,
         },
@@ -126,12 +128,12 @@ function Chart({ data, formOpen, type, chartConfig }) {
     },
     datasets: {
       line: {
-        borderColor: matchedType.color,
-        backgroundColor: matchedType.color,
-        pointBackgroundColor: matchedType.color,
+        borderColor: matchedType.color + `${darkTheme ? "aa" : "ff"}`,
+        backgroundColor: matchedType.color + "ff",
+        pointBackgroundColor: matchedType.color + "ff",
         spanGaps: true,
         segment: {
-          borderColor: (ctx) => skipped(ctx, "rgba(255, 99, 132)"),
+          borderColor: (ctx) => skipped(ctx, matchedType.color + "aa"),
           borderDash: (ctx) => skipped(ctx, [4, 3]),
         },
         borderWidth: windowWidth < 576 ? 2 : 2.5,
@@ -139,7 +141,7 @@ function Chart({ data, formOpen, type, chartConfig }) {
         hoverRadius: windowWidth < 576 ? 3.5 : 5,
       },
       bar: {
-        backgroundColor: matchedType.color + "aa",
+        backgroundColor: matchedType.color + `${darkTheme ? "99" : "aa"}`,
       },
     },
   };

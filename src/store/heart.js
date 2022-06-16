@@ -87,12 +87,12 @@ const initialState = {
           {
             label: "Diastolic",
             path: "diastolic",
-            backgroundColor: "rgba(48, 145, 209, 0.7)",
+            backgroundColor: "rgba(48, 145, 209, 0.6)",
           },
           {
             label: "Systolic",
             path: "systolic",
-            backgroundColor: "rgba(254, 55, 95, 0.7)",
+            backgroundColor: "rgba(254, 55, 95, 0.6)",
           },
         ],
         multiValue: true,

@@ -83,11 +83,12 @@ function DateControl({ data }) {
   useEffect(() => {
     if (!earliestData || !latestData || !dateTree || !year || !month) return;
 
-    const totalInterval = (
-      (new Date(latestData.date).getTime() -
-        new Date(earliestData.date).getTime()) /
-      (60000 * 60 * 24 * 14)
-    ).toFixed(0);
+    const totalInterval =
+      Math.floor(
+        (new Date(latestData.date).getTime() -
+          new Date(earliestData.date).getTime()) /
+          (60000 * 60 * 24 * 14)
+      ) + 1;
 
     const dayArr = Array.from(
       { length: totalInterval == 0 ? 1 : totalInterval },
@@ -115,11 +116,11 @@ function DateControl({ data }) {
   useEffect(() => {
     if (!earliestData || !latestData || !dateTree || !year || !month) return;
 
-    const totalInterval = (
+    const totalInterval = Math.floor(
       (new Date(latestData.date).getTime() -
         new Date(earliestData.date).getTime()) /
-      (60000 * 60 * 24 * 7)
-    ).toFixed(0);
+        (60000 * 60 * 24 * 7)
+    );
 
     const dayArr = Array.from(
       { length: totalInterval == 0 ? 1 : totalInterval },

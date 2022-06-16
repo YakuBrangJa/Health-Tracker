@@ -14,13 +14,15 @@ import DateNav from "./DateNav";
 import ValueHeader from "./ValueHeader";
 import Chart from "../../../Charts/Chart";
 import DataTable from "./DataTable/DataTable";
-import { formStateActions } from "../../../../store/form-state";
+import formState, { formStateActions } from "../../../../store/form-state";
 import { uiStateActions } from "../../../../store/ui-state";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
 
 function Detail({
   id,
   title,
   data,
+  dataKey,
   type,
   unit,
   selectedUnit,
@@ -32,8 +34,31 @@ function Detail({
   const [formOpen, setFormOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const sidebarState = useSelector((state) => state.formState.sidebarState);
+  const { sidebarState, dataSubmitted } = useSelector(
+    (state) => state.formState
+  );
   const showTableState = useSelector((state) => state.uiState.showTableState);
+
+  // SETTING LOCALSTORAGE DATA
+  const [localData, setLocalData] = useLocalStorage(type);
+
+  useEffect(() => {
+    if (!dataSubmitted) return;
+    setLocalData({
+      ...localData,
+      [dataKey]: {
+        id,
+        title,
+        selectedUnit,
+        data,
+        favourite,
+      },
+    });
+
+    dispatch(formStateActions.setDataSubmitted(false));
+  }, [localData, id, title, selectedUnit, data, favourite]);
+
+  // END OF SETTING LOCALSTORAGE DATA
 
   useEffect(() => {
     setIsLoaded(true);

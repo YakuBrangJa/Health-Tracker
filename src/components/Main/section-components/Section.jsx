@@ -86,28 +86,29 @@ function Section({
     actions,
   ]);
 
-  // SENDING DATA TO FIREBASE
-  const { sendRequest } = useHttps();
-  useEffect(() => {
-    // return;
-    if (!dataSubmitted) return;
+  // // SENDING DATA TO FIREBASE
+  // const { sendRequest } = useHttps();
+  // useEffect(() => {
+  //   // return;
+  //   if (!dataSubmitted) return;
 
-    sendRequest({
-      url: `https://clone-demo-c5cc6-default-rtdb.firebaseio.com/health-tracker${
-        sidebarState === "/vitals" ? data[dataKey].route : sidebarState
-      }/${dataKey}.json`,
-      method: "PUT",
-      body: {
-        id: data[dataKey].id,
-        title: data[dataKey].title,
-        selectedUnit: data[dataKey].selectedUnit,
-        data: data[dataKey].data,
-        favourite: data[dataKey].favourite,
-      },
-    });
+  //   sendRequest({
+  //     url: `https://clone-demo-c5cc6-default-rtdb.firebaseio.com/health-tracker${
+  //       sidebarState === "/vitals" ? data[dataKey].route : sidebarState
+  //     }/${dataKey}.json`,
+  //     method: "PUT",
+  //     body: {
+  //       id: data[dataKey].id,
+  //       title: data[dataKey].title,
+  //       selectedUnit: data[dataKey].selectedUnit,
+  //       data: data[dataKey].data,
+  //       favourite: data[dataKey].favourite,
+  //     },
+  //   });
 
-    dispatch(formStateActions.setDataSubmitted(false));
-  }, [data, dataKey, sendRequest, sidebarState]);
+  //   dispatch(formStateActions.setDataSubmitted(false));
+  // }, [data, dataKey, sendRequest, sidebarState]);
+  // // END OF SENDING DATA TO FIREBASE
 
   // const [testLoading, setTestLoading] = useState(true);
   if (isLoading) return <SectionLoading title={title}></SectionLoading>;
@@ -178,6 +179,7 @@ function Section({
               type={data[dataKey].type}
               actions={title === "Vitals" ? data[dataKey].actions : actions}
               chartConfig={data[dataKey].chartConfig}
+              dataKey={dataKey}
             />
           )}
         </div>

@@ -23,7 +23,7 @@ import OtherData from "./components/Main/OtherData/OtherData";
 // LAZY LOADINGS
 
 import useDataRequest2 from "./hooks/useDataReuquest2";
-import useDarkMode from "./hooks/useDarkMode";
+import useLocalStorageData from "./hooks/useLocalStorageData";
 import { formStateActions } from "./store/form-state";
 import { uiStateActions } from "./store/ui-state";
 
@@ -35,38 +35,36 @@ import { otherDataActions } from "./store/other-data";
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { firstRun, darkTheme } = useSelector((state) => state.uiState);
 
-  // SETTING DARK MODE
-  const [theme, setTheme] = useDarkMode(darkTheme);
-  useEffect(() => {
-    dispatch(uiStateActions.setDarkTheme(theme));
-  }, [theme]);
-
-  // FETCHING DATA
-  const { isLoading, error, fetchData } = useDataRequest2();
-
-  useEffect(() => {
-    if (!firstRun) return;
-    fetchData("body-measurements", bodyMeasurementsActions);
-    fetchData("heart", heartActions);
-    fetchData("respiratory", respiratoryActions);
-    fetchData("other-data", otherDataActions);
-  }, [fetchData, firstRun]);
-
-  useEffect(() => {
-    dispatch(uiStateActions.updateLoadingDataState(isLoading));
-  }, [isLoading]);
+  const firstRun = useSelector((state) => state.uiState.firstRun);
 
   // READING ACTIVE SIDEBAR
   useEffect(() => {
     dispatch(formStateActions.setSidebarState(location.pathname));
   }, [location]);
 
-  // READING DEVICE WIDTH
-  useEffect(() => {
-    dispatch(uiStateActions.setWindowWidth(window.innerWidth));
-  }, []);
+  // GETTING DATA FROM LOCALSTORAGE
+  useLocalStorageData("body-measurements", bodyMeasurementsActions, {});
+  useLocalStorageData("heart", heartActions, {});
+  useLocalStorageData("respiratory", respiratoryActions, {});
+  useLocalStorageData("other-data", otherDataActions, {});
+
+  // FETCHING DATA
+  // const { isLoading, error, fetchData } = useDataRequest2();
+
+  // useEffect(() => {
+  //   if (!firstRun) return;
+  //   fetchData("body-measurements", bodyMeasurementsActions);
+  //   fetchData("heart", heartActions);
+  //   fetchData("respiratory", respiratoryActions);
+  //   fetchData("other-data", otherDataActions);
+  // }, [fetchData, firstRun]);
+
+  // useEffect(() => {
+  //   dispatch(uiStateActions.updateLoadingDataState(isLoading));
+  // }, [isLoading]);
+
+  // END OF FETCHING DATA
 
   return (
     <div className={`app `}>

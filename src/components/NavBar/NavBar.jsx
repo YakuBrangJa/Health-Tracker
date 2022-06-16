@@ -60,10 +60,10 @@ function NavBar() {
           <IoMdMenu className=" icon" />
         </button>
 
-        <div className="nav-search">
+        {/* <div className="nav-search">
           <input type="search" placeholder="Search..." />
           <SearchIcon className="nav-search-icon" />
-        </div>
+        </div> */}
       </div>
 
       <button className="text-btn nav-backBtn" onClick={goBackHandler}>
@@ -72,11 +72,24 @@ function NavBar() {
       </button>
 
       <div className="nav-right">
-        <div className="item theme-toggle" onClick={themeChangeHandler}>
-          {!darkTheme && <DarkModeIcon className="icon" />}
-          {darkTheme && <LightModeOutlinedIcon className="icon" />}
-        </div>
-        {/* <div className="item">
+        <button
+          className="item theme-toggle text-btn"
+          onClick={themeChangeHandler}
+        >
+          {!darkTheme && (
+            <div>
+              <span> Dark Theme</span>
+              <DarkModeIcon className="icon dark" />
+            </div>
+          )}
+          {darkTheme && (
+            <div>
+              <span> Light Theme</span>
+              <LightModeOutlinedIcon className="icon light" />
+            </div>
+          )}
+        </button>
+        {/* <div className="item notification">
           <NotificationsIcon />
           <span>2</span>
         </div>

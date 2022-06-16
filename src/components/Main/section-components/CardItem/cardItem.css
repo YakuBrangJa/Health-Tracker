@@ -5,7 +5,7 @@
   align-items: stretch;
   background: var(--color-white3);
   border: 1px solid var(--color-grey6);
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   flex-shrink: 0;
   cursor: pointer;
   transition: all 100ms ease;
@@ -32,27 +32,26 @@ body.dark-mode .emptyCardItem {
   white-space: nowrap;
 }
 
-.cardItem.active,
+.cardItem.active {
+  border-left-width: 0.35rem;
+}
 .emptyCardItem.active {
-  border: 1px solid var(--color-grey3);
+  border-left-width: 0.35rem;
 }
 
-body.dark-mode .cardItem.active,
+/* body.dark-mode .cardItem.active,
 body.dark-mode .emptyCardItem.active {
   border: 1px solid var(--color-grey4);
-}
+} */
 
-.cardItem-date__container.active,
+/* .cardItem-date__container.active,
 .emptyCardItem-add__container.active {
   transform: translate(0.2rem, 0);
-}
+} */
 
 .cardItem-top {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
-  /* align-items: flex-start; */
-  /* gap: 0.8rem; */
 }
 
 .cardItem-name {
@@ -123,7 +122,10 @@ body.dark-mode .emptyCardItem-add__container {
   background: var(--color-white1);
   transition: background 200ms ease;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--card-shadow);
   transition: border 150ms ease;
+  border-radius: 0.5rem;
+  border-color: var(--color-grey11);
 }
 .cardItem.homeCard .cardItem-date__container {
   transform: translateX(0.5rem);
@@ -132,7 +134,7 @@ body.dark-mode .emptyCardItem-add__container {
 
 .cardItem.homeCard:hover {
   background-color: var(--color-white2);
-  border-color: var(--color-grey5);
+  /* border-color: var(--color-grey5); */
 }
 body.dark-mode .cardItem.homeCard:hover {
   background-color: var(--color-dark2);
@@ -162,6 +164,7 @@ body.dark-mode .cardItem.homeCard:hover {
   .cardItem {
     height: 5.8rem;
     border: 0px solid var(--color-grey4);
+    border-radius: 0.5rem;
   }
   .cardItem-name {
     font-size: 0.95rem;
@@ -171,6 +174,7 @@ body.dark-mode .cardItem.homeCard:hover {
   .emptyCardItem {
     padding: 0.8rem 1rem;
     border-width: 0;
+    border-radius: 0.5rem;
   }
 
   .cardItem.active,

@@ -89,11 +89,11 @@ const initialState = {
         <FaLungs
           className="icon"
           style={{
-            color: "#54a1ff",
+            color: "#2a80e8",
           }}
         />
       ),
-      color: "#54a1ff",
+      color: "#2a80e8",
       route: "/respiratory",
     },
     // {
@@ -116,19 +116,19 @@ const initialState = {
       color: "#35c759",
       route: "/other-data",
     },
-    {
-      title: "Menstrual Cycle",
-      icons: (
-        <DataSaverOffIcon
-          className="icon"
-          style={{
-            color: "#e60e9a",
-          }}
-        />
-      ),
-      color: "#e60e9a",
-      route: "/menstrual-cycle",
-    },
+    // {
+    //   title: "Menstrual Cycle",
+    //   icons: (
+    //     <DataSaverOffIcon
+    //       className="icon"
+    //       style={{
+    //         color: "#e60e9a",
+    //       }}
+    //     />
+    //   ),
+    //   color: "#e60e9a",
+    //   route: "/menstrual-cycle",
+    // },
     // {
     //   title: "Medications",
     //   icons: <MedicationIcon />,
@@ -149,7 +149,7 @@ const initialState = {
         />
       ),
       color: "#1e74dc",
-      route: "/other-data",
+      route: "/profile",
     },
     {
       title: "Settings",
