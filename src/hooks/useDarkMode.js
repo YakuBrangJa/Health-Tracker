@@ -4,6 +4,7 @@ import useLocalStorage from "./useLocalStorage";
 // import useMedia from "./useMedia";
 
 function useDarkMode(defaultValue) {
+  // set theme to user's previous choice
   const [enabledState, setEnabledState] = useLocalStorage(
     "dark-theme",
     defaultValue
